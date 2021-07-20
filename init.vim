@@ -1,5 +1,5 @@
-"							_
-"  _ ____		_(_)_ __ ___
+"             _
+"  _ ____   _(_)_ __ ___
 " | '_ \ \ / | | '_ ` _ \
 " | | | \ V /| | | | | | |
 " |_| |_|\_/ |_|_| |_| |_|
@@ -136,9 +136,6 @@ function! StartifyEntryFormat() abort
  	return 'v:lua.webDevIcons(absolute_path) . " " . entry_path'
 endfunction
 
-" Vimspector
-" let g:vimspector_enable_mappings = 'HUMAN'
-
 " Remaps
 let mapleader = ' '
 " Fast save
@@ -190,14 +187,6 @@ require'colorizer'.setup({
 EOF
 
 " Highlights
-highlight link ALEInfoSign CocInfoSign
-
-" highlight LspDiagnosticsVirtualTextInformation guifg=#88c0d0 gui=underline
-" highlight LspDiagnosticsUnderlineHint guifg=#88c0d0 gui=underline
-" highlight LspDiagnosticsSignHint guifg=#88c0d0
-
-" highlight link LspDiagnosticsVirtualTextHint LspDiagnosticsVirtualTextInformation
-
 highlight StatusLine guifg=#2e3440 guibg=#2e3440 ctermbg=black ctermbg=black
 highlight link StatusLineNC StatusLine
 highlight link StatusLineTerm StatusLine
@@ -286,7 +275,6 @@ EOF
 " Search
 set ignorecase
 set smartcase
-set hlsearch
 
 " Clipboard
 set clipboard=unnamedplus
@@ -298,11 +286,9 @@ let g:indent_blankline_char = "│"
 let g:indent_blankline_use_treesitter = v:true
 
 " Indentation
-filetype plugin indent on
 set tabstop=2
 set shiftwidth=2
 set noexpandtab
-set autoindent
 
 " Close tag
 lua <<EOF
@@ -312,14 +298,6 @@ require'nvim-treesitter.configs'.setup {
 	}
 }
 EOF
-
-" Rainbow brackets 🌈
-let g:rainbow_active = 0
-let g:rainbow_ctermfgs = [220, 203, 213]
-let g:rainbow_guifgs = ['#ffd700', '#ff5f5f', '#ff87ff']
-let g:rainbow_load_separately = [
-	\ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
-	\ ]
 
 " Markdown settings
 let g:mkdp_markdown_css = expand('~/.config/nvim/markdown.css')
@@ -338,68 +316,13 @@ autocmd FileType jsonc setlocal commentstring=//\ %s
 autocmd FileType kerboscript setlocal commentstring=//\ %s
 " autocmd FileType svelte setlocal commentstring=<!--\ %s\ -->
 
-" Custom devicons icons
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['ks'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.zshrc'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['zshrc'] = ''
-
 if filereadable('gradlew')
 	compiler gradlew
 endif
 
-" ALE Settings
-
-let g:ale_disable_lsp = 1
-let g:ale_linters_explicit = 1
-
-let g:ale_fixers = {
-\ 'javascript': ['eslint'],
-\ 'typescript': ['eslint'],
-\ 'python': ['yapf'],
-\ 'cs': []
-\}
-
-let g:ale_linters = {
-\ 'python': ['pylint', 'pyright', 'pyls'],
-\ 'cs': [],
-\ 'javascript': ['eslint'],
-\ 'typescript': ['eslint'],
-\}
-
-let g:ale_css_stylelint_options = '--config ~/.config/stylelintrc.js'
-
-let g:ale_sign_warning = ''
-let g:ale_sign_error = ''
-let g:ale_sign_info = ''
-
-let g:ale_virtualtext_cursor = 1
-
-" GoTo code navigation.
-" nmap <silent> gd :ALEGoToDefinition<CR>
-" nmap <silent> gy :ALEGoToTypeDefinition<CR>
-" nmap <silent> gr :ALEFindReferences<CR>
-
-" Symbol renaming.
-" nmap <silent> <leader>rn :ALERename<CR>
-" Code format
-" nmap <silent> <leader>f :ALEFix<CR>
-
-" autocmd CursorHold * silent ALEHover
-
 " Omnisharp settings
 let g:OmniSharp_highlighting = 3
 let g:OmniSharp_typeLookupInPreview = 1
-
-" LSP things
-lua <<EOF
-
--- Show diagnostics in ALE
--- require("nvim-ale-diagnostic")
-
-
-EOF
 
 " Speed up CursorHold
 set updatetime=300
