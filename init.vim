@@ -79,7 +79,7 @@ Plug 'rubixninja314/vim-mcfunction'
 Plug 'neoclide/npm.nvim', {'do': 'npm install'}
 
 " Visual changes
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'mhinz/vim-startify'
@@ -177,6 +177,12 @@ set scrolloff=2
 
 lua <<EOF
 
+require'gitsigns'.setup({
+	yadm = {
+		enable = true
+	}
+})
+
 require'colorizer'.setup({
 	'*';
 	css = { css = true };
@@ -196,11 +202,6 @@ sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError line
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
 sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
-
-" Gitgutter symbols
-let g:gitgutter_sign_added = '┃'
-let g:gitgutter_sign_modified = '┃'
-let g:gitgutter_sign_modified_removed = '~'
 
 " Keep buffers after abandoning
 set hidden
