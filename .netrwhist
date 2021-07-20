@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/usr/share/icons/Vimix-cursors'
+let g:netrw_dirhist_8='/home/alex/.nvim_plugins/omnisharp-vim/ale_linters/cs'
+let g:netrw_dirhist_7='/home/alex/.mozilla/firefox/4gyxoon4.default-release-1578758788297/chrome'
+let g:netrw_dirhist_6='/etc/X11/xorg.conf.d'
+let g:netrw_dirhist_5='/var/log/lightdm'
+let g:netrw_dirhist_4='/home/alex/snake'
+let g:netrw_dirhist_3='/home/alex/Games/Star Wars Tie Fighter'
+let g:netrw_dirhist_2='/home/alex/Python/plexupdate'
+let g:netrw_dirhist_1='/home/alex/Documents'
+let g:netrw_dirhist_0='/usr/include/sys'

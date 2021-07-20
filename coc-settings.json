@@ -1,0 +1,41 @@
+{
+	"languageserver": {
+		"kls": {
+			"command": "kls",
+			"args": ["--stdio"],
+			"shell": true,
+			"filetypes": ["kerboscript"],
+			"initializationOptions": {},
+			"settings": {}
+		},
+		"kotlin": {
+			"command": "kotlin-language-server",
+			"filetypes": ["kotlin"]
+		},
+		"bash": {
+			"command": "bash-language-server",
+			"args": ["start"],
+			"filetypes": ["sh"],
+			"ignoredRootPaths": ["~"]
+		},
+		"glsl": {
+			"command": "glslls",
+			"args": ["--stdin"],
+			"filetypes": ["glsl"]
+		}
+	},
+	"java.home": "/usr/lib/jvm/java-8-openjdk",
+	"diagnostic.displayByAle": true,
+	"eslint.enable": false,
+	// "solargraph.diagnostics": true,
+	// "python.jediEnabled": false,
+	// "python.linting.pylintEnabled": false,
+	// "python.linting.mypyEnabled": true,
+	// "python.linting.flake8Enabled": true,
+	// "python.linting.flake8Args": ["--ignore=E121,E123,E126,E226,E24,E265,E704,E501,W503,W504"],
+	"prettier.useTabs": true,
+	"prettier.singleQuote": true,
+	"emmet.includeLanguages": {
+		"svelte": "html"
+	}
+}
