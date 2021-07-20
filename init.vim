@@ -455,6 +455,13 @@ pairs.add_rules {
         :use_key(")")
 }
 
+pairs.get_rule('"')
+ :with_pair(function()
+    if vim.bo.filetype == 'vim' then
+       return false
+   end
+end)
+
 local t = function(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
