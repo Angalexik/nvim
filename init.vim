@@ -54,6 +54,7 @@ Plug 'mfussenegger/nvim-lint'
 Plug 'fivethree-team/vscode-svelte-snippets'
 
 " Various FileType support
+Plug 'Pocco81/DAPInstall.nvim'
 Plug 'mfussenegger/nvim-dap'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'puremourning/vimspector'

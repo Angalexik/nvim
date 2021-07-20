@@ -1,7 +1,17 @@
 local dap = require"dap"
-dap.configurations.lua = { 
-  { 
-    type = 'nlua', 
+local dap_install = require"dap-install"
+
+local dbgpath = require"dap-install.config".options["installation_path"]
+local debuggers = vim.split(vim.fn.globpath(dbgpath, "*"), "\n")
+
+for _, debugger in ipairs(debuggers) do
+  local dbg = debugger:match("^.+/(.+)$"):gsub("/", "")
+  dap_install.config(dbg, {})
+end
+
+dap.configurations.lua = {
+  {
+    type = 'nlua',
     request = 'attach',
     name = "Attach to running Neovim instance",
     host = function()
