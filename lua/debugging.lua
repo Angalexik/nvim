@@ -5,8 +5,10 @@ local dbgpath = require"dap-install.config".options["installation_path"]
 local debuggers = vim.split(vim.fn.globpath(dbgpath, "*"), "\n")
 
 for _, debugger in ipairs(debuggers) do
-  local dbg = debugger:match("^.+/(.+)$"):gsub("/", "")
-  dap_install.config(dbg, {})
+  local dbg = debugger:match("^.+/(.+)$")
+  if dbg then
+    dap_install.config(dbg, {})
+  end
 end
 
 dap.configurations.lua = {
