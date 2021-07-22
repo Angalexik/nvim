@@ -293,7 +293,23 @@ lint.linters.stylelint = function ()
       --- @field text string
 
       --- @type StylelintOutput
-      local decoded = vim.fn.json_decode(output)[1]
+      local decoded = {}
+      if pcall(vim.fn.json_decode, output) then
+        decoded = vim.fn.json_decode(output)[1]
+      else
+        decoded = {
+          warnings = {
+            {
+              line = 1,
+              column = 1,
+              text = "Stylelint error, run `stylelint " .. vim.fn.expand("%") .. "` for more info.",
+              severity = "error",
+              rule = "none",
+            },
+          },
+          errored = true,
+        }
+      end
       local diagnostics = {}
       if decoded.errored then
         for _, message in ipairs(decoded.warnings) do
