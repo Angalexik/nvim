@@ -154,8 +154,8 @@ tnoremap <esc> <C-\><C-N>
 " Dap
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
 nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
-nnoremap <silent> <S-<F11>> :lua require'dap'.step_out()<CR>
-nnoremap <silent> <S-<F5>> :lua require'dap'.disconnect()<CR>
+nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
+nnoremap <silent> <F3> :lua require'dap'.disconnect()<CR>
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F6> :lua require'dap'.pause()<CR>
 nnoremap <silent> <F9> :lua require'dap'.toggle_breakpoint()<CR>
