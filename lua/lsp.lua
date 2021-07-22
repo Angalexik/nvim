@@ -79,11 +79,28 @@ configs.kls = {
 --   lua = {luaformatter}
 -- }
 
+local function has_value (tab, val)
+  for _, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- local servers = { "svelte", "tsserver", "vimls", "omnisharp" }
-local servers = lspinstall.installed_servers()
-for _, lsp in ipairs(servers) do
+local servers = { "csharp", "svelte", "bash", "json", "html", "typescript", "cpp", "vim", "css", "lua" }
+local installed_servers = lspinstall.installed_servers()
+for _, server in ipairs(servers) do
+  if not has_value(installed_servers, server) then
+    lspinstall.install_server(server)
+  end
+end
+
+for _, lsp in ipairs(installed_servers) do
   if lsp == "lua" then
     local luadev = require("lua-dev").setup()
     luadev.settings.Lua.workspace.library["/home/alex/dotfiles/computercraft"] = true
