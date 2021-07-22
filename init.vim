@@ -56,6 +56,7 @@ Plug 'fivethree-team/vscode-svelte-snippets'
 " Various FileType support
 Plug 'Pocco81/DAPInstall.nvim'
 Plug 'mfussenegger/nvim-dap'
+Plug 'theHamsta/nvim-dap-virtual-text'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'puremourning/vimspector'
 Plug 'mattn/emmet-vim'
@@ -158,6 +159,7 @@ nnoremap <silent> <S-<F5>> :lua require'dap'.disconnect()<CR>
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F6> :lua require'dap'.pause()<CR>
 nnoremap <silent> <F9> :lua require'dap'.toggle_breakpoint()<CR>
+let g:dap_virtual_text = v:true
 
 " Vim rooter
 let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', 'gradle/', 'Cargo.toml', 'tsconfig.json', '*.sln', '*.csproj', 'Makefile']
