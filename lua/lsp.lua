@@ -213,7 +213,22 @@ lint.linters.eslint = function ()
       --- @field endColumn number
 
       --- @type ESLintOutput
-      local decoded = vim.fn.json_decode(output)[1]
+      local decoded = {}
+      if pcall(vim.fn.json_decode, output) then
+        decoded = vim.fn.json_decode(output)[1]
+      else
+        decoded = {
+          messages = {
+            {
+              line = 1,
+              column = 1,
+              message = "ESLint error, run `eslint " .. vim.fn.expand("%") .. "` for more info.",
+              severity = 2,
+              ruleId = "none",
+            },
+          }
+        }
+      end
       local diagnostics = {}
       for _, message in ipairs(decoded.messages) do
         if not message.endLine then
