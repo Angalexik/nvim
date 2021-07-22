@@ -237,27 +237,6 @@ nnoremap <silent> <C-s>		 :BufferPick<CR>
 let g:bufferline = get(g:, 'bufferline', {})
 
 let g:bufferline.icon_custom_colors = 'white'
-highlight! BufferTabpageFill guifg=#d8dee9 guibg=#2e3440
-
-highlight! BufferCurrent guifg=#d8dee9 guibg=#4c566a
-highlight link BufferCurrentIndex BufferCurrent
-highlight link BufferCurrentSign BufferCurrent
-highlight! BufferCurrentMod guifg=#88c0d0 guibg=#4c566a
-highlight! BufferCurrentTarget guifg=#bf616a guibg=#4c566a
-
-highlight link BufferVisible BufferCurrent
-highlight link BufferVisibleMod BufferCurrentMod
-highlight link BufferVisibleIndex BufferCurrentIndex
-highlight link BufferVisibleSign BufferCurrentSign
-highlight link BufferVisibleTarget BufferCurrentTarget
-
-highlight! BufferInactive guifg=#616e88 guibg=#2e3440
-highlight link BufferInactiveIndex BufferInactive
-highlight link BufferInactiveSign BufferInactive
-highlight! BufferInactiveSign guifg=#d8dee9 guibg=#2e3440
-highlight! BufferInactiveMod guifg=#88c0d0 guibg=#2e3440
-highlight! BufferInactiveTarget guifg=#bf616a guibg=#2e3440
-
 
 " Treesitter settings
 lua <<EOF
