@@ -2,6 +2,7 @@ local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
 local vcs = require('galaxyline.provider_vcs')
 local diag = require('galaxyline.provider_diagnostic')
+local finfo = require('galaxyline.provider_fileinfo')
 
 local fn = vim.fn
 local cmd = vim.cmd
@@ -143,15 +144,28 @@ local FileName = {
 local FileType = {
 	FileType = {
 		provider = function ()
-			return bo.filetype
+			return '  ' .. bo.filetype -- first space isn't displayed
 		end,
 		condition = function ()
 			local ft = bo.filetype
 			return not (not ft or ft == '')
 		end,
 		highlight = {colours.fg, colours.bg1},
+	}
+}
+
+local FTIcon = {
+	FTIcon = {
+		provider = function ()
+			return finfo.get_file_icon()
+		end,
+		condition = function ()
+			local ft = bo.filetype
+			return not (not ft or ft == '')
+		end,
+		highlight = {colours.bg1, colours.nord9},
 		separator = '',
-		separator_highlight = {colours.bg1},
+		separator_highlight = {colours.nord9},
 	}
 }
 
@@ -265,6 +279,7 @@ addLeftSection({
 	}
 })
 
+addRightSection(FTIcon)
 addRightSection(FileType)
 
 addRightSection({
@@ -433,6 +448,7 @@ addShortLeftSection(leftsep)
 
 addShortLeftSection(FileName)
 
+addShortRightSection(FTIcon)
 addShortRightSection(FileType)
 
 addShortRightSection({
