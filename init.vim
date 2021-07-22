@@ -6,7 +6,7 @@
 
 
 " Plugins
-call plug#begin('~/.nvim_plugins')
+call plug#begin(stdpath('data') . '/plugins')
 
 " Plugin dependencies
 Plug 'nvim-lua/popup.nvim'
