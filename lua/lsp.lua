@@ -6,6 +6,18 @@ local lspinstall = require('lspinstall')
 local nvim_lsp = require('lspconfig')
 local configs = require('lspconfig/configs')
 
+-- Install python-lsp-server
+local pylspconfig = require('lspinstall/util').extract_config("pylsp")
+pylspconfig.default_config.cmd[1] = "./venv/bin/pylsp"
+require("lspinstall/servers").pylsp = vim.tbl_extend('error', pylspconfig, {
+  install_script = [[
+  python3 -m venv ./venv
+  ./venv/bin/pip3 install -U pip
+  ./venv/bin/pip3 install -U 'python-lsp-server[all]'
+  ./venv/bin/pip3 install -U pylsp-mypy
+  ]]
+})
+
 lspinstall.setup()
 
 -- Use an on_attach function to only map the following keys
@@ -92,7 +104,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- local servers = { "svelte", "tsserver", "vimls", "omnisharp" }
-local servers = { "csharp", "svelte", "bash", "json", "html", "typescript", "cpp", "vim", "css", "lua" }
+local servers = { "csharp", "svelte", "bash", "json", "html", "typescript", "cpp", "vim", "css", "lua", "pylsp" }
 local installed_servers = lspinstall.installed_servers()
 for _, server in ipairs(servers) do
   if not has_value(installed_servers, server) then
