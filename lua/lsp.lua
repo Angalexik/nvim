@@ -102,7 +102,7 @@ end
 
 for _, lsp in ipairs(installed_servers) do
   if lsp == "lua" then
-    local luadev = require("lua-dev").setup()
+    local luadev = require("lua-dev").setup({ lspconfig = { on_attach = on_attach } })
     luadev.settings.Lua.workspace.library["/home/alex/dotfiles/computercraft"] = true
     nvim_lsp[lsp].setup(luadev)
   -- elseif lsp == "efm" then
