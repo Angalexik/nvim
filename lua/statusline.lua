@@ -28,6 +28,17 @@ local colours = {
 	nord14 = "#a3be8c", -- green
 }
 
+local modecols = {
+	N = colours.nord8,
+	T = colours.nord8,
+	['!'] = colours.nord8,
+	V = colours.nord7,
+	I = colours.nord14,
+	R = colours.nord14,
+	C = colours.nord12,
+	S = colours.nord14,
+}
+
 local leftsep = {
 	LeftSeparator = {
 		provider = function ()
@@ -121,25 +132,30 @@ local function addShortRightSection(component)
 	table.insert(section.short_line_right, component)
 end
 
-local FileName = {
-	FileName = {
+local function FileName(short)
+	local filename = {
 		provider = function ()
 			-- return string.gsub(fileinfo.get_current_file_name('', ''), '^%s*(.-)%s*$', '%1')
 			local icon = ''
+			local padding = ''
+			if bo.modifiable and not short then
+				padding = '  ' -- first space isn't shown
+			end
 			local path = shortenPath(fn.fnamemodify(fn.expand('%'), ':~:.'))
 			if path == '' then
 				path = '[No File]'
 			end
 			if fn.getbufinfo(fn.bufnr('%'))[1].changed == 1 then
-				icon = ' [+]'
+				icon = '  '
 			end
-			return path .. icon
+			return padding .. path .. icon
 		end,
 		highlight = {colours.fg, colours.bg1},
 		separator = '',
 		separator_highlight = {colours.bg1},
 	}
-}
+	return { FileName = filename }
+end
 
 local FileType = {
 	FileType = {
@@ -169,39 +185,39 @@ local FTIcon = {
 	}
 }
 
-addLeftSection(leftsep)
-
 addLeftSection({
-	ViMode = {
+	ModeSep = {
 		provider = function ()
-			local modecols = {
-				N = colours.nord8,
-				T = colours.nord8,
-				['!'] = colours.nord8,
-				V = colours.nord7,
-				I = colours.nord14,
-				R = colours.nord14,
-				C = colours.nord12,
-				S = colours.nord14,
-			}
 			local mode = string.upper(
 			string.gsub(
 			string.sub(fn.mode(), 1, 1), "", "V"
 			):gsub("", "S")
 			)
-			cmd("hi GalaxyViMode guifg=" .. modecols[mode])
-			return mode
+			cmd("hi GalaxyModeSep guifg=" .. modecols[mode])
+			return ''
 		end,
-		separator = '',
-		separator_highlight = {colours.bg1},
-		highlight = {colours.fg, colours.bg1, "bold"},
+		highlight = {colours.bg1},
 	}
 })
 
-addLeftSection(padding)
-addLeftSection(leftsep)
+addLeftSection({
+	ViMode = {
+		provider = function ()
+			local mode = string.upper(
+			string.gsub(
+			string.sub(fn.mode(), 1, 1), "", "V"
+			):gsub("", "S")
+			)
+			cmd("hi GalaxyViMode guibg=" .. modecols[mode])
+			return mode .. ' '
+		end,
+		-- separator = '',
+		-- separator_highlight = {colours.bg1},
+		highlight = {colours.bg1, colours.fg, "bold"},
+	}
+})
 
-addLeftSection(FileName)
+addLeftSection(FileName(false))
 
 addLeftSection({
 	GitSep = {
@@ -446,7 +462,7 @@ addRightSection({
 
 addShortLeftSection(leftsep)
 
-addShortLeftSection(FileName)
+addShortLeftSection(FileName(true))
 
 addShortRightSection(FTIcon)
 addShortRightSection(FileType)
