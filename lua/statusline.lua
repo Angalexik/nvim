@@ -319,6 +319,17 @@ addRightSection({
 addRightSection(padding)
 
 addRightSection({
+	LineIcon = {
+		provider = function ()
+			return ' '
+		end,
+		highlight = {colours.bg1, colours.nord9},
+		separator = '',
+		separator_highlight = {colours.nord9}
+	}
+})
+
+addRightSection({
 	PercentTotLinesLineNCharN = {
 		provider = function ()
 			local curline = fn.line('.')
@@ -329,11 +340,9 @@ addRightSection({
 			elseif curline == totlines then
 				percent = 'Bot'
 			end
-			return fn.line('.') .. ':' .. fn.col('.') .. ' ' .. percent .. '/' .. totlines
+			return '  ' .. fn.line('.') .. ':' .. fn.col('.') .. ' ' .. percent .. '/' .. totlines -- first space isn't shown
 		end,
 		highlight = {colours.nord9, colours.bg1},
-		separator = '',
-		separator_highlight = {colours.bg1},
 	}
 })
 
