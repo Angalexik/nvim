@@ -337,6 +337,11 @@ addRightSection({
 		provider = function ()
 			local curline = fn.line('.')
 			local totlines = fn.line('$')
+			if curline == 1 then
+				return 'Top' .. '/' .. totlines
+			elseif curline == totlines then
+				return 'Bot' .. '/' .. totlines
+			end
 			local percent = math.modf((curline / totlines) * 100)
 			return percent .. '%/' .. totlines
 		end,
