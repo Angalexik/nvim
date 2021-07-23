@@ -141,7 +141,6 @@ local function FileName(short)
 	if short then name = 'FileNameShort' else name = 'FileName' end
 	local filename = {
 		provider = function ()
-			-- return string.gsub(fileinfo.get_current_file_name('', ''), '^%s*(.-)%s*$', '%1')
 			local icon = ''
 			local padding = ''
 			if bo.modifiable and not short then
@@ -217,8 +216,6 @@ addLeftSection({
 			cmd("hi GalaxyViMode guibg=" .. modecols[mode])
 			return mode .. ' '
 		end,
-		-- separator = '',
-		-- separator_highlight = {colours.bg1},
 		highlight = {colours.bg1, colours.fg, "bold"},
 	}
 })
@@ -359,44 +356,6 @@ addRightSection({
 		highlight = {colours.bg1},
 	}
 })
-
--- addRightSection({
--- 	things = {
--- 		provider = function ()
--- 			return diag.get_diagnostic_error()
--- 		end
--- 	}
--- })
-
-
--- addRightSection({
--- 	ALEWarning = {
--- 		provider = function ()
--- 			return "W:" .. getalediag().warnings
--- 		end,
--- 		highlight = {colours.nord13, colours.bg1},
--- 		separator = '',
--- 		separator_highlight = {colours.bg1},
--- 	}
--- })
-
--- addRightSection({
--- 	nothing = {
--- 		provider = function ()
--- 			return ' '
--- 		end,
--- 		highlight = {colours.fg, colours.bg1},
--- 	}
--- })
-
--- addRightSection({
--- 	ALEError = {
--- 		provider = function ()
--- 			return "E:" .. getalediag().errors
--- 		end,
--- 		highlight = {colours.nord11, colours.bg1},
--- 	}
--- })
 
 addRightSection({
 	Hints = {

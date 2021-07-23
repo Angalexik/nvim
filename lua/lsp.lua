@@ -56,40 +56,6 @@ configs.kls = {
   }
 }
 
--- local eslint = {
---   lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
---   lintIgnoreExitCode = true,
---   lintStdin = true,
---   lintFormats = {"%f(%l,%c): %tarning %m", "%f(%l,%c): %rror %m"},
---   lintSource = "eslint",
---   formatCommand = "eslint_d --stdin --stdin-filename ${INPUT} --fix",
---   formatStdin = true
--- }
-
--- local stylelint = {
---   lintCommand = "stylelint --config ~/.config/stylelintrc.js --formatter unix --stdin --stdin-filename ${INPUT}",
---   lintIgnoreExitCode = true,
---   lintStdin = true,
---   lintFormats = {"%f:%l:%c: %m [%trror]", "%f:%l:%c: %m [%tarning]"},
---   lintSource = "stylelint"
--- }
-
--- local luaformatter = {
---   formatCommand = "lua-format -i --indent-width=2",
---   formatStdin = true
--- }
-
--- local languages = {
---   svelte = {eslint, stylelint},
---   css = {stylelint},
---   scss = {stylelint},
---   sass = {stylelint},
---   typescript = {eslint},
---   javascript = {eslint},
---   javascriptreact = {eslint},
---   typescriptreact = {eslint},
---   lua = {luaformatter}
--- }
 
 local function has_value (tab, val)
   for _, value in ipairs(tab) do
@@ -103,7 +69,6 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
--- local servers = { "svelte", "tsserver", "vimls", "omnisharp" }
 local servers = { "csharp", "svelte", "bash", "json", "html", "typescript", "cpp", "vim", "css", "lua", "pylsp" }
 local installed_servers = lspinstall.installed_servers()
 for _, server in ipairs(servers) do
@@ -117,29 +82,6 @@ for _, lsp in ipairs(installed_servers) do
     local luadev = require("lua-dev").setup({ lspconfig = { on_attach = on_attach } })
     luadev.settings.Lua.workspace.library["/home/alex/dotfiles/computercraft"] = true
     nvim_lsp[lsp].setup(luadev)
-  -- elseif lsp == "efm" then
-  --   nvim_lsp[lsp].setup {
-  --     on_attach = on_attach,
-  --     cmd = {
-  --       "/home/alex/.local/share/nvim/lspinstall/efm/./efm-langserver",
-  --       "-logfile", "/home/alex/efm.log", "-loglevel", "9"
-  --     },
-  --     init_options = {documentFormatting = true},
-  --     root_dir = vim.loop.cwd,
-  --     filetypes = vim.tbl_keys(languages),
-  --     settings = {
-  --       rootMarkers = {".git/"},
-  --       -- filetypes = {
-  --       -- 	"svelte",
-  --       -- 	"css",
-  --       -- 	"typescript",
-  --       -- 	"javascript",
-  --       -- 	"javascriptreact",
-  --       -- 	"typescriptreact",
-  --       -- },
-  --       languages = languages
-  --     }
-  --   }
   else
     nvim_lsp[lsp].setup {on_attach = on_attach}
   end

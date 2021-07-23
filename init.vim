@@ -17,7 +17,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'Angalexik/nord-vim'
 Plug 'dracula/vim'
 Plug 'reedes/vim-colors-pencil'
-" Plug 'folke/lsp-colors.nvim'
 
 " QOL
 Plug 'tpope/vim-surround'
@@ -29,8 +28,6 @@ Plug 'tpope/vim-sensible'
 Plug 'airblade/vim-rooter'
 Plug 'alvan/vim-closetag'
 Plug 'ggandor/lightspeed.nvim'
-" Plug 'LucHermitte/local_vimrc'
-" Plug 'LucHermitte/lh-vim-lib'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-telescope/telescope.nvim'
@@ -38,8 +35,6 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'jbyuki/one-small-step-for-vimkind'
 
 " Completion/LSP
-" Plug 'dense-analysis/ale'
-" Plug 'nathunsmitty/nvim-ale-diagnostic'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'onsails/lspkind-nvim'
@@ -57,25 +52,19 @@ Plug 'fivethree-team/vscode-svelte-snippets'
 Plug 'Pocco81/DAPInstall.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'puremourning/vimspector'
 Plug 'mattn/emmet-vim'
 Plug 'evanleck/vim-svelte'
 Plug 'liuchengxu/vista.vim'
 Plug 'digitaltoad/vim-pug'
-" Plug 'kevinoid/vim-jsonc'
 Plug 'Freedzone/kerbovim'
 Plug 'maxbane/vim-asm_ca65'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-" Plug 'cespare/vim-toml'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'tpope/vim-markdown'
 Plug 'clktmr/vim-gdscript3'
-" Plug 'DonnieWest/kotlin-vim'
-" Plug 'tfnico/vim-gradle'
 Plug 'rubixninja314/vim-mcfunction'
 Plug 'neoclide/npm.nvim', {'do': 'npm install'}
 
@@ -85,7 +74,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/goyo.vim'
-" Plug 'ryanoasis/vim-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
@@ -284,7 +272,6 @@ EOF
 " Markdown settings
 let g:mkdp_markdown_css = expand('~/.config/nvim/markdown.css')
 let g:mkdp_page_title = '„${name}“'
-" let g:markdown_enable_spell_checking = 0
 
 " Fold settings
 set foldmethod=marker
@@ -296,7 +283,6 @@ autocmd FileType json setlocal filetype=jsonc
 " Custom comments for vim-commetary
 autocmd FileType jsonc setlocal commentstring=//\ %s
 autocmd FileType kerboscript setlocal commentstring=//\ %s
-" autocmd FileType svelte setlocal commentstring=<!--\ %s\ -->
 
 if filereadable('gradlew')
 	compiler gradlew
