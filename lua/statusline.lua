@@ -91,10 +91,14 @@ local function showgit()
 end
 
 local function showlsp()
-	return diag.get_diagnostic_error() or
+	return (diag.get_diagnostic_error() or
 		diag.get_diagnostic_warn() or
 		diag.get_diagnostic_info() or
-		diag.get_diagnostic_hint()
+		diag.get_diagnostic_hint()) and not
+		(diag.get_diagnostic_error() == '' or
+		diag.get_diagnostic_warn() == '' or
+		diag.get_diagnostic_info() == '' or
+		diag.get_diagnostic_hint() == '')
 end
 
 ---@param text string
