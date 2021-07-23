@@ -133,6 +133,8 @@ local function addShortRightSection(component)
 end
 
 local function FileName(short)
+	local name = ''
+	if short then name = 'FileNameShort' else name = 'FileName' end
 	local filename = {
 		provider = function ()
 			-- return string.gsub(fileinfo.get_current_file_name('', ''), '^%s*(.-)%s*$', '%1')
@@ -154,7 +156,7 @@ local function FileName(short)
 		separator = '',
 		separator_highlight = {colours.bg1},
 	}
-	return { FileName = filename }
+	return { [name] = filename }
 end
 
 local FileType = {
