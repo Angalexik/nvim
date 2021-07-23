@@ -319,31 +319,17 @@ addRightSection({
 addRightSection(padding)
 
 addRightSection({
-	LineNCharN = {
-		provider = function ()
-			return fn.line('.') .. ':' .. fn.col('.')
-		end,
-		highlight = {colours.nord9, colours.bg1},
-		separator = '',
-		separator_highlight = {colours.bg1},
-	}
-})
-
-addRightSection(rightsep)
-addRightSection(padding)
-
-addRightSection({
-	PercentTotLines = {
+	PercentTotLinesLineNCharN = {
 		provider = function ()
 			local curline = fn.line('.')
 			local totlines = fn.line('$')
+			local percent = math.modf((curline / totlines) * 100) .. '%'
 			if curline == 1 then
-				return 'Top' .. '/' .. totlines
+				percent = 'Top'
 			elseif curline == totlines then
-				return 'Bot' .. '/' .. totlines
+				percent = 'Bot'
 			end
-			local percent = math.modf((curline / totlines) * 100)
-			return percent .. '%/' .. totlines
+			return fn.line('.') .. ':' .. fn.col('.') .. ' ' .. percent .. '/' .. totlines
 		end,
 		highlight = {colours.nord9, colours.bg1},
 		separator = '',
