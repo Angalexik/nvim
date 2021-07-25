@@ -155,9 +155,9 @@ lint.linters.eslint = function ()
       --- @field endColumn number
 
       --- @type ESLintOutput
-      local decoded = {}
-      if pcall(vim.fn.json_decode, output) then
-        decoded = vim.fn.json_decode(output)[1]
+      local status, decoded = pcall(vim.fn.json_decode, output)
+      if status then
+        decoded = decoded[1]
       else
         decoded = {
           messages = {
