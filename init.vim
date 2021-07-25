@@ -98,6 +98,9 @@ lua require('statusline')
 " Debugging
 lua require('debugging')
 
+" Key maps
+runtime mappings.vim
+
 " Set up devicons
 lua << EOF
 
@@ -126,28 +129,8 @@ function! StartifyEntryFormat() abort
  	return 'v:lua.webDevIcons(absolute_path) . " " . entry_path'
 endfunction
 
-" Remaps
-let mapleader = ' '
-" Fast save
-map <leader>w :w!<cr>
-" Fast search
-map <leader><space> /
-map <leader><C-space> ?
-" Change to writing mode
-nmap <leader>zz :source ~/.config/nvim/markdown.vim<cr>
 " Enable mouse
 set mouse=a
-" Exit terminal
-tnoremap <esc> <C-\><C-N>
-
-" Dap
-nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
-nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
-nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
-nnoremap <silent> <F3> :lua require'dap'.disconnect()<CR>
-nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
-nnoremap <silent> <F6> :lua require'dap'.pause()<CR>
-nnoremap <silent> <F9> :lua require'dap'.toggle_breakpoint()<CR>
 let g:dap_virtual_text = v:true
 
 " Vim rooter
@@ -198,32 +181,6 @@ sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl
 set hidden
 
 " Barbar
-" Move to previous/next
-nnoremap <silent>		 <A-,> :BufferPrevious<CR>
-nnoremap <silent>		 <A-.> :BufferNext<CR>
-" Re-order to previous/next
-nnoremap <silent>		 <A-<> :BufferMovePrevious<CR>
-nnoremap <silent>		 <A->> :BufferMoveNext<CR>
-" Goto buffer in position...
-nnoremap <silent>		 <A-1> :BufferGoto 1<CR>
-nnoremap <silent>		 <A-2> :BufferGoto 2<CR>
-nnoremap <silent>		 <A-3> :BufferGoto 3<CR>
-nnoremap <silent>		 <A-4> :BufferGoto 4<CR>
-nnoremap <silent>		 <A-5> :BufferGoto 5<CR>
-nnoremap <silent>		 <A-6> :BufferGoto 6<CR>
-nnoremap <silent>		 <A-7> :BufferGoto 7<CR>
-nnoremap <silent>		 <A-8> :BufferGoto 8<CR>
-nnoremap <silent>		 <A-9> :BufferLast<CR>
-" Close buffer
-nnoremap <silent>		 <A-c> :BufferClose<CR>
-" Wipeout buffer
-"													 :BufferWipeout<CR>
-" Close commands
-"													 :BufferCloseAllButCurrent<CR>
-"													 :BufferCloseBuffersLeft<CR>
-"													 :BufferCloseBuffersRight<CR>
-" Magic buffer-picking mode
-nnoremap <silent> <C-s>		 :BufferPick<CR>
 
 let g:bufferline = get(g:, 'bufferline', {})
 
@@ -391,10 +348,5 @@ _G.s_tab_complete = function()
 		return t "<S-Tab>"
 	end
 end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 EOF
