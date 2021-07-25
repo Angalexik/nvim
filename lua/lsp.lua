@@ -80,7 +80,7 @@ end
 for _, lsp in ipairs(installed_servers) do
   if lsp == "lua" then
     local luadev = require("lua-dev").setup({ lspconfig = { on_attach = on_attach } })
-    luadev.settings.Lua.workspace.library = {"/home/alex/Python/ldoctoemmy/libs",}
+    luadev.settings.Lua.workspace.library["/home/alex/Python/ldoctoemmy/libs"] = true
     nvim_lsp[lsp].setup(luadev)
   else
     nvim_lsp[lsp].setup {on_attach = on_attach}
