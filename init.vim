@@ -10,6 +10,9 @@ set runtimepath^=/home/alex/dotfiles/coc-computercraft
 " Plugins
 runtime plugins.vim
 
+" Options
+runtime options.vim
+
 " Lsp configuration
 lua require("lsp")
 
@@ -50,8 +53,6 @@ function! StartifyEntryFormat() abort
  	return 'v:lua.webDevIcons(absolute_path) . " " . entry_path'
 endfunction
 
-" Enable mouse
-set mouse=a
 let g:dap_virtual_text = v:true
 
 " Vim rooter
@@ -61,14 +62,6 @@ let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 colorscheme nord
-set encoding=UTF-8
-set relativenumber
-set number
-set breakindent
-set termguicolors
-set noshowmode
-set signcolumn=yes:1
-set scrolloff=2
 
 lua <<EOF
 
@@ -98,9 +91,6 @@ sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning 
 sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
 
-" Keep buffers after abandoning
-set hidden
-
 " Barbar
 
 let g:bufferline = get(g:, 'bufferline', {})
@@ -121,23 +111,11 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" Search
-set ignorecase
-set smartcase
-
-" Clipboard
-set clipboard=unnamedplus
-
 " Indentline
 let g:indent_blankline_buftype_exclude = ['terminal', 'help']
 let g:indent_blankline_filetype_exclude = ['startify']
 let g:indent_blankline_char = "│"
 let g:indent_blankline_use_treesitter = v:true
-
-" Indentation
-set tabstop=2
-set shiftwidth=2
-set noexpandtab
 
 " Close tag
 lua <<EOF
@@ -151,10 +129,6 @@ EOF
 " Markdown settings
 let g:mkdp_markdown_css = expand('~/.config/nvim/markdown.css')
 let g:mkdp_page_title = '„${name}“'
-
-" Fold settings
-set foldmethod=marker
-set foldmarker=#region,#endregion
 
 " Allow json comments
 autocmd FileType json setlocal filetype=jsonc
@@ -171,12 +145,7 @@ endif
 let g:OmniSharp_highlighting = 3
 let g:OmniSharp_typeLookupInPreview = 1
 
-" Speed up CursorHold
-set updatetime=300
-
 " nvim compe
-set completeopt=menuone,noselect
-
 let g:compe = {}
 let g:compe.enabled = v:true
 let g:compe.autocomplete = v:true
