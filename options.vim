@@ -15,3 +15,4 @@ set tabstop=2 " 2 wide tabs
 set shiftwidth=2
 set updatetime=300 " speed up cursorhold
 set completeopt=menuone,noselect " show menu even if there is only completion and don't automatically select
+set path=** " magic fuzzy finding
