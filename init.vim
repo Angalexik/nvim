@@ -4,9 +4,6 @@
 " | | | \ V /| | | | | | |
 " |_| |_|\_/ |_|_| |_| |_|
 
-" temporary
-set runtimepath^=/home/alex/dotfiles/coc-computercraft
-
 " Plugins
 runtime plugins.vim
 
