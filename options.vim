@@ -17,4 +17,4 @@ set updatetime=300 " speed up cursorhold
 set completeopt=menuone,noselect " show menu even if there is only completion and don't automatically select
 set path=** " magic fuzzy finding
 set fillchars=eob:\  " remove ~ at the end of file
-set list listchars+=trail:· " show trailing whitespace as `·`
+set list listchars=trail:· " show trailing whitespace as `·`
