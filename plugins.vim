@@ -20,9 +20,9 @@ Plug 'tpope/vim-sensible'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-rooter'
 Plug 'ggandor/lightspeed.nvim'
-Plug 'windwp/nvim-ts-autotag'
+Plug 'windwp/nvim-ts-autotag', { 'for': ['html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'xml', 'php', 'glimmer', 'handlebars', 'hbs'] }
 Plug 'windwp/nvim-autopairs'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'on': 'Telescope' }
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'jbyuki/one-small-step-for-vimkind'
 
@@ -38,15 +38,15 @@ Plug 'folke/lua-dev.nvim'
 Plug 'mfussenegger/nvim-lint'
 
 " Snippets
-Plug 'fivethree-team/vscode-svelte-snippets'
+Plug 'fivethree-team/vscode-svelte-snippets', { 'for': 'svelte' }
 
 " Various FileType support
 Plug 'Pocco81/DAPInstall.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': ['svelte', 'html', 'xml'] }
 Plug 'evanleck/vim-svelte'
-Plug 'liuchengxu/vista.vim'
+Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!!'] }
 Plug 'digitaltoad/vim-pug'
 Plug 'Freedzone/kerbovim'
 Plug 'maxbane/vim-asm_ca65'
@@ -54,7 +54,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'on': ['MarkdownPreview', 'MarkdownPreviewToggle'] }
 Plug 'tpope/vim-markdown'
 Plug 'clktmr/vim-gdscript3'
 Plug 'rubixninja314/vim-mcfunction'
