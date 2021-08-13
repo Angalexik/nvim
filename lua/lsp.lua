@@ -213,7 +213,9 @@ lint.linters_by_ft = {
   typescriptreact = {"eslint",},
   css = {"stylelint"},
   scss = {"stylelint"},
-  sass = {"stylelint"}
+  sass = {"stylelint"},
+  sh = {"shellcheck"},
+  bash = {"shellcheck"},
 }
 -- lint.try_lint()
 vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged <buffer> lua require('lint').try_lint()")
