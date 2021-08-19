@@ -117,6 +117,8 @@ let g:indent_blankline_buftype_exclude = ['terminal', 'help']
 let g:indent_blankline_filetype_exclude = ['startify']
 let g:indent_blankline_char = "│"
 let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_show_current_context = v:true
+let g:indent_blankline_context_patterns = ['function', 'class', 'method', 'namespace', '^using', '^for', '^if', '^else', '^table', '^dictionary', '^list', '^while', '^try', '^except', '^finally', '^handler', '^finalizer', '^alternative', '^switch', 'case']
 
 " iamcco/markdown-preview.nvim
 let g:mkdp_markdown_css = expand('~/.config/nvim/markdown.css')
