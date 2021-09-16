@@ -73,6 +73,24 @@ require'colorizer'.setup({
 	sass = { css = true };
 }, { RGB = true, RRGGBB = true, RRGGBBAA = true, names = false})
 
+-- ahmedkhalf/project.nvim
+require'project_nvim'.setup({
+	patterns = {
+		'.git',
+		'.git/',
+		'_darcs/',
+		'.hg/',
+		'.bzr/',
+		'.svn/',
+		'gradle/',
+		'Cargo.toml',
+		'tsconfig.json',
+		'*.sln',
+		'*.csproj',
+		'Makefile'
+	}
+})
+
 -- kyazdani42/nvim-web-devicons
 local devicons = require'nvim-web-devicons'
 
@@ -124,5 +142,3 @@ let g:indent_blankline_context_patterns = ['function', 'class', 'method', 'names
 let g:mkdp_markdown_css = expand('~/.config/nvim/markdown.css')
 let g:mkdp_page_title = '„${name}“'
 
-" airblade/vim-rooter
-let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', 'gradle/', 'Cargo.toml', 'tsconfig.json', '*.sln', '*.csproj', 'Makefile']
