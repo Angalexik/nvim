@@ -11,6 +11,7 @@ Plug 'dracula/vim'
 Plug 'reedes/vim-colors-pencil'
 
 " QOL
+Plug 'lilydjwg/fcitx.vim'
 Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
