@@ -2,7 +2,9 @@ lua << EOF
 
 -- windwp/nvim-autopairs
 local pairs = require("nvim-autopairs")
-pairs.setup()
+pairs.setup({
+	enable_check_bracket_line = false
+})
 
 require("nvim-autopairs.completion.compe").setup({
 	map_cr = true,
