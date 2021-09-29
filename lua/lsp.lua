@@ -73,7 +73,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "csharp", "svelte", "bash", "json", "html", "typescript", "cpp", "vim", "css", "lua", "pylsp" }
+local servers = { "csharp", "svelte", "bash", "json", "html", "typescript", "cpp", "vim", "css", "lua", "pylsp", "rust" }
 local installed_servers = lspinstall.installed_servers()
 for _, server in ipairs(servers) do
   if not has_value(installed_servers, server) then
