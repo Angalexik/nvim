@@ -28,6 +28,9 @@ lua require('completion')
 " Key maps
 runtime mappings.vim
 
+" User commands
+runtime commands.vim
+
 " Visual settings
 colorscheme nord
 
