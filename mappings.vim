@@ -46,12 +46,6 @@ nnoremap <silent>		 <A-c> :BufferClose<CR>
 " Magic buffer-picking mode
 nnoremap <silent> <C-s>		 :BufferPick<CR>
 
-" compe mappings
-imap <expr> <Tab> v:lua.tab_complete()
-smap <expr> <Tab> v:lua.tab_complete()
-imap <expr> <S-Tab> v:lua.s_tab_complete()
-smap <expr> <S-Tab> v:lua.s_tab_complete()
-
 " change to writing mode
 " TODO: fix this
 nmap <leader>zz :source ~/.config/nvim/markdown.vim<cr>
