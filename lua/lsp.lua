@@ -2,23 +2,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                  {virtual_text = {prefix = "●"}})
 
-local lspinstall = require('lspinstall')
 local nvim_lsp = require('lspconfig')
 local configs = require('lspconfig/configs')
-
--- Install python-lsp-server
-local pylspconfig = require('lspinstall/util').extract_config("pylsp")
-pylspconfig.default_config.cmd[1] = "./venv/bin/pylsp"
-require("lspinstall/servers").pylsp = vim.tbl_extend('error', pylspconfig, {
-  install_script = [[
-  python3 -m venv ./venv
-  ./venv/bin/pip3 install -U pip
-  ./venv/bin/pip3 install -U 'python-lsp-server[all]'
-  ./venv/bin/pip3 install -U pylsp-mypy
-  ]]
-})
-
-lspinstall.setup()
+local lsp_installer = require('nvim-lsp-installer')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -60,38 +46,32 @@ configs.kls = {
   }
 }
 
+local luadev = require('lua-dev').setup({
+  lspconfig = {
+    on_attach = on_attach
+  }
+})
 
-local function has_value (tab, val)
-  for _, value in ipairs(tab) do
-    if value == val then
-      return true
-    end
-  end
-
-  return false
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "csharp", "svelte", "bash", "json", "html", "typescript", "cpp", "vim", "css", "lua", "pylsp", "rust" }
-local installed_servers = lspinstall.installed_servers()
+local servers = { "omnisharp", "svelte", "bashls", "jsonls", "html", "tsserver", "clangd", "vimls", "cssls", "sumneko_lua", "pylsp", "rust_analyzer", "eslint" }
+local lsp_installer_servers = require('nvim-lsp-installer.servers')
+local to_install = {}
 for _, server in ipairs(servers) do
-  if not has_value(installed_servers, server) then
-    lspinstall.install_server(server)
+  if not lsp_installer_servers.is_server_installed(server) then
+    table.insert(to_install, server)
   end
 end
 
-for _, lsp in ipairs(installed_servers) do
-  if lsp == "lua" then
-    local luadev = require("lua-dev").setup({ lspconfig = { on_attach = on_attach } })
-    luadev.settings.Lua.workspace.library["/home/alex/Python/ldoctoemmy/libs"] = true
-    nvim_lsp[lsp].setup(luadev)
-  else
-    nvim_lsp[lsp].setup {on_attach = on_attach}
-  end
+if #to_install ~= 0 then
+  lsp_installer.install_sync(to_install)
 end
 
--- nvim_lsp.kls.setup {on_attach = on_attach}
+lsp_installer.on_server_ready(function (server)
+  local opts = { on_attach = on_attach }
+  if server.name == "sumneko_lua" then
+    opts = luadev
+  end
+  server:setup(opts)
+end)
 
 require('lspkind').init({
   symbol_map = {
@@ -120,102 +100,13 @@ require('lspkind').init({
 
 local lint = require("lint")
 
-lint.linters.eslint = function ()
-  local severities = {
-    ["1"] = vim.lsp.protocol.DiagnosticSeverity.Warning,
-    ["2"] = vim.lsp.protocol.DiagnosticSeverity.Error,
-  }
-  return {
-    cmd = "eslint_d",
-    stdin = true,
-    args = {
-      "-f",
-      "json",
-      "--stdin",
-      "--stdin-filename",
-      vim.fn.expand("%"),
-    },
-    stream = "stdout",
-    ignore_exitcode = true,
-    parser = function(output)
-      --- @class ESLintOutput
-      --- @field filePath string
-      --- @field messages table<number, ESLintMessage>
-      --- @field errorCount number
-      --- @field warningCount number
-      --- @field fixableErrorCount number
-      --- @field fixableWarningCount number
-      --- @field source string
-
-      --- @class ESLintMessage
-      --- @field ruleId string
-      --- @field severity number
-      --- @field message string
-      --- @field line number
-      --- @field column number
-      --- @field nodeType string
-      --- @field messageId string
-      --- @field endLine number
-      --- @field endColumn number
-
-      --- @type ESLintOutput
-      local status, decoded = pcall(vim.fn.json_decode, output)
-      if status then
-        decoded = decoded[1]
-      else
-        decoded = {
-          messages = {
-            {
-              line = 1,
-              column = 1,
-              message = "ESLint error, run `eslint " .. vim.fn.expand("%") .. "` for more info.",
-              severity = 2,
-              ruleId = "none",
-            },
-          }
-        }
-      end
-      local diagnostics = {}
-      for _, message in ipairs(decoded.messages) do
-        if not message.endLine then
-          message.endLine = message.line
-        end
-        if not message.endColumn then
-          message.endColumn = message.column
-        end
-        table.insert(diagnostics, {
-          range = {
-            start = {
-              line = message.line - 1,
-              character = message.column - 1,
-            },
-            ["end"] = {
-              line = message.endLine - 1,
-              character = message.endColumn - 1,
-            },
-          },
-          message = message.message,
-          code = message.ruleId,
-          source = "eslint",
-          severity = severities[message.severity],
-        })
-      end
-      return diagnostics
-    end
-  }
-end
-
 lint.linters_by_ft = {
-  svelte = {"eslint", "stylelint"},
-  javascript = {"eslint",},
-  typescript = {"eslint",},
-  javascriptreact = {"eslint",},
-  typescriptreact = {"eslint",},
+  svelte = {"stylelint"},
   css = {"stylelint"},
   scss = {"stylelint"},
   sass = {"stylelint"},
   sh = {"shellcheck"},
   bash = {"shellcheck"},
 }
--- lint.try_lint()
-vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged <buffer> lua require('lint').try_lint()")
+
+vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged,BufWritePost <buffer> lua require('lint').try_lint()")
