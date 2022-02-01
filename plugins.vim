@@ -70,8 +70,8 @@ Plug 'rafcamlet/nvim-luapad', { 'on': ['Luapad', 'LuaRun', 'Lua'] }
 
 " Visual changes
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'norcalli/nvim-colorizer.lua'
 Plug 'glepnir/galaxyline.nvim'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/goyo.vim'
 Plug 'romgrk/barbar.nvim'

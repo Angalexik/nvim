@@ -63,14 +63,6 @@ require'gitsigns'.setup({
 	}
 })
 
--- norcalli/nvim-colorizer.lua
-require'colorizer'.setup({
-	'*';
-	css = { css = true };
-	scss = { css = true };
-	sass = { css = true };
-}, { RGB = true, RRGGBB = true, RRGGBBAA = true, names = false})
-
 -- ahmedkhalf/project.nvim
 require'project_nvim'.setup({
 	patterns = {
@@ -140,3 +132,6 @@ let g:indent_blankline_context_patterns = ['function', 'class', 'method', 'names
 let g:mkdp_markdown_css = expand('~/.config/nvim/markdown.css')
 let g:mkdp_page_title = '„${name}“'
 
+" rrethy/vim-hexokinase
+let g:Hexokinase_highlighters = [ 'virtual' ]
+let g:Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla,colour_names'
