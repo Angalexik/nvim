@@ -4,6 +4,7 @@ call plug#begin(stdpath('data') . '/plugins')
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'Olical/aniseed'
 
 " Colour scheme
 Plug 'arcticicestudio/nord-vim'
@@ -70,8 +71,8 @@ Plug 'rafcamlet/nvim-luapad', { 'on': ['Luapad', 'LuaRun', 'Lua'] }
 
 " Visual changes
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'glepnir/galaxyline.nvim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'famiu/feline.nvim'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/goyo.vim'
 Plug 'romgrk/barbar.nvim'

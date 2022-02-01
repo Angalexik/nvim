@@ -135,3 +135,6 @@ let g:mkdp_page_title = '„${name}“'
 " rrethy/vim-hexokinase
 let g:Hexokinase_highlighters = [ 'virtual' ]
 let g:Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla,colour_names'
+
+" Olical/aniseed
+let g:aniseed#env = v:true

@@ -17,7 +17,7 @@ runtime pluginoptions.vim
 lua require("lsp")
 
 " Status line
-lua require('statusline')
+lua require('new_statusline')
 
 " Debugging
 lua require('debugging')
