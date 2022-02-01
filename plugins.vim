@@ -6,7 +6,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Colour scheme
-Plug 'Angalexik/nord-vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim'
 Plug 'reedes/vim-colors-pencil'
 
