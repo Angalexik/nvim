@@ -8,8 +8,6 @@ Plug 'Olical/aniseed'
 
 " Colour scheme
 Plug 'arcticicestudio/nord-vim'
-Plug 'dracula/vim'
-Plug 'reedes/vim-colors-pencil'
 
 " QOL
 Plug 'lilydjwg/fcitx.vim'
@@ -28,7 +26,7 @@ Plug 'windwp/nvim-ts-autotag', { 'for': ['html', 'javascript', 'typescript', 'ja
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-telescope/telescope.nvim', { 'on': 'Telescope' }
 Plug 'yuttie/comfortable-motion.vim'
-Plug 'jbyuki/one-small-step-for-vimkind'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Completion/LSP
 Plug 'neovim/nvim-lspconfig'
@@ -53,7 +51,6 @@ Plug 'Pocco81/DAPInstall.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'mattn/emmet-vim', { 'for': ['svelte', 'html', 'xml'] }
-Plug 'evanleck/vim-svelte'
 Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!!'] }
 Plug 'digitaltoad/vim-pug'
 Plug 'Freedzone/kerbovim'
