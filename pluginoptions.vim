@@ -96,17 +96,11 @@ devicons.setup {
 		}
 	}
 }
--- Startify devicons
-function _G.webDevIcons(path)
- 	local filename = vim.fn.fnamemodify(path, ':t')
- 	local extension = vim.fn.fnamemodify(path, ':e')
- 	return devicons.get_icon(filename, extension, { default = true })
-end
+
+-- goolord/alpha-nvim
+require'alpha'.setup(require'dashboard'.config)
 
 EOF
-function! StartifyEntryFormat() abort
- 	return 'v:lua.webDevIcons(absolute_path) . " " . entry_path'
-endfunction
 
 " arcticicestudio/nord-vim
 let g:nord_italic = 1
@@ -122,7 +116,7 @@ let g:OmniSharp_typeLookupInPreview = 1
 
 " lukas-reineke/indent-blankline.nvim
 let g:indent_blankline_buftype_exclude = ['terminal', 'help']
-let g:indent_blankline_filetype_exclude = ['startify']
+let g:indent_blankline_filetype_exclude = ['alpha']
 let g:indent_blankline_char = "│"
 let g:indent_blankline_use_treesitter = v:true
 let g:indent_blankline_show_current_context = v:true

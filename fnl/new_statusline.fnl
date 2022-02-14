@@ -252,4 +252,11 @@
   ((. (require :feline) "setup") {"components" components
                                   "theme" theme
                                   "custom_providers" {"left_rounded" (hashfn "")
-                                                      "right_rounded" (hashfn "")}}))
+                                                      "right_rounded" (hashfn "")}
+                                  "force_inactive" {"filetypes" ["^help$"
+                                                                 "^alpha$"
+                                                                 "^dirvish$"
+                                                                 "^qf$"
+                                                                 "^fugitive$"
+                                                                 "^fugitiveblame$"]
+                                                    "buftypes" ["^terminal$"]}}))

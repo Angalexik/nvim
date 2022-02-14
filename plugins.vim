@@ -70,7 +70,7 @@ Plug 'rafcamlet/nvim-luapad', { 'on': ['Luapad', 'LuaRun', 'Lua'] }
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'famiu/feline.nvim'
-Plug 'mhinz/vim-startify'
+Plug 'goolord/alpha-nvim'
 Plug 'junegunn/goyo.vim'
 Plug 'romgrk/barbar.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
