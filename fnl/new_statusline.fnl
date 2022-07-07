@@ -93,15 +93,22 @@
 (fn diagnostics-count [severity]
   (lsp-provider.get_diagnostics_count severity))
 
+(fn diagnostic-padding [severity]
+  (if (if (= severity error-severity)
+        (or (> (diagnostics-count warn-severity) 0)
+            (> (diagnostics-count info-severity) 0)
+            (> (diagnostics-count hint-severity) 0))
+        (= severity warn-severity)
+        (or (> (diagnostics-count info-severity) 0)
+            (> (diagnostics-count hint-severity) 0))
+        (> diagnostics-count hint-severity 0))
+    " "
+    ""))
+
 (fn cursorpos []
   (let [pos (api.nvim_win_get_cursor 0)]
     (.. (. pos 1) ":" (+ (. pos 2) 1))))
 
-; (fn show-diag []
-;   (or (lsp.diagnostics_exist error-severity)
-;       (lsp.diagnostics_exist warn-severity)
-;       (lsp.diagnostics_exist info-severity)
-;       (lsp.diagnostics_exist hint-severity)))
 (fn show-diag []
   (or (> (diagnostics-count error-severity) 0)
       (> (diagnostics-count warn-severity) 0)
@@ -201,22 +208,31 @@
               "enabled" (hashfn (> (diagnostics-count error-severity) 0))
               "hl" {"bg" "bg1"
                     "fg" "nord11"}
-              "icon" " E:"}
+              "icon" "E:"
+              "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
+                                    (tset sep "str" (diagnostic-padding error-severity))
+                                    sep))}
       warnings {"provider" (hashfn (tostring (diagnostics-count warn-severity)))
                 "enabled" (hashfn (> (diagnostics-count warn-severity) 0))
                 "hl" {"bg" "bg1"
                       "fg" "nord13"}
-                "icon" " W:"}
+                "icon" "W:"
+                "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
+                                      (tset sep "str" (diagnostic-padding warn-severity))
+                                      sep))}
       informations {"provider" (hashfn (tostring (diagnostics-count info-severity)))
                     "enabled" (hashfn (> (diagnostics-count info-severity) 0))
                     "hl" {"bg" "bg1"
                           "fg" "nord8"}
-                    "icon" " I:"}
+                    "icon" "I:"
+                    "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
+                                          (tset sep "str" (diagnostic-padding info-severity))
+                                          sep))}
       hints {"provider" (hashfn (tostring (diagnostics-count hint-severity)))
              "enabled" (hashfn (> (diagnostics-count hint-severity) 0))
              "hl" {"bg" "bg1"
-                   "fg" "nord3_bright"}
-             "icon" " H:"}
+                   "fg" "nord10"}
+             "icon" "H:"}
       lsep {"provider" "right_rounded" ;; HACK: separator is a separate component instead of being a separator
             "hl" {"fg" "bg1"}
             "enabled" show-diag}]
@@ -241,10 +257,10 @@
 (let [theme {"fg" "#d8dee9"
              "bg" "#2e3440"
              "bg1" "#4c566a"
-             "nord3_bright" "#7b88a1"
              "nord7" "#8fbcbb"
              "nord8" "#88c0d0"
              "nord9" "#81a1c1"
+             "nord10" "#5e81ac"
              "nord11" "#bf616a"
              "nord12" "#d08770"
              "nord13" "#ebcb8b"
