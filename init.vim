@@ -11,7 +11,7 @@ runtime plugins.vim
 runtime options.vim
 
 " Plugin Options
-runtime pluginoptions.vim
+lua require("pluginoptions")
 
 " Lsp configuration
 lua require("lsp")

@@ -1,4 +1,4 @@
-lua << EOF
+local g = vim.g
 
 -- windwp/nvim-autopairs
 local pairs = require("nvim-autopairs")
@@ -43,7 +43,7 @@ end)
 
 -- nvim-treesitter/nvim-treesitter
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = "maintained",
+	ensure_installed = "all",
 	highlight = {
 		enable = true,
 		disable = { "c_sharp" }
@@ -97,35 +97,32 @@ devicons.setup {
 -- goolord/alpha-nvim
 require'alpha'.setup(require'dashboard'.config)
 
-EOF
+-- arcticicestudio/nord-vim
+g.nord_italic = 1
+g.nord_italic_comments = 1
 
-" arcticicestudio/nord-vim
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
+-- romgrk/barbar.nvim
+require('bufferline').setup({
+	icon_custom_colors = "white",
+})
 
-" romgrk/barbar.nvim
-let g:bufferline = get(g:, 'bufferline', {})
-let g:bufferline.icon_custom_colors = 'white'
+-- OmniSharp/omnisharp-vim
+g.OmniSharp_highlighting = 3
+g.OmniSharp_typeLookupInPreview = 1
 
-" OmniSharp/omnisharp-vim
-let g:OmniSharp_highlighting = 3
-let g:OmniSharp_typeLookupInPreview = 1
+-- lukas-reineke/indent-blankline.nvim
+require('indent_blankline').setup({
+	buftype_exclude = {'terminal', 'help'},
+	filetype_exclude = {'alpha'},
+	char = "│",
+	use_treesitter = true,
+	show_current_context = true,
+	context_patterns = {'function', 'class', 'method', 'namespace', '^using', '^for', '^if', '^else', '^table', '^dictionary', '^list', '^while', '^try', '^except', '^finally', '^handler', '^finalizer', '^alternative', '^switch', 'case'},
+})
 
-" lukas-reineke/indent-blankline.nvim
-let g:indent_blankline_buftype_exclude = ['terminal', 'help']
-let g:indent_blankline_filetype_exclude = ['alpha']
-let g:indent_blankline_char = "│"
-let g:indent_blankline_use_treesitter = v:true
-let g:indent_blankline_show_current_context = v:true
-let g:indent_blankline_context_patterns = ['function', 'class', 'method', 'namespace', '^using', '^for', '^if', '^else', '^table', '^dictionary', '^list', '^while', '^try', '^except', '^finally', '^handler', '^finalizer', '^alternative', '^switch', 'case']
+-- rrethy/vim-hexokinase
+g.Hexokinase_highlighters = {'virtual'}
+g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla,colour_names'
 
-" iamcco/markdown-preview.nvim
-let g:mkdp_markdown_css = expand('~/.config/nvim/markdown.css')
-let g:mkdp_page_title = '„${name}“'
-
-" rrethy/vim-hexokinase
-let g:Hexokinase_highlighters = [ 'virtual' ]
-let g:Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla,colour_names'
-
-" Olical/aniseed
-let g:aniseed#env = v:true
+-- Olical/aniseed
+g["aniseed#env"] = true
