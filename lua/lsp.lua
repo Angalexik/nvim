@@ -37,41 +37,32 @@ local on_attach = function(client, bufnr)
 
 end
 
-configs.kls = {
-  default_config = {
-    cmd = {'kls', '--stdio'},
-    filetypes = {'kerboscript'},
-    root_dir = function(fname) return vim.fn.getcwd() end,
-    settings = {}
-  }
-}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local servers = { "omnisharp", "svelte", "bashls", "jsonls", "html", "tsserver", "clangd", "vimls", "cssls", "sumneko_lua", "pylsp", "rust_analyzer", "eslint" }
 
 local luadev = require('lua-dev').setup({
   lspconfig = {
-    on_attach = on_attach
+    on_attach = on_attach,
+    capabilities = capabilities,
   }
 })
 
-local servers = { "omnisharp", "svelte", "bashls", "jsonls", "html", "tsserver", "clangd", "vimls", "cssls", "sumneko_lua", "pylsp", "rust_analyzer", "eslint" }
-local lsp_installer_servers = require('nvim-lsp-installer.servers')
-local to_install = {}
+lsp_installer.setup({
+  automatic_installation = true
+})
+
 for _, server in ipairs(servers) do
-  if not lsp_installer_servers.is_server_installed(server) then
-    table.insert(to_install, server)
+  if server == "sumneko_lua" then
+    require('lspconfig').sumneko_lua.setup(luadev)
+  else
+    require('lspconfig')[server].setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
   end
 end
 
-if #to_install ~= 0 then
-  lsp_installer.install_sync(to_install)
-end
-
-lsp_installer.on_server_ready(function (server)
-  local opts = { on_attach = on_attach }
-  if server.name == "sumneko_lua" then
-    opts = luadev
-  end
-  server:setup(opts)
-end)
 
 require('lspkind').init({
   symbol_map = {
