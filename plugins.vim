@@ -70,7 +70,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'romgrk/barbar.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+" Nyooom!
+Plug 'lewis6991/impatient.nvim'
+
 call plug#end()
+
+lua require('impatient')
 
 " Auto install
 autocmd VimEnter *
