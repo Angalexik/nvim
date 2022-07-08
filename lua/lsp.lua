@@ -63,32 +63,6 @@ for _, server in ipairs(servers) do
   end
 end
 
-
-require('lspkind').init({
-  symbol_map = {
-    Text = '',
-    Method = '',
-    Function = '',
-    Constructor = '',
-    Variable = '',
-    Class = 'פּ',
-    Interface = 'ﰮ',
-    Module = '',
-    Property = '襁',
-    Unit = '',
-    Value = '',
-    Enum = '',
-    Keyword = '',
-    Snippet = '﬌',
-    Color = '',
-    File = '',
-    Folder = '',
-    EnumMember = '',
-    Constant = '',
-    Struct = ''
-  }
-})
-
 local lint = require("lint")
 
 lint.linters_by_ft = {

@@ -30,7 +30,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Completion/LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'onsails/lspkind-nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'

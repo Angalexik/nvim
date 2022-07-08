@@ -1,10 +1,52 @@
 local cmp = require('cmp')
 
+local symbol_map = {
+	Text = '',
+	Method = '',
+	Function = '',
+	Constructor = '',
+	Field = "ﰠ",
+	Variable = '',
+	Class = 'פּ',
+	Interface = 'ﰮ',
+	Module = '',
+	Property = '襁',
+	Unit = '',
+	Value = '',
+	Enum = '',
+	Keyword = '',
+	Snippet = '﬌',
+	Color = '',
+	File = '',
+	Reference = "",
+	Folder = '',
+	EnumMember = '',
+	Constant = '',
+	Struct = '',
+	Event = "",
+	Operator = "",
+	TypeParameter = "",
+}
+
 cmp.setup({
+	window = {
+		completion = {
+			col_offset = -3,
+			side_padding = 0,
+		},
+	},
 	snippet = {
 		expand = function(args)
 			vim.fn['vsnip#anonymous'](args.body)
 		end,
+	},
+	formatting = {
+		fields = {"kind", "abbr", "menu"},
+		format = function (entry, vim_item)
+			vim_item.menu = "(" .. vim_item.kind .. ")"
+			vim_item.kind = " " .. symbol_map[vim_item.kind] .. " "
+			return vim_item
+		end
 	},
 	mapping = {
 		['<Plug>(cmp-next)'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
