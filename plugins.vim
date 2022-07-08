@@ -47,9 +47,6 @@ Plug 'mfussenegger/nvim-lint'
 Plug 'fivethree-team/vscode-svelte-snippets', { 'for': 'svelte' }
 
 " Various FileType support
-Plug 'Pocco81/DAPInstall.nvim'
-Plug 'mfussenegger/nvim-dap'
-Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'mattn/emmet-vim', { 'for': ['svelte', 'html', 'xml'] }
 Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!!'] }
 Plug 'digitaltoad/vim-pug'

@@ -81,9 +81,6 @@ require'project_nvim'.setup({
 	}
 })
 
--- theHamsta/nvim-dap-virtual-text
-require'nvim-dap-virtual-text'.setup()
-
 -- kyazdani42/nvim-web-devicons
 local devicons = require'nvim-web-devicons'
 

@@ -19,9 +19,6 @@ lua require("lsp")
 " Status line
 lua require('new_statusline')
 
-" Debugging
-lua require('debugging')
-
 " Compe
 lua require('completion')
 

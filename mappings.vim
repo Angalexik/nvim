@@ -8,22 +8,6 @@ map <leader><C-space> ?
 " exit terminal
 tnoremap <esc> <C-\><C-N>
 
-" dap mappings
-" step over
-nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
-" step in
-nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
-" step out
-nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
-" disconnect
-nnoremap <silent> <F3> :lua require'dap'.disconnect()<CR>
-" continue
-nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
-" pause
-nnoremap <silent> <F6> :lua require'dap'.pause()<CR>
-" breakpoint
-nnoremap <silent> <F9> :lua require'dap'.toggle_breakpoint()<CR>
-
 " barbar mappings
 " Move to previous/next
 nnoremap <silent>		 <A-,> :BufferPrevious<CR>
