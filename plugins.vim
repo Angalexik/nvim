@@ -24,7 +24,7 @@ Plug 'ahmedkhalf/project.nvim'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'windwp/nvim-ts-autotag', { 'for': ['html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'xml', 'php', 'glimmer', 'handlebars', 'hbs'] }
 Plug 'windwp/nvim-autopairs'
-Plug 'nvim-telescope/telescope.nvim', { 'on': 'Telescope' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
