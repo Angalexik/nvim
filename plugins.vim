@@ -55,7 +55,6 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'on': ['MarkdownPreview', 'MarkdownPreviewToggle'] }
 Plug 'tpope/vim-markdown'
 Plug 'clktmr/vim-gdscript3'
 Plug 'rubixninja314/vim-mcfunction'
