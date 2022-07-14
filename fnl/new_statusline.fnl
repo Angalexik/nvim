@@ -101,7 +101,7 @@
         (= severity warn-severity)
         (or (> (diagnostics-count info-severity) 0)
             (> (diagnostics-count hint-severity) 0))
-        (> diagnostics-count hint-severity 0))
+        (> (diagnostics-count hint-severity) 0))
     " "
     ""))
 
