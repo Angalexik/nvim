@@ -126,3 +126,6 @@ g.Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla,colour_names'
 
 -- Olical/aniseed
 g["aniseed#env"] = true
+
+-- lilydjwg/fcitx.vim
+g.fcitx5_remote = "/usr/bin/fcitx5-remote"
