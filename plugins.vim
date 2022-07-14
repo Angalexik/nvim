@@ -25,7 +25,7 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'yuttie/comfortable-motion.vim'
+Plug 'psliwka/vim-smoothie'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Completion/LSP
