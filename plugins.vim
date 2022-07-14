@@ -73,6 +73,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Nyooom!
 Plug 'lewis6991/impatient.nvim'
+Plug 'tweekmonster/startuptime.vim'
 
 call plug#end()
 
