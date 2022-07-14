@@ -31,17 +31,8 @@ runtime commands.vim
 " Visual settings
 colorscheme nord
 
-" Highlights
-highlight StatusLine guifg=#2e3440 guibg=#2e3440 ctermbg=black ctermbg=black
-highlight link StatusLineNC StatusLine
-highlight link StatusLineTerm StatusLine
-highlight link StatusLineTermNC StatusLine
-highlight CmpItemKind guifg=#2e3440 guibg=#81a1c1 ctermbg=Cyan
-highlight CmpItemAbbrMatch guifg=#e5e9f0 ctermfg=White cterm=bold gui=bold
-highlight link CmpItemAbbrMatch CmpItemAbbrMatchFuzzy
-highlight CmpItemAbbr guifg=#d8dee9 ctermfg=White
-highlight CmpItemMenu guifg=#81a1c1 ctermfg=Cyan gui=italic cterm=italic
-highlight PmenuSel ctermfg=NONE ctermbg=8 guifg=NONE guibg=#4C566A cterm=underline gui=underline
+" Custom highlights
+lua require("highlights")
 
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
@@ -54,7 +45,3 @@ autocmd FileType json setlocal filetype=jsonc
 " Custom comments for vim-commetary
 autocmd FileType jsonc setlocal commentstring=//\ %s
 autocmd FileType kerboscript setlocal commentstring=//\ %s
-
-if filereadable('gradlew')
-	compiler gradlew
-endif
