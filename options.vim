@@ -1,3 +1,9 @@
+function MyFoldText()
+	let line = getline(v:foldstart)
+	let foldedlinecount = v:foldend - v:foldstart + 1
+	return '  ' . foldedlinecount . ' lines ' . line
+endfunction
+
 set mouse=a " enable mouse
 set encoding=UTF-8 " change encoding to utf8
 set relativenumber " show numbers relative to cursor position
@@ -16,5 +22,10 @@ set shiftwidth=2
 set updatetime=300 " speed up cursorhold
 set completeopt=menuone,noselect " show menu even if there is only completion and don't automatically select
 set path=** " magic fuzzy finding
-set fillchars=eob:\  " remove ~ at the end of file
+set fillchars=eob:\ ,fold:\  " remove ~ at the end of file, remove · after folds
 set list listchars=trail:·,nbsp:␣,tab:\ \  " show trailing whitespace as `·` and NBSP as `␣`
+" treesitter folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=99 " don't automatically close folds
+set foldtext=MyFoldText()
