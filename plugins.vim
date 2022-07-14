@@ -41,6 +41,7 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'folke/lua-dev.nvim'
 Plug 'mfussenegger/nvim-lint'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 
 " Snippets
 Plug 'fivethree-team/vscode-svelte-snippets'

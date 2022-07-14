@@ -10,7 +10,7 @@ local symbol_map = {
 	Class = 'פּ',
 	Interface = 'ﰮ',
 	Module = '',
-	Property = '襁',
+	Property = 'ﰠ',
 	Unit = '',
 	Value = '',
 	Enum = '',
@@ -63,6 +63,7 @@ cmp.setup({
 		{ name = 'vsnip' },
 		{ name = 'buffer' },
 		{ name = 'path' },
+		{ name = 'nvim_lsp_signature_help' }
 	}
 })
 
