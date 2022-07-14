@@ -65,7 +65,7 @@ Plug 'rafcamlet/nvim-luapad'
 " Visual changes
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'famiu/feline.nvim'
+Plug '~/Code/Lua/feline.nvim'
 Plug 'goolord/alpha-nvim'
 Plug 'junegunn/goyo.vim'
 Plug 'romgrk/barbar.nvim'
