@@ -22,7 +22,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ahmedkhalf/project.nvim'
 Plug 'ggandor/lightspeed.nvim'
-Plug 'windwp/nvim-ts-autotag', { 'for': ['html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'xml', 'php', 'glimmer', 'handlebars', 'hbs'] }
+Plug 'windwp/nvim-ts-autotag'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'yuttie/comfortable-motion.vim'
@@ -43,11 +43,11 @@ Plug 'folke/lua-dev.nvim'
 Plug 'mfussenegger/nvim-lint'
 
 " Snippets
-Plug 'fivethree-team/vscode-svelte-snippets', { 'for': 'svelte' }
+Plug 'fivethree-team/vscode-svelte-snippets'
 
 " Various FileType support
-Plug 'mattn/emmet-vim', { 'for': ['svelte', 'html', 'xml'] }
-Plug 'liuchengxu/vista.vim', { 'on': ['Vista', 'Vista!!'] }
+Plug 'mattn/emmet-vim'
+Plug 'liuchengxu/vista.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'Freedzone/kerbovim'
 Plug 'maxbane/vim-asm_ca65'
@@ -59,7 +59,7 @@ Plug 'tpope/vim-markdown'
 Plug 'clktmr/vim-gdscript3'
 Plug 'rubixninja314/vim-mcfunction'
 Plug 'neoclide/npm.nvim', {'do': 'npm install'}
-Plug 'rafcamlet/nvim-luapad', { 'on': ['Luapad', 'LuaRun', 'Lua'] }
+Plug 'rafcamlet/nvim-luapad'
 
 " Visual changes
 Plug 'lewis6991/gitsigns.nvim'
