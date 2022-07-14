@@ -7,6 +7,7 @@
 (local add-provider (. (require :feline.providers) "add_provider"))
 (local cursor (require :feline.providers.cursor))
 (local lsp-provider (require :feline.providers.lsp))
+(local feline (require :feline))
 
 ; (local components {"left" {"active" {}
 ;                            "inactive" {}}
@@ -136,10 +137,14 @@
 ;; Git block
 (left {"provider" "left_rounded" ;; TODO: a nicer way to do this
        "enabled" showgit
+       "truncate_hide" true
+       "truncate_group" "git"
        "hl" {"fg" "bg1"}})
 
 ;; Git additions
 (left {"provider" "git_diff_added"
+       "truncate_hide" true
+       "truncate_group" "git"
        "enabled" (hashfn (and (showgit)
                               (> vim.b.gitsigns_status_dict.added 0)))
        "hl" {"fg" "nord14"
@@ -151,6 +156,8 @@
 
 ;; Git changes
 (left {"provider" "git_diff_changed"
+       "truncate_hide" true
+       "truncate_group" "git"
        "enabled" (hashfn (and (showgit)
                               (> vim.b.gitsigns_status_dict.changed 0)))
        "hl" {"fg" "nord13"
@@ -162,6 +169,8 @@
 
 ;; Git deletions
 (left {"provider" "git_diff_removed"
+       "truncate_hide" true
+       "truncate_group" "git"
        "enabled" (hashfn (and (showgit)
                               (> vim.b.gitsigns_status_dict.removed 0)))
        "hl" {"fg" "nord11"
@@ -169,12 +178,16 @@
        "icon" "-"})
 
 (left {"provider" "right_rounded" ;; TODO: a nicer way to do this
+       "truncate_hide" true
+       "truncate_group" "git"
        "enabled" showgit
        "hl" {"fg" "bg1"}
        "right_sep" " "})
 
 ;; File type
 (let [component {"provider" (hashfn (.. " " bo.filetype))
+                 "truncate_hide" true
+                 "priority" 1
                  "enabled" (hashfn (and bo.filetype
                                           (not= bo.filetype "")))
                  "hl" {"bg" "bg1"}
@@ -190,6 +203,7 @@
 ;; Position
 (right {"provider" (hashfn (let [percentage (cursor.line_percentage)]
                              (.. " " (cursorpos) " " percentage "/" (vfn.line "$"))))
+        "short_provider" (hashfn (.. " " (cursorpos)))
         "hl" {"bg" "bg1"
               "fg" "nord9"}
         "left_sep" [" " {"str" "left_rounded"
@@ -201,10 +215,16 @@
 
 ;; Diagnostics block
 (let [rsep {"provider" "left_rounded" ;; HACK: separator is a separate component instead of being a separator
+            "truncate_hide" true
+            "truncate_group" "lsp"
+            "priority" 1
             "enabled" show-diag
             "hl" {"fg" "bg1"}
             "left_sep" " "}
       errors {"provider" (hashfn (tostring (diagnostics-count error-severity)))
+              "truncate_hide" true
+              "truncate_group" "lsp"
+              "priority" 1
               "enabled" (hashfn (> (diagnostics-count error-severity) 0))
               "hl" {"bg" "bg1"
                     "fg" "nord11"}
@@ -213,6 +233,9 @@
                                     (tset sep "str" (diagnostic-padding error-severity))
                                     sep))}
       warnings {"provider" (hashfn (tostring (diagnostics-count warn-severity)))
+                "truncate_hide" true
+                "truncate_group" "lsp"
+                "priority" 1
                 "enabled" (hashfn (> (diagnostics-count warn-severity) 0))
                 "hl" {"bg" "bg1"
                       "fg" "nord13"}
@@ -221,6 +244,9 @@
                                       (tset sep "str" (diagnostic-padding warn-severity))
                                       sep))}
       informations {"provider" (hashfn (tostring (diagnostics-count info-severity)))
+                    "truncate_hide" true
+                    "truncate_group" "lsp"
+                    "priority" 1
                     "enabled" (hashfn (> (diagnostics-count info-severity) 0))
                     "hl" {"bg" "bg1"
                           "fg" "nord8"}
@@ -229,11 +255,17 @@
                                           (tset sep "str" (diagnostic-padding info-severity))
                                           sep))}
       hints {"provider" (hashfn (tostring (diagnostics-count hint-severity)))
+             "truncate_hide" true
+             "truncate_group" "lsp"
+             "priority" 1
              "enabled" (hashfn (> (diagnostics-count hint-severity) 0))
              "hl" {"bg" "bg1"
                    "fg" "nord10"}
              "icon" "H:"}
       lsep {"provider" "right_rounded" ;; HACK: separator is a separate component instead of being a separator
+            "truncate_hide" true
+            "truncate_group" "lsp"
+            "priority" 1
             "hl" {"fg" "bg1"}
             "enabled" show-diag}]
   (right rsep)
@@ -265,14 +297,14 @@
              "nord12" "#d08770"
              "nord13" "#ebcb8b"
              "nord14" "#a3be8c"}]
-  ((. (require :feline) "setup") {"components" components
-                                  "theme" theme
-                                  "custom_providers" {"left_rounded" (hashfn "")
-                                                      "right_rounded" (hashfn "")}
-                                  "force_inactive" {"filetypes" ["^help$"
-                                                                 "^alpha$"
-                                                                 "^dirvish$"
-                                                                 "^qf$"
-                                                                 "^fugitive$"
-                                                                 "^fugitiveblame$"]
-                                                    "buftypes" ["^terminal$"]}}))
+  (feline.setup {"components" components
+                 "theme" theme
+                 "custom_providers" {"left_rounded" (hashfn "")
+                                     "right_rounded" (hashfn "")}
+                 "force_inactive" {"filetypes" ["^help$"
+                                                "^alpha$"
+                                                "^dirvish$"
+                                                "^qf$"
+                                                "^fugitive$"
+                                                "^fugitiveblame$"]
+                                   "buftypes" ["^terminal$"]}}))
