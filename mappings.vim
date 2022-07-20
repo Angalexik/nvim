@@ -7,6 +7,9 @@ map <leader><space> /
 map <leader><C-space> ?
 " exit terminal
 tnoremap <esc> <C-\><C-N>
+" go to diagnostic
+nnoremap ]q <Cmd>lua vim.diagnostic.goto_next()<cr>
+nnoremap [q <Cmd>lua vim.diagnostic.goto_prev()<cr>
 
 " barbar mappings
 " Move to previous/next
