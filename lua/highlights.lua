@@ -70,15 +70,18 @@ local nord = {
 }
 
 local highlights = {
+	-- Status line
 	StatusLine = { fg = nord.nord0, bg = nord.nord0 },
 	StatusLineNC = { link = "StatusLine" },
 	StatusLineTerm = { link = "StatusLine" },
 	StatusLineTermNC = { link = "StatusLine" },
+	-- cmp
 	CmpItemKind = { fg = nord.nord0, bg = nord.nord9 },
 	CmpItemAbbrMatch = { fg = nord.nord5 },
 	CmpItemMenu = { fg = nord.nord9, opts = "italic" },
 	PmenuSel = { fg = "NONE", bg = nord.nord3, opts = "underline" },
 	FloatBorder = { fg = nord.nord4, bg = nord.nord2 },
+	-- Barbar
 	BufferTabpageFill = { bg = nord.nord0 },
 
 	BufferCurrent = { bg = nord.nord1 },
@@ -101,6 +104,18 @@ local highlights = {
 	BufferVisibleSign = { bg = nord.nord2 },
 	BufferVisibleIndex = { bg = nord.nord2 },
 	BufferVisibleTarget = { bg = nord.nord2, fg = nord.nord11 },
+	-- Lightspeed
+	LightspeedLabel = { fg = nord.nord8, opts = "bold" },
+	LightspeedLabelOverlapped = { fg = nord.nord8, opts = "bold,underline" },
+	LightspeedLabelDistant = { fg = nord.nord15, opts = "bold" },
+	LightspeedLabelDistantOverlapped = { fg = nord.nord15, opts = "bold,underline" },
+	LightspeedShortcut = { fg = nord.nord10, opts = "bold" },
+	LightspeedShortcutOverlapped = { fg = nord.nord10, opts = "bold,underline" },
+	LightspeedMaskedChar = { fg = nord.nord4, bg = nord.nord2, opts = "bold" },
+	LightspeedGreyWash = { fg = nord.nord3_bright },
+	LightspeedUnlabeledMatch = { fg = nord.nord4, bg = nord.nord1 },
+	LightspeedOneCharMatch = { fg = nord.nord8, opts = "bold,reverse" },
+	LightspeedUniqueChar = { opts = "bold,underline" },
 }
 
 for k, v in pairs(highlights) do
