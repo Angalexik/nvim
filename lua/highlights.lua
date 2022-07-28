@@ -116,6 +116,8 @@ local highlights = {
 	LightspeedUnlabeledMatch = { fg = nord.nord4, bg = nord.nord1 },
 	LightspeedOneCharMatch = { fg = nord.nord8, opts = "bold,reverse" },
 	LightspeedUniqueChar = { opts = "bold,underline" },
+	-- Lightbulb
+	LightBulbVirtualText = { fg = nord.nord13, opts = "bold" }
 }
 
 for k, v in pairs(highlights) do

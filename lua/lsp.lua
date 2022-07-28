@@ -74,4 +74,15 @@ lint.linters_by_ft = {
   bash = {"shellcheck"},
 }
 
+require("nvim-lightbulb").setup({
+  sign = {
+    enabled = false,
+  },
+  virtual_text = {
+    enabled = true,
+    text = "ﯦ "
+  }
+})
+
+vim.api.nvim_command('autocmd CursorHold,CursorHoldI * lua require("nvim-lightbulb").update_lightbulb()')
 vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged,BufWritePost <buffer> lua require('lint').try_lint()")
