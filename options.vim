@@ -29,3 +29,4 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99 " don't automatically close folds
 set foldtext=MyFoldText()
+set guifont=MonoLisa_Nerd_Font:h13.6
