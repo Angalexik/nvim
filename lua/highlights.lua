@@ -70,6 +70,9 @@ local nord = {
 }
 
 local highlights = {
+	-- Floaters
+	FloatBorder = { fg = nord.nord4, bg = nord.nord2 },
+	NormalFloat = { fg = nord.nord4, bg = nord.nord2 },
 	-- Status line
 	StatusLine = { fg = nord.nord0, bg = nord.nord0 },
 	StatusLineNC = { link = "StatusLine" },
@@ -80,7 +83,6 @@ local highlights = {
 	CmpItemAbbrMatch = { fg = nord.nord5 },
 	CmpItemMenu = { fg = nord.nord9, opts = "italic" },
 	PmenuSel = { fg = "NONE", bg = nord.nord3, opts = "underline" },
-	FloatBorder = { fg = nord.nord4, bg = nord.nord2 },
 	-- Barbar
 	BufferTabpageFill = { bg = nord.nord0 },
 

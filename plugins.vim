@@ -73,6 +73,7 @@ Plug 'goolord/alpha-nvim'
 Plug 'junegunn/goyo.vim'
 Plug 'romgrk/barbar.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'stevearc/dressing.nvim'
 
 " Nyooom!
 Plug 'lewis6991/impatient.nvim'
