@@ -4,7 +4,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 
 local nvim_lsp = require('lspconfig')
 local configs = require('lspconfig/configs')
-local lsp_installer = require('nvim-lsp-installer')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -48,15 +47,16 @@ local luadev = require('lua-dev').setup({
   }
 })
 
-lsp_installer.setup({
+require('mason').setup({})
+require('mason-lspconfig').setup({
   automatic_installation = true
 })
 
 for _, server in ipairs(servers) do
   if server == "sumneko_lua" then
-    require('lspconfig').sumneko_lua.setup(luadev)
+    nvim_lsp.sumneko_lua.setup(luadev)
   else
-    require('lspconfig')[server].setup({
+    nvim_lsp[server].setup({
       on_attach = on_attach,
       capabilities = capabilities,
     })
