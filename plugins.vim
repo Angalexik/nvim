@@ -5,6 +5,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'Olical/aniseed'
+Plug 'antoinemadec/FixCursorHold.nvim'
 
 " Colour scheme
 Plug 'arcticicestudio/nord-vim'
@@ -42,6 +43,7 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'folke/lua-dev.nvim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'kosayoda/nvim-lightbulb'
 
 " Snippets
 Plug 'fivethree-team/vscode-svelte-snippets'
