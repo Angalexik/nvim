@@ -28,7 +28,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'psliwka/vim-smoothie'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'pianocomposer321/yabs.nvim'
+Plug 'stevearc/overseer.nvim'
 
 " Completion/LSP
 Plug 'neovim/nvim-lspconfig'

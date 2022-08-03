@@ -8,6 +8,8 @@
 (local cursor (require :feline.providers.cursor))
 (local lsp-provider (require :feline.providers.lsp))
 (local feline (require :feline))
+(local STATUS (. (require :overseer.constants) "STATUS"))
+(local task_list (require :overseer.task_list))
 
 ; (local components {"left" {"active" {}
 ;                            "inactive" {}}
@@ -184,6 +186,23 @@
        "hl" {"fg" "bg1"}
        "right_sep" " "})
 
+(right {"provider" (hashfn (let [tasks {}]
+                             (each [_ task (pairs (task_list.list_tasks))]
+                               (if (= task.status STATUS.RUNNING)
+                                   (table.insert tasks task.name)))
+                             (if (> (length tasks) 0)
+                                 (.. " " (table.concat tasks " | "))
+                                 "")))
+        "truncate_hide" true
+        "priority" 0
+        "hl" {"bg" "bg1"}
+        "left_sep" {"str" "left_rounded"
+                    "hl" {"fg" "nord15"}}
+        "right_sep" "right_rounded"
+        "icon" {"str" "省"
+                "hl" {"bg" "nord15"
+                      "fg" "bg"}}})
+
 ;; File type
 (let [component {"provider" (hashfn (.. " " bo.filetype))
                  "truncate_hide" true
@@ -191,8 +210,8 @@
                  "enabled" (hashfn (and bo.filetype
                                           (not= bo.filetype "")))
                  "hl" {"bg" "bg1"}
-                 "left_sep" {"str" "left_rounded"
-                             "hl" {"fg" "nord9"}}
+                 "left_sep" [" " {"str" "left_rounded"
+                                  "hl" {"fg" "nord9"}}]
                  "right_sep" "right_rounded"
                  "icon" (hashfn {"str" (.. (file-icon) " ")
                                  "hl" {"bg" "nord9"
@@ -296,7 +315,8 @@
              "nord11" "#bf616a"
              "nord12" "#d08770"
              "nord13" "#ebcb8b"
-             "nord14" "#a3be8c"}]
+             "nord14" "#a3be8c"
+             "nord15" "#b48ead"}]
   (feline.setup {"components" components
                  "theme" theme
                  "custom_providers" {"left_rounded" (hashfn "")
