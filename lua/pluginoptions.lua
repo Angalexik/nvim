@@ -144,13 +144,7 @@ g["aniseed#env"] = true
 -- lilydjwg/fcitx.vim
 g.fcitx5_remote = "/usr/bin/fcitx5-remote"
 
--- pianocomposer321/yabs.nvim
-require('yabs'):setup({
-	opts = {
-		output_types = {
-			quickfix = {
-				open_on_run = 'never'
-			}
-		}
-	}
+-- stevearc/overseer.nvim
+require("overseer").setup({
+	templates = {"cargo", "make", "npm", "vscode"}
 })
