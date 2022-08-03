@@ -54,6 +54,20 @@ require'nvim-treesitter.configs'.setup {
 	autotag = { -- windwp/nvim-ts-autotag
 		enable = true,
 	},
+  textobjects = {
+    select = {
+      enable = true,
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+	},
 }
 
 -- lewis6991/gitsigns.nvim

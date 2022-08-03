@@ -58,6 +58,7 @@ Plug 'Freedzone/kerbovim'
 Plug 'maxbane/vim-asm_ca65'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'tpope/vim-markdown'
