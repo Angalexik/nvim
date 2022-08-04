@@ -1,71 +1,71 @@
 local nord = {
 	nord0 = {
 		gui = "#2e3440",
-		term = "NONE"
+		term = "NONE",
 	},
 	nord1 = {
 		gui = "#3b4252",
-		term = "0"
+		term = "0",
 	},
 	nord2 = {
 		gui = "#434c5e",
-		term = "8"
+		term = "8",
 	},
 	nord3 = {
 		gui = "#4c566a",
-		term = "8"
+		term = "8",
 	},
 	nord3_bright = {
 		gui = "#616e88",
-		term = "8"
+		term = "8",
 	},
 	nord4 = {
 		gui = "#d8dee9",
-		term = "NONE"
+		term = "NONE",
 	},
 	nord5 = {
 		gui = "#e5e9f0",
-		term = "7"
+		term = "7",
 	},
 	nord6 = {
 		gui = "#eceff4",
-		term = "15"
+		term = "15",
 	},
 	nord7 = {
 		gui = "#8fbcbb",
-		term = "14"
+		term = "14",
 	},
 	nord8 = {
 		gui = "#88c0d0",
-		term = "6"
+		term = "6",
 	},
 	nord9 = {
 		gui = "#81a1c1",
-		term = "4"
+		term = "4",
 	},
 	nord10 = {
 		gui = "#5e81ac",
-		term = "12"
+		term = "12",
 	},
 	nord11 = {
 		gui = "#bf616a",
-		term = "1"
+		term = "1",
 	},
 	nord12 = {
 		gui = "#d08770",
-		term = "11"
+		term = "11",
 	},
 	nord13 = {
 		gui = "#ebcb8b",
-		term = "3"
+		term = "3",
 	},
 	nord14 = {
 		gui = "#a3be8c",
-		term = "2"
+		term = "2",
 	},
 	nord15 = {
 		gui = "#b48ead",
-		term = "5"
+		term = "5",
 	},
 }
 
@@ -95,9 +95,9 @@ local highlights = {
 
 	BufferInactive = { bg = nord.nord0, fg = nord.nord3_bright },
 	BufferInactiveMod = { bg = nord.nord0, fg = nord.nord15 },
-	BufferInactiveIcon = { bg = nord.nord0 , fg = nord.nord3_bright },
-	BufferInactiveSign = { bg = nord.nord0 , fg = nord.nord3_bright },
-	BufferInactiveIndex = { bg = nord.nord0 , fg = nord.nord3_bright },
+	BufferInactiveIcon = { bg = nord.nord0, fg = nord.nord3_bright },
+	BufferInactiveSign = { bg = nord.nord0, fg = nord.nord3_bright },
+	BufferInactiveIndex = { bg = nord.nord0, fg = nord.nord3_bright },
 	BufferInactiveTarget = { bg = nord.nord0, fg = nord.nord11 },
 
 	BufferVisible = { bg = nord.nord2 },
@@ -119,7 +119,7 @@ local highlights = {
 	LightspeedOneCharMatch = { fg = nord.nord8, opts = "bold,reverse" },
 	LightspeedUniqueChar = { opts = "bold,underline" },
 	-- Lightbulb
-	LightBulbVirtualText = { fg = nord.nord13, opts = "bold" }
+	LightBulbVirtualText = { fg = nord.nord13, opts = "bold" },
 }
 
 for k, v in pairs(highlights) do

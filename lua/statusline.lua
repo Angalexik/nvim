@@ -1,8 +1,8 @@
-local gl = require('galaxyline')
-local condition = require('galaxyline.condition')
-local vcs = require('galaxyline.provider_vcs')
-local diag = require('galaxyline.provider_diagnostic')
-local finfo = require('galaxyline.provider_fileinfo')
+local gl = require("galaxyline")
+local condition = require("galaxyline.condition")
+local vcs = require("galaxyline.provider_vcs")
+local diag = require("galaxyline.provider_diagnostic")
+local finfo = require("galaxyline.provider_fileinfo")
 
 local fn = vim.fn
 local cmd = vim.cmd
@@ -11,7 +11,7 @@ local bo = vim.bo
 
 local section = gl.section
 
-gl.short_line_list = {"startify", "vim-plug", "vista", "qf"}
+gl.short_line_list = { "startify", "vim-plug", "vista", "qf" }
 
 local colours = {
 	bg0 = "#2e3440", -- nord0
@@ -31,7 +31,7 @@ local colours = {
 local modecols = {
 	N = colours.nord8,
 	T = colours.nord8,
-	['!'] = colours.nord8,
+	["!"] = colours.nord8,
 	V = colours.nord7,
 	I = colours.nord14,
 	R = colours.nord14,
@@ -41,49 +41,43 @@ local modecols = {
 
 local leftsep = {
 	LeftSeparator = {
-		provider = function ()
-			return ''
+		provider = function()
+			return ""
 		end,
-		highlight = {colours.bg1},
-	}
+		highlight = { colours.bg1 },
+	},
 }
 
 local rightsep = {
 	RightSeparator = {
-		provider = function ()
-			return ''
+		provider = function()
+			return ""
 		end,
-		highlight = {colours.bg1},
+		highlight = { colours.bg1 },
 	},
 }
 
 local padding = {
 	Padding = {
-		provider = function ()
-			return ' '
-		end
-	}
+		provider = function()
+			return " "
+		end,
+	},
 }
 
 ---@param path string
 ---@return string
 local function shortenPath(path)
-
 	while #path + 2 > (fn.winwidth(fn.winnr()) - 50) do -- 50 is approx width of right section
-		local split = vim.split(path, '/')
+		local split = vim.split(path, "/")
 		if #split < 2 then
 			break
 		end
-		path = '<' .. table.concat(
-			{unpack(
-				split, 2
-			)},
-			'/'
-		)
+		path = "<" .. table.concat({ unpack(split, 2) }, "/")
 	end
 
 	-- breaks if file path begins with `<`, but you shouldn't be putting that in a file name anyway
-	return string.gsub(path, '^%<', '</')
+	return string.gsub(path, "^%<", "</")
 end
 
 local function showgit()
@@ -91,14 +85,18 @@ local function showgit()
 end
 
 local function showlsp()
-	return (diag.get_diagnostic_error() or
-		diag.get_diagnostic_warn() or
-		diag.get_diagnostic_info() or
-		diag.get_diagnostic_hint()) and not
-		(diag.get_diagnostic_error() == '' or
-		diag.get_diagnostic_warn() == '' or
-		diag.get_diagnostic_info() == '' or
-		diag.get_diagnostic_hint() == '')
+	return (
+		diag.get_diagnostic_error()
+		or diag.get_diagnostic_warn()
+		or diag.get_diagnostic_info()
+		or diag.get_diagnostic_hint()
+	)
+		and not (
+			diag.get_diagnostic_error() == ""
+			or diag.get_diagnostic_warn() == ""
+			or diag.get_diagnostic_info() == ""
+			or diag.get_diagnostic_hint() == ""
+		)
 end
 
 ---@param text string
@@ -111,12 +109,12 @@ end
 
 local function getalediag()
 	local getcount = fn["ale#statusline#Count"]
-	local bufnr = fn.bufnr('%')
+	local bufnr = fn.bufnr("%")
 	local errorcount = getcount(bufnr).error
 	local warningcount = getcount(bufnr).total - errorcount
 	return {
 		errors = errorcount,
-		warnings = warningcount
+		warnings = warningcount,
 	}
 end
 
@@ -137,105 +135,101 @@ local function addShortRightSection(component)
 end
 
 local function FileName(short)
-	local name = ''
-	if short then name = 'FileNameShort' else name = 'FileName' end
+	local name = ""
+	if short then
+		name = "FileNameShort"
+	else
+		name = "FileName"
+	end
 	local filename = {
-		provider = function ()
-			local icon = ''
-			local padding = ''
+		provider = function()
+			local icon = ""
+			local padding = ""
 			if bo.modifiable and not short then
-				padding = '  ' -- first space isn't shown
+				padding = "  " -- first space isn't shown
 			end
-			local path = shortenPath(fn.fnamemodify(fn.expand('%'), ':~:.'))
-			if path == '' then
-				path = '[No File]'
+			local path = shortenPath(fn.fnamemodify(fn.expand("%"), ":~:."))
+			if path == "" then
+				path = "[No File]"
 			end
-			if fn.getbufinfo(fn.bufnr('%'))[1].changed == 1 then
-				icon = '  '
+			if fn.getbufinfo(fn.bufnr("%"))[1].changed == 1 then
+				icon = "  "
 			end
 			return padding .. path .. icon
 		end,
-		highlight = {colours.fg, colours.bg1},
-		separator = '',
-		separator_highlight = {colours.bg1},
+		highlight = { colours.fg, colours.bg1 },
+		separator = "",
+		separator_highlight = { colours.bg1 },
 	}
 	return { [name] = filename }
 end
 
 local FileType = {
 	FileType = {
-		provider = function ()
-			return '  ' .. bo.filetype -- first space isn't displayed
+		provider = function()
+			return "  " .. bo.filetype -- first space isn't displayed
 		end,
-		condition = function ()
+		condition = function()
 			local ft = bo.filetype
-			return not (not ft or ft == '')
+			return not (not ft or ft == "")
 		end,
-		highlight = {colours.fg, colours.bg1},
-	}
+		highlight = { colours.fg, colours.bg1 },
+	},
 }
 
 local FTIcon = {
 	FTIcon = {
-		provider = function ()
+		provider = function()
 			return finfo.get_file_icon()
 		end,
-		condition = function ()
+		condition = function()
 			local ft = bo.filetype
-			return not (not ft or ft == '')
+			return not (not ft or ft == "")
 		end,
-		highlight = {colours.bg1, colours.nord9},
-		separator = '',
-		separator_highlight = {colours.nord9},
-	}
+		highlight = { colours.bg1, colours.nord9 },
+		separator = "",
+		separator_highlight = { colours.nord9 },
+	},
 }
 
 addLeftSection({
 	ModeSep = {
-		provider = function ()
-			local mode = string.upper(
-			string.gsub(
-			string.sub(fn.mode(), 1, 1), "", "V"
-			):gsub("", "S")
-			)
+		provider = function()
+			local mode = string.upper(string.gsub(string.sub(fn.mode(), 1, 1), "", "V"):gsub("", "S"))
 			cmd("hi GalaxyModeSep guifg=" .. modecols[mode])
-			return ''
+			return ""
 		end,
-		highlight = {colours.bg1},
-	}
+		highlight = { colours.bg1 },
+	},
 })
 
 addLeftSection({
 	ViMode = {
-		provider = function ()
-			local mode = string.upper(
-			string.gsub(
-			string.sub(fn.mode(), 1, 1), "", "V"
-			):gsub("", "S")
-			)
+		provider = function()
+			local mode = string.upper(string.gsub(string.sub(fn.mode(), 1, 1), "", "V"):gsub("", "S"))
 			cmd("hi GalaxyViMode guibg=" .. modecols[mode])
-			return mode .. ' '
+			return mode .. " "
 		end,
-		highlight = {colours.bg1, colours.fg, "bold"},
-	}
+		highlight = { colours.bg1, colours.fg, "bold" },
+	},
 })
 
 addLeftSection(FileName(false))
 
 addLeftSection({
 	GitSep = {
-		provider = function ()
+		provider = function()
 			if showgit() and (vcs.diff_remove() or vcs.diff_add() or vcs.diff_modified()) then
-				return ' '
+				return " "
 			end
 		end,
-		highlight = {colours.bg1},
+		highlight = { colours.bg1 },
 	},
 })
 
 addLeftSection({
 	GitAdditions = {
-		provider = function ()
+		provider = function()
 			if vcs.diff_add() then
 				if vcs.diff_modified() or vcs.diff_remove() then
 					return vcs.diff_add()
@@ -245,14 +239,14 @@ addLeftSection({
 			end
 		end,
 		icon = "+",
-		highlight = {colours.nord14, colours.bg1},
-		condition = showgit
-	}
+		highlight = { colours.nord14, colours.bg1 },
+		condition = showgit,
+	},
 })
 
 addLeftSection({
 	GitModifications = {
-		provider = function ()
+		provider = function()
 			if vcs.diff_modified() then
 				if vcs.diff_remove() then
 					return vcs.diff_modified()
@@ -262,40 +256,40 @@ addLeftSection({
 			end
 		end,
 		icon = "~",
-		highlight = {colours.nord13, colours.bg1},
-		condition = showgit
-	}
+		highlight = { colours.nord13, colours.bg1 },
+		condition = showgit,
+	},
 })
 
 addLeftSection({
 	GitDeletions = {
-		provider = function ()
+		provider = function()
 			return strip(vcs.diff_remove())
 		end,
 		icon = "-",
-		highlight = {colours.nord11, colours.bg1},
-		condition = showgit
-	}
+		highlight = { colours.nord11, colours.bg1 },
+		condition = showgit,
+	},
 })
 
 addLeftSection({
 	GitSepRight = {
-		provider = function ()
+		provider = function()
 			if showgit() and (vcs.diff_remove() or vcs.diff_add() or vcs.diff_modified()) then
-				return ''
+				return ""
 			end
 		end,
-		highlight = {colours.bg1},
-	}
+		highlight = { colours.bg1 },
+	},
 })
 
 addLeftSection({
 	ResetColour = {
-		provider = function ()
-			return ''
+		provider = function()
+			return ""
 		end,
-		highlight = {colours.bg0},
-	}
+		highlight = { colours.bg0 },
+	},
 })
 
 addRightSection(FTIcon)
@@ -303,13 +297,13 @@ addRightSection(FileType)
 
 addRightSection({
 	CondRightSeparator = {
-		provider = function ()
-			return ''
+		provider = function()
+			return ""
 		end,
-		highlight = {colours.bg1},
-		condition = function ()
+		highlight = { colours.bg1 },
+		condition = function()
 			local ft = bo.filetype
-			return not (not ft or ft == '')
+			return not (not ft or ft == "")
 		end,
 	},
 })
@@ -317,30 +311,30 @@ addRightSection(padding)
 
 addRightSection({
 	LineIcon = {
-		provider = function ()
-			return ' '
+		provider = function()
+			return " "
 		end,
-		highlight = {colours.bg1, colours.nord9},
-		separator = '',
-		separator_highlight = {colours.nord9}
-	}
+		highlight = { colours.bg1, colours.nord9 },
+		separator = "",
+		separator_highlight = { colours.nord9 },
+	},
 })
 
 addRightSection({
 	PercentTotLinesLineNCharN = {
-		provider = function ()
-			local curline = fn.line('.')
-			local totlines = fn.line('$')
-			local percent = math.modf((curline / totlines) * 100) .. '%'
+		provider = function()
+			local curline = fn.line(".")
+			local totlines = fn.line("$")
+			local percent = math.modf((curline / totlines) * 100) .. "%"
 			if curline == 1 then
-				percent = 'Top'
+				percent = "Top"
 			elseif curline == totlines then
-				percent = 'Bot'
+				percent = "Bot"
 			end
-			return '  ' .. fn.line('.') .. ':' .. fn.col('.') .. ' ' .. percent .. '/' .. totlines -- first space isn't shown
+			return "  " .. fn.line(".") .. ":" .. fn.col(".") .. " " .. percent .. "/" .. totlines -- first space isn't shown
 		end,
-		highlight = {colours.nord9, colours.bg1},
-	}
+		highlight = { colours.nord9, colours.bg1 },
+	},
 })
 
 addRightSection(rightsep)
@@ -348,51 +342,46 @@ addRightSection(rightsep)
 
 addRightSection({
 	DiagLeftSep = {
-		provider = function ()
+		provider = function()
 			if showlsp() then
-				return '  ' -- the first space doesn't appear for some reason
+				return "  " -- the first space doesn't appear for some reason
 			end
 		end,
-		highlight = {colours.bg1},
-	}
+		highlight = { colours.bg1 },
+	},
 })
 
 addRightSection({
 	Hints = {
-		provider = function ()
-			if diag.get_diagnostic_info() or
-				diag.get_diagnostic_warn() or
-				diag.get_diagnostic_error()
-			then
+		provider = function()
+			if diag.get_diagnostic_info() or diag.get_diagnostic_warn() or diag.get_diagnostic_error() then
 				return diag.get_diagnostic_hint()
 			else
 				return strip(diag.get_diagnostic_hint())
 			end
 		end,
 		icon = "H:",
-		highlight = {colours.nord3_bright, colours.bg1},
-	}
+		highlight = { colours.nord3_bright, colours.bg1 },
+	},
 })
 
 addRightSection({
 	Informations = {
-		provider = function ()
-			if diag.get_diagnostic_warn() or
-				diag.get_diagnostic_error()
-			then
+		provider = function()
+			if diag.get_diagnostic_warn() or diag.get_diagnostic_error() then
 				return diag.get_diagnostic_info()
 			else
 				return strip(diag.get_diagnostic_info())
 			end
 		end,
 		icon = "I:",
-		highlight = {colours.nord8, colours.bg1},
-	}
+		highlight = { colours.nord8, colours.bg1 },
+	},
 })
 
 addRightSection({
 	Warnings = {
-		provider = function ()
+		provider = function()
 			if diag.get_diagnostic_error() then
 				return diag.get_diagnostic_warn()
 			else
@@ -400,29 +389,29 @@ addRightSection({
 			end
 		end,
 		icon = "W:",
-		highlight = {colours.nord13, colours.bg1},
-	}
+		highlight = { colours.nord13, colours.bg1 },
+	},
 })
 
 addRightSection({
 	Errors = {
-		provider = function ()
+		provider = function()
 			return strip(diag.get_diagnostic_error())
 		end,
 		icon = "E:",
-		highlight = {colours.nord11, colours.bg1},
-	}
+		highlight = { colours.nord11, colours.bg1 },
+	},
 })
 
 addRightSection({
 	DiagRightSep = {
-		provider = function ()
+		provider = function()
 			if showlsp() then
-				return ''
+				return ""
 			end
 		end,
-		highlight = {colours.bg1},
-	}
+		highlight = { colours.bg1 },
+	},
 })
 
 addShortLeftSection(leftsep)
@@ -434,13 +423,13 @@ addShortRightSection(FileType)
 
 addShortRightSection({
 	CondRightSeparator = {
-		provider = function ()
-			return ''
+		provider = function()
+			return ""
 		end,
-		highlight = {colours.bg1},
-		condition = function ()
+		highlight = { colours.bg1 },
+		condition = function()
 			local ft = bo.filetype
-			return not (not ft or ft == '')
+			return not (not ft or ft == "")
 		end,
 	},
 })

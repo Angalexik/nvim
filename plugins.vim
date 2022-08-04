@@ -66,6 +66,7 @@ Plug 'clktmr/vim-gdscript3'
 Plug 'rubixninja314/vim-mcfunction'
 Plug 'neoclide/npm.nvim', {'do': 'npm install'}
 Plug 'rafcamlet/nvim-luapad'
+Plug 'ckipp01/stylua-nvim'
 
 " Visual changes
 Plug 'lewis6991/gitsigns.nvim'
