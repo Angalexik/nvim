@@ -29,6 +29,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'psliwka/vim-smoothie'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'skywind3000/asyncrun.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'wellle/targets.vim'
 Plug 'moll/vim-bbye'
 
 " Completion/LSP
