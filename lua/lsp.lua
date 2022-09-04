@@ -52,6 +52,7 @@ local servers = {
 	"pylsp",
 	"rust_analyzer",
 	"eslint",
+	"tailwindcss",
 }
 
 local luadev = require("lua-dev").setup({
