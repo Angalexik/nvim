@@ -85,15 +85,26 @@
                                                (vfn.expand "%:e") ; file extension
                                                {"default" true}))
 
-(fn file-name []
-  (var name (vfn.fnamemodify (vfn.expand "%") ":~:."))
+(fn file-name-base [short]
+  (var name (vfn.fnamemodify (vfn.expand "%")
+                             (if short
+                               ":t"
+                               ":~:.")))
   (set name (if (or (= "" name) (= nil name))
               "[No File]"
               name))
   (let [modified (if (api.nvim_buf_get_option 0 "modified")
                    " [+]"
                    "")]
-    (.. name modified)))
+    (if (and short (not= name "[No File]"))
+      (.. "</" name modified)
+      (.. name modified))))
+
+(fn file-name []
+  (file-name-base false))
+
+(fn short-file-name []
+  (file-name-base true))
 
 (fn diagnostics-count [severity]
   (lsp-provider.get_diagnostics_count severity))
@@ -131,6 +142,7 @@
 
 ;; File name
 (let [component {"provider" file-name
+                 "short_provider" short-file-name
                  "hl" {"bg" "bg1"}
                  "right_sep" ["right_rounded" " "]
                  "left_sep" {"str" " "
