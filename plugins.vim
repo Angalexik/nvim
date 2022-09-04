@@ -28,7 +28,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'psliwka/vim-smoothie'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'stevearc/overseer.nvim'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'moll/vim-bbye'
 
 " Completion/LSP
