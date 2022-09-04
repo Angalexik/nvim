@@ -1,8 +1,7 @@
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
 	vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = { prefix = "●" } })
 
-local nvim_lsp = require("lspconfig")
-local configs = require("lspconfig/configs")
+local lspconfig = require("lspconfig")
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -33,11 +32,7 @@ local on_attach = function(client, bufnr)
 	-- vim.api.nvim_command("autocmd CursorHold * silent lua vim.lsp.buf.hover({focuasble=false})")
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	if client.name == "sumneko_lua" then
-		buf_set_keymap("n", "<space>f", "<cmd>lua require('stylua-nvim').format_file()<CR>", opts)
-	else
-		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
-	end
+	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
 	buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 end
 
@@ -73,14 +68,25 @@ require("mason-lspconfig").setup({
 
 for _, server in ipairs(servers) do
 	if server == "sumneko_lua" then
-		nvim_lsp.sumneko_lua.setup(luadev)
+		lspconfig.sumneko_lua.setup(luadev)
 	else
-		nvim_lsp[server].setup({
+		lspconfig[server].setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 		})
 	end
 end
+
+local nullls = require("null-ls")
+
+nullls.setup({
+	sources = {
+		nullls.builtins.formatting.prettierd.with({
+			extra_filetypes = { "svelte" },
+		}),
+		nullls.builtins.formatting.stylua,
+	},
+})
 
 local lint = require("lint")
 
@@ -104,4 +110,4 @@ require("nvim-lightbulb").setup({
 })
 
 vim.api.nvim_command('autocmd CursorHold,CursorHoldI * lua require("nvim-lightbulb").update_lightbulb()')
-vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged,BufWritePost <buffer> lua require('lint').try_lint()")
+-- vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged,BufWritePost <buffer> lua require('lint').try_lint()")
