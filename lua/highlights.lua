@@ -120,6 +120,8 @@ local highlights = {
 	LightspeedUniqueChar = { opts = "bold,underline" },
 	-- Lightbulb
 	LightBulbVirtualText = { fg = nord.nord13, opts = "bold" },
+	-- cokeline
+	TabLineFill = { bg = nord.nord0 }
 }
 
 for k, v in pairs(highlights) do

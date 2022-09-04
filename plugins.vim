@@ -29,6 +29,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'psliwka/vim-smoothie'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'stevearc/overseer.nvim'
+Plug 'moll/vim-bbye'
 
 " Completion/LSP
 Plug 'neovim/nvim-lspconfig'
@@ -74,7 +75,7 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug '~/Code/Lua/feline.nvim'
 Plug 'goolord/alpha-nvim'
 Plug 'junegunn/goyo.vim'
-Plug 'romgrk/barbar.nvim'
+Plug 'noib3/nvim-cokeline'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'stevearc/dressing.nvim'
 
