@@ -119,11 +119,6 @@ require("alpha").setup(require("dashboard").config)
 g.nord_italic = 1
 g.nord_italic_comments = 1
 
--- romgrk/barbar.nvim
-require("bufferline").setup({
-	icon_custom_colors = "white",
-})
-
 -- OmniSharp/omnisharp-vim
 g.OmniSharp_highlighting = 3
 g.OmniSharp_typeLookupInPreview = 1

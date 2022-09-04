@@ -13,22 +13,22 @@ nnoremap [q <Cmd>lua vim.diagnostic.goto_prev()<cr>
 
 " barbar mappings
 " Move to previous/next
-nnoremap 		 <A-,> <Cmd>BufferPrevious<CR>
-nnoremap 		 <A-.> <Cmd>BufferNext<CR>
+nnoremap 		 <A-,> <Plug>(cokeline-focus-prev)
+nnoremap 		 <A-.> <Plug>(cokeline-focus-next)
 " Re-order to previous/next
-nnoremap 		 <A-<> <Cmd>BufferMovePrevious<CR>
-nnoremap 		 <A->> <Cmd>BufferMoveNext<CR>
+" nnoremap 		 <A-<> <Cmd>BufferMovePrevious<CR>
+" nnoremap 		 <A->> <Cmd>BufferMoveNext<CR>
 " Goto buffer in position...
-nnoremap 		 <A-1> <Cmd>BufferGoto 1<CR>
-nnoremap 		 <A-2> <Cmd>BufferGoto 2<CR>
-nnoremap 		 <A-3> <Cmd>BufferGoto 3<CR>
-nnoremap 		 <A-4> <Cmd>BufferGoto 4<CR>
-nnoremap 		 <A-5> <Cmd>BufferGoto 5<CR>
-nnoremap 		 <A-6> <Cmd>BufferGoto 6<CR>
-nnoremap 		 <A-7> <Cmd>BufferGoto 7<CR>
-nnoremap 		 <A-8> <Cmd>BufferGoto 8<CR>
-nnoremap 		 <A-9> <Cmd>BufferLast<CR>
+nnoremap 		 <A-1> <Plug>(cokeline-focus-1)
+nnoremap 		 <A-2> <Plug>(cokeline-focus-2)
+nnoremap 		 <A-3> <Plug>(cokeline-focus-3)
+nnoremap 		 <A-4> <Plug>(cokeline-focus-4)
+nnoremap 		 <A-5> <Plug>(cokeline-focus-5)
+nnoremap 		 <A-6> <Plug>(cokeline-focus-6)
+nnoremap 		 <A-7> <Plug>(cokeline-focus-7)
+nnoremap 		 <A-8> <Plug>(cokeline-focus-8)
+nnoremap 		 <A-9> <Plug>(cokeline-focus-9)
 " Close buffer
-nnoremap 		 <A-c> <Cmd>BufferClose<CR>
+nnoremap 		 <A-c> <Cmd>Bdelete<CR>
 " Magic buffer-picking mode
-nnoremap  <C-s>		 <Cmd>BufferPick<CR>
+nnoremap  <C-s>   <Plug>(cokeline-pick-focus)

@@ -19,6 +19,9 @@ lua require("lsp")
 " Status line
 lua require('new_statusline')
 
+" Buffer line
+lua require('buffline')
+
 " Compe
 lua require('completion')
 
