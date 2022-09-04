@@ -164,11 +164,6 @@ g["aniseed#env"] = true
 -- lilydjwg/fcitx.vim
 g.fcitx5_remote = "/usr/bin/fcitx5-remote"
 
--- stevearc/overseer.nvim
-require("overseer").setup({
-	templates = { "cargo", "make", "npm", "vscode" },
-})
-
 -- justinmk/vim-dirvish
 local function dirvish_icon(path)
 	return require("nvim-web-devicons").get_icon(path, vim.fn.fnamemodify(path, ":e"), { default = true }) .. " "

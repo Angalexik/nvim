@@ -1,2 +1,2 @@
-command Build lua require('yabs'):run_task('build')
-command Run lua require('yabs'):run_task('run')
+command Build AsyncRun -program=make
+" command Run lua require('yabs'):run_task('run')

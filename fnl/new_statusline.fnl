@@ -8,8 +8,6 @@
 (local cursor (require :feline.providers.cursor))
 (local lsp-provider (require :feline.providers.lsp))
 (local feline (require :feline))
-(local STATUS (. (require :overseer.constants) "STATUS"))
-(local task_list (require :overseer.task_list))
 
 ; (local components {"left" {"active" {}
 ;                            "inactive" {}}
@@ -51,6 +49,10 @@
                  "I" "nord14"
                  "R" "nord14"
                  "S" "nord14"})
+
+(local statuscols {"running" "nord15"
+                   "success" "nord14"
+                   "failure" "nord11"})
 
 (local error-severity diag.severity.ERROR)
 (local warn-severity diag.severity.WARN)
@@ -186,23 +188,22 @@
        "hl" {"fg" "bg1"}
        "right_sep" " "})
 
-(right {"provider" (hashfn (let [tasks {}]
-                             (each [_ task (pairs (task_list.list_tasks))]
-                               (if (= task.status STATUS.RUNNING)
-                                   (table.insert tasks task.name)))
-                             (if (> (length tasks) 0)
-                                 (.. " " (table.concat tasks " | "))
-                                 "")))
+(right {"provider" (hashfn (if (not= vim.g.asyncrun_status "")
+                             " AsyncRun"
+                             ""))
         "truncate_hide" true
         "priority" 0
         "hl" {"bg" "bg1"}
-        "left_sep" {"str" "left_rounded"
-                    "hl" {"fg" "nord15"}}
+        "left_sep" (hashfn {"str" "left_rounded"
+                            "hl" {"fg" (. statuscols vim.g.asyncrun_status)}})
         "right_sep" "right_rounded"
-        "icon" {"str" "省"
-                "hl" {"bg" "nord15"
-                      "fg" "bg"}}})
-
+        "icon" (hashfn (let [icon (match vim.g.asyncrun_status
+                                    "running" "省"
+                                    "success" "﫠"
+                                    "failure" " ")]
+                         {"str" icon
+                          "hl" {"fg" "bg"
+                                "bg" (. statuscols vim.g.asyncrun_status)}}))})
 ;; File type
 (let [component {"provider" (hashfn (.. " " bo.filetype))
                  "truncate_hide" true
