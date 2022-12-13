@@ -121,7 +121,23 @@ local highlights = {
 	-- Lightbulb
 	LightBulbVirtualText = { fg = nord.nord13, opts = "bold" },
 	-- cokeline
-	TabLineFill = { bg = nord.nord0 }
+	TabLineFill = { bg = nord.nord0 },
+	-- nvim-notify
+	NotifyDEBUGBorder = { fg = nord.nord3 },
+	NotifyDEBUGIcon = { fg = nord.nord3 },
+	NotifyDEBUGTitle = { fg = nord.nord3 },
+	NotifyERRORBorder = { fg = nord.nord11 },
+	NotifyERRORIcon = { fg = nord.nord11 },
+	NotifyERRORTitle = { fg = nord.nord11 },
+	NotifyINFOBorder = { fg = nord.nord14 },
+	NotifyINFOIcon = { fg = nord.nord14 },
+	NotifyINFOTitle = { fg = nord.nord14 },
+	NotifyTRACEBorder = { fg = nord.nord15 },
+	NotifyTRACEIcon = { fg = nord.nord15 },
+	NotifyTRACETitle = { fg = nord.nord15 },
+	NotifyWARNBorder = { fg = nord.nord13 },
+	NotifyWARNIcon = { fg = nord.nord13 },
+	NotifyWARNTitle = { fg = nord.nord13 },
 }
 
 for k, v in pairs(highlights) do

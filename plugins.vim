@@ -6,6 +6,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'Olical/aniseed'
 Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'rcarriga/nvim-notify'
 
 " Colour scheme
 Plug 'arcticicestudio/nord-vim'
@@ -80,6 +82,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'noib3/nvim-cokeline'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'stevearc/dressing.nvim'
+Plug 'folke/noice.nvim'
 
 " Nyooom!
 Plug 'lewis6991/impatient.nvim'
