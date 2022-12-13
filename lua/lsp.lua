@@ -32,11 +32,11 @@ local on_attach = function(client, bufnr)
 	-- vim.api.nvim_command("autocmd CursorHold * silent lua vim.lsp.buf.hover({focuasble=false})")
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
+	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 	buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 end
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local servers = {
 	"omnisharp",
@@ -55,27 +55,38 @@ local servers = {
 	"tailwindcss",
 }
 
-local luadev = require("lua-dev").setup({
-	lspconfig = {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	},
-})
+require("neodev").setup({})
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
 
+local config_overrides = {
+	pylsp = {
+		pylsp = {
+			plugins = {
+				pycodestyle = {
+					-- Stop yelling when using black formatter
+					ignore = {"E203", "W503"},
+					maxLineLength = 88
+				}
+			}
+		}
+	}
+}
+
 for _, server in ipairs(servers) do
-	if server == "sumneko_lua" then
-		lspconfig.sumneko_lua.setup(luadev)
-	else
-		lspconfig[server].setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-		})
+	local settings = {}
+	if config_overrides[server] ~= nil then
+		settings = config_overrides[server]
 	end
+
+	lspconfig[server].setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+		settings = settings
+	})
 end
 
 local nullls = require("null-ls")
