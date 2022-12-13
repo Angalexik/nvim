@@ -97,7 +97,18 @@ nullls.setup({
 			extra_filetypes = { "svelte" },
 		}),
 		nullls.builtins.formatting.stylua,
+		nullls.builtins.diagnostics.eslint_d.with({
+			extra_filetypes = { "svelte" },
+		}),
+		nullls.builtins.formatting.black,
+		nullls.builtins.diagnostics.mypy
 	},
+})
+
+require("mason-null-ls").setup({
+	ensure_installed = nil,
+	automatic_installation = true,
+	automatic_setup = true,
 })
 
 local lint = require("lint")
