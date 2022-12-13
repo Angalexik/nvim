@@ -171,6 +171,11 @@ end
 
 vim.fn["dirvish#add_icon_fn"](dirvish_icon)
 
+-- andweeb/presence.nvim
+require("presence"):setup({
+	buttons = false,
+})
+
 -- folke/noice.nvim
 require("noice").setup({
 	lsp = {
