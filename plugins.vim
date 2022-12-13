@@ -89,6 +89,9 @@ Plug 'folke/noice.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'tweekmonster/startuptime.vim'
 
+" I don't know where to put this one lol
+Plug 'andweeb/presence.nvim'
+
 call plug#end()
 
 lua require('impatient')
