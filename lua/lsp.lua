@@ -9,6 +9,7 @@ local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
+
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
@@ -68,12 +69,12 @@ local config_overrides = {
 			plugins = {
 				pycodestyle = {
 					-- Stop yelling when using black formatter
-					ignore = {"E203", "W503"},
-					maxLineLength = 88
-				}
-			}
-		}
-	}
+					ignore = { "E203", "W503" },
+					maxLineLength = 88,
+				},
+			},
+		},
+	},
 }
 
 for _, server in ipairs(servers) do
@@ -85,7 +86,7 @@ for _, server in ipairs(servers) do
 	lspconfig[server].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
-		settings = settings
+		settings = settings,
 	})
 end
 
@@ -100,8 +101,6 @@ nullls.setup({
 		nullls.builtins.diagnostics.eslint_d.with({
 			extra_filetypes = { "svelte" },
 		}),
-		nullls.builtins.formatting.black,
-		nullls.builtins.diagnostics.mypy
 	},
 })
 
@@ -128,9 +127,8 @@ require("nvim-lightbulb").setup({
 	},
 	virtual_text = {
 		enabled = true,
-		text = "ﯦ ",
+		text = " ",
 	},
 })
 
 vim.api.nvim_command('autocmd CursorHold,CursorHoldI * lua require("nvim-lightbulb").update_lightbulb()')
--- vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged,BufWritePost <buffer> lua require('lint').try_lint()")

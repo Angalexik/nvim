@@ -65,8 +65,10 @@ require("nvim-treesitter.configs").setup({
 			lookahead = true,
 			keymaps = {
 				-- You can use the capture groups defined in textobjects.scm
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
+				["af"] = "@call.outer",
+				["if"] = "@call.inner",
+				["aF"] = "@function.outer",
+				["iF"] = "@function.inner",
 				["ac"] = "@class.outer",
 				["ic"] = "@class.inner",
 			},
