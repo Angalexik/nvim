@@ -138,6 +138,10 @@ local highlights = {
 	NotifyWARNBorder = { fg = nord.nord13 },
 	NotifyWARNIcon = { fg = nord.nord13 },
 	NotifyWARNTitle = { fg = nord.nord13 },
+	-- leap.nvim
+	LeapMatch = { fg = nord.nord13, opts = "underline,nocombine" },
+	LeapLabelPrimary = { fg = nord.nord0, bg = nord.nord13, opts = "nocombine" },
+	LeapLabelSecondary = { fg = nord.nord0, bg = nord.nord15, opts = "nocombine" },
 }
 
 for k, v in pairs(highlights) do

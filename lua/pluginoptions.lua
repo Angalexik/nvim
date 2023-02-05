@@ -197,3 +197,9 @@ require("noice").setup({
 		lsp_doc_border = false, -- add a border to hover docs and signature help
 	},
 })
+
+-- ggandor/leap.nvim
+require("leap").add_default_mappings()
+
+-- ggandor/flit.nvim
+require("flit").setup()
