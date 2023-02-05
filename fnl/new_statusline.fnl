@@ -232,6 +232,17 @@
   (right component)
   (right-in component))
 
+;; Words per minute
+(right {"provider" (hashfn (.. " " ((. (require "wpm") "wpm")) " WPM"))
+        "hl" {"bg" "bg1"
+              "fg" "nord9"}
+        "left_sep" [" " {"str" "left_rounded"
+                         "hl" {"fg" "nord9"}}]
+        "right_sep" "right_rounded"
+        "icon" {"str" " "
+                "hl" {"bg" "nord9"
+                      "fg" "bg"}}})
+
 ;; Position
 (right {"provider" (hashfn (let [percentage (cursor.line_percentage)]
                              (.. " " (cursorpos) " " percentage "/" (vfn.line "$"))))
