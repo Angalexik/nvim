@@ -92,6 +92,7 @@ Plug 'tweekmonster/startuptime.vim'
 
 " I don't know where to put this one lol
 Plug 'andweeb/presence.nvim'
+Plug 'jcdickinson/wpm.nvim'
 
 call plug#end()
 

@@ -203,3 +203,6 @@ require("leap").add_default_mappings()
 
 -- ggandor/flit.nvim
 require("flit").setup()
+
+-- jcdickinson/wpm.nvim
+require("wpm").setup({})
