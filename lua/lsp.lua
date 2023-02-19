@@ -49,7 +49,7 @@ local servers = {
 	"clangd",
 	"vimls",
 	"cssls",
-	"sumneko_lua",
+	"lua_ls",
 	"pylsp",
 	"rust_analyzer",
 	"eslint",
