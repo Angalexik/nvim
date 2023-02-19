@@ -12,6 +12,10 @@ tnoremap <C-[> <C-\><C-N>
 nnoremap ]q <Cmd>lua vim.diagnostic.goto_next()<cr>
 nnoremap [q <Cmd>lua vim.diagnostic.goto_prev()<cr>
 
+" go to hunk
+nnoremap ]g <Cmd>Gitsigns next_hunk<cr>
+nnoremap [g <Cmd>Gitsigns prev_hunk<cr>
+
 " barbar mappings
 " Move to previous/next
 nnoremap 		 <A-,> <Plug>(cokeline-focus-prev)
