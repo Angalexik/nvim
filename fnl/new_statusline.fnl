@@ -347,7 +347,7 @@
                                      "right_rounded" (hashfn "")}
                  "force_inactive" {"filetypes" ["^help$"
                                                 "^alpha$"
-                                                "^dirvish$"
+                                                "^oil$"
                                                 "^qf$"
                                                 "^fugitive$"
                                                 "^fugitiveblame$"]

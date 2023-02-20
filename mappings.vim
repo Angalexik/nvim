@@ -37,3 +37,6 @@ nnoremap 		 <A-9> <Plug>(cokeline-focus-9)
 nnoremap 		 <A-c> <Cmd>Bdelete<CR>
 " Magic buffer-picking mode
 nnoremap  <C-s>   <Plug>(cokeline-pick-focus)
+
+" Open oil.nvim
+nnoremap - <Cmd>lua require("oil").open()<cr>
