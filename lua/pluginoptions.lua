@@ -166,13 +166,6 @@ g["aniseed#env"] = true
 -- lilydjwg/fcitx.vim
 g.fcitx5_remote = "/usr/bin/fcitx5-remote"
 
--- justinmk/vim-dirvish
-local function dirvish_icon(path)
-	return require("nvim-web-devicons").get_icon(path, vim.fn.fnamemodify(path, ":e"), { default = true }) .. " "
-end
-
-vim.fn["dirvish#add_icon_fn"](dirvish_icon)
-
 -- andweeb/presence.nvim
 require("presence"):setup({
 	buttons = false,
@@ -206,3 +199,6 @@ require("flit").setup()
 
 -- jcdickinson/wpm.nvim
 require("wpm").setup({})
+
+-- stevearc/oil.nvim
+require("oil").setup()
