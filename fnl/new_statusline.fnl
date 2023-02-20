@@ -133,12 +133,12 @@
 
 ;; Vim mode
 (left {"provider" vimode
-       "hl" (hashfn {"fg" "bg"
-                     "bg" (vimode-colour)
-                     "style" "bold"})
+       "hl" #{"fg" "bg"
+              "bg" (vimode-colour)
+              "style" "bold"}
        "left_sep" "left_rounded"
-       "right_sep" (hashfn {"str" " "
-                            "hl" {"bg" (vimode-colour)}})})
+       "right_sep" #{"str" " "
+                     "hl" {"bg" (vimode-colour)}}})
 
 ;; File name
 (let [component {"provider" file-name
@@ -161,34 +161,34 @@
 (left {"provider" "git_diff_added"
        "truncate_hide" true
        "truncate_group" "git"
-       "enabled" (hashfn (and (showgit)
-                              (> vim.b.gitsigns_status_dict.added 0)))
+       "enabled" #(and (showgit)
+                       (> vim.b.gitsigns_status_dict.added 0))
        "hl" {"fg" "nord14"
              "bg" "bg1"}
        "icon" "+"
-       "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
-                             (tset sep "str" (git-padding true))
-                             sep))})
+       "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
+                      (tset sep "str" (git-padding true))
+                      sep)})
 
 ;; Git changes
 (left {"provider" "git_diff_changed"
        "truncate_hide" true
        "truncate_group" "git"
-       "enabled" (hashfn (and (showgit)
-                              (> vim.b.gitsigns_status_dict.changed 0)))
+       "enabled" #(and (showgit)
+                       (> vim.b.gitsigns_status_dict.changed 0))
        "hl" {"fg" "nord13"
              "bg" "bg1"}
        "icon" "~"
-       "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
-                             (tset sep "str" (git-padding false))
-                             sep))})
+       "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
+                      (tset sep "str" (git-padding false))
+                      sep)})
 
 ;; Git deletions
 (left {"provider" "git_diff_removed"
        "truncate_hide" true
        "truncate_group" "git"
-       "enabled" (hashfn (and (showgit)
-                              (> vim.b.gitsigns_status_dict.removed 0)))
+       "enabled" #(and (showgit)
+                       (> vim.b.gitsigns_status_dict.removed 0))
        "hl" {"fg" "nord11"
              "bg" "bg1"}
        "icon" "-"})
@@ -200,40 +200,40 @@
        "hl" {"fg" "bg1"}
        "right_sep" " "})
 
-(right {"provider" (hashfn (if (not= vim.g.asyncrun_status "")
-                             " AsyncRun"
-                             ""))
+(right {"provider" #(if (not= vim.g.asyncrun_status "")
+                      " AsyncRun"
+                      "")
         "truncate_hide" true
         "priority" 0
         "hl" {"bg" "bg1"}
-        "left_sep" (hashfn {"str" "left_rounded"
-                            "hl" {"fg" (. statuscols vim.g.asyncrun_status)}})
+        "left_sep" #{"str" "left_rounded"
+                     "hl" {"fg" (. statuscols vim.g.asyncrun_status)}}
         "right_sep" "right_rounded"
-        "icon" (hashfn (let [icon (match vim.g.asyncrun_status
-                                    "running" "省"
-                                    "success" "﫠"
-                                    "failure" " ")]
-                         {"str" icon
-                          "hl" {"fg" "bg"
-                                "bg" (. statuscols vim.g.asyncrun_status)}}))})
+        "icon" #(let [icon (match vim.g.asyncrun_status
+                             "running" "省"
+                             "success" "﫠"
+                             "failure" " ")]
+                  {"str" icon
+                   "hl" {"fg" "bg"
+                         "bg" (. statuscols vim.g.asyncrun_status)}})})
 ;; File type
-(let [component {"provider" (hashfn (.. " " bo.filetype))
+(let [component {"provider" #(.. " " bo.filetype)
                  "truncate_hide" true
                  "priority" 1
-                 "enabled" (hashfn (and bo.filetype
-                                          (not= bo.filetype "")))
+                 "enabled" #(and bo.filetype
+                                   (not= bo.filetype ""))
                  "hl" {"bg" "bg1"}
                  "left_sep" [" " {"str" "left_rounded"
                                   "hl" {"fg" "nord9"}}]
                  "right_sep" "right_rounded"
-                 "icon" (hashfn {"str" (.. (file-icon) " ")
-                                 "hl" {"bg" "nord9"
-                                       "fg" "bg"}})}]
+                 "icon" #{"str" (.. (file-icon) " ")
+                          "hl" {"bg" "nord9"
+                                "fg" "bg"}}}]
   (right component)
   (right-in component))
 
 ;; Words per minute
-(right {"provider" (hashfn (.. " " ((. (require "wpm") "wpm")) " WPM"))
+(right {"provider" #(.. " " ((. (require "wpm") "wpm")) " WPM")
         "hl" {"bg" "bg1"
               "fg" "nord9"}
         "left_sep" [" " {"str" "left_rounded"
@@ -244,9 +244,9 @@
                       "fg" "bg"}}})
 
 ;; Position
-(right {"provider" (hashfn (let [percentage (cursor.line_percentage)]
-                             (.. " " (cursorpos) " " percentage "/" (vfn.line "$"))))
-        "short_provider" (hashfn (.. " " (cursorpos)))
+(right {"provider" #(let [percentage (cursor.line_percentage)]
+                      (.. " " (cursorpos) " " percentage "/" (vfn.line "$")))
+        "short_provider" #(.. " " (cursorpos))
         "hl" {"bg" "bg1"
               "fg" "nord9"}
         "left_sep" [" " {"str" "left_rounded"
@@ -264,44 +264,44 @@
             "enabled" show-diag
             "hl" {"fg" "bg1"}
             "left_sep" " "}
-      errors {"provider" (hashfn (tostring (diagnostics-count error-severity)))
+      errors {"provider" #(tostring (diagnostics-count error-severity))
               "truncate_hide" true
               "truncate_group" "lsp"
               "priority" 1
-              "enabled" (hashfn (> (diagnostics-count error-severity) 0))
+              "enabled" #(> (diagnostics-count error-severity) 0)
               "hl" {"bg" "bg1"
                     "fg" "nord11"}
               "icon" "E:"
-              "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
-                                    (tset sep "str" (diagnostic-padding error-severity))
-                                    sep))}
-      warnings {"provider" (hashfn (tostring (diagnostics-count warn-severity)))
+              "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
+                             (tset sep "str" (diagnostic-padding error-severity))
+                             sep)}
+      warnings {"provider" #(tostring (diagnostics-count warn-severity))
                 "truncate_hide" true
                 "truncate_group" "lsp"
                 "priority" 1
-                "enabled" (hashfn (> (diagnostics-count warn-severity) 0))
+                "enabled" #(> (diagnostics-count warn-severity) 0)
                 "hl" {"bg" "bg1"
                       "fg" "nord13"}
                 "icon" "W:"
-                "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
-                                      (tset sep "str" (diagnostic-padding warn-severity))
-                                      sep))}
-      informations {"provider" (hashfn (tostring (diagnostics-count info-severity)))
+                "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
+                               (tset sep "str" (diagnostic-padding warn-severity))
+                               sep)}
+      informations {"provider" #(tostring (diagnostics-count info-severity))
                     "truncate_hide" true
                     "truncate_group" "lsp"
                     "priority" 1
-                    "enabled" (hashfn (> (diagnostics-count info-severity) 0))
+                    "enabled" #(> (diagnostics-count info-severity) 0)
                     "hl" {"bg" "bg1"
                           "fg" "nord8"}
                     "icon" "I:"
-                    "right_sep" (hashfn (let [sep {"hl" {"bg" "bg1"}}]
-                                          (tset sep "str" (diagnostic-padding info-severity))
-                                          sep))}
-      hints {"provider" (hashfn (tostring (diagnostics-count hint-severity)))
+                    "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
+                                   (tset sep "str" (diagnostic-padding info-severity))
+                                   sep)}
+      hints {"provider" #(tostring (diagnostics-count hint-severity))
              "truncate_hide" true
              "truncate_group" "lsp"
              "priority" 1
-             "enabled" (hashfn (> (diagnostics-count hint-severity) 0))
+             "enabled" #(> (diagnostics-count hint-severity) 0)
              "hl" {"bg" "bg1"
                    "fg" "nord10"}
              "icon" "H:"}
@@ -343,8 +343,8 @@
              "nord15" "#b48ead"}]
   (feline.setup {"components" components
                  "theme" theme
-                 "custom_providers" {"left_rounded" (hashfn "")
-                                     "right_rounded" (hashfn "")}
+                 "custom_providers" {"left_rounded" #""
+                                     "right_rounded" #""}
                  "force_inactive" {"filetypes" ["^help$"
                                                 "^alpha$"
                                                 "^oil$"
