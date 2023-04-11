@@ -142,6 +142,15 @@ local highlights = {
 	LeapMatch = { fg = nord.nord13, opts = "underline,nocombine" },
 	LeapLabelPrimary = { fg = nord.nord0, bg = nord.nord13, opts = "nocombine" },
 	LeapLabelSecondary = { fg = nord.nord0, bg = nord.nord15, opts = "nocombine" },
+	-- Treesitter
+	["@tag"] = { link = "htmlTag" },
+	["@tag.attribute"] = { link = "htmlArg" },
+	["@text.title"] = { link = "htmlH1" },
+	["@text.strong"] = { link = "Bold" },
+	["@text.emphasis"] = { link = "Italic" },
+	["@text.diff.add"] = { link = "DiffAdd" },
+	["@text.diff.delete"] = { link = "DiffDelete" },
+	["@attribute"] = { link = "PreProc" },
 }
 
 for k, v in pairs(highlights) do
