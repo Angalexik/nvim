@@ -83,11 +83,22 @@ for _, server in ipairs(servers) do
 		settings = config_overrides[server]
 	end
 
+	if server == "clangd" then
+		lspconfig[server].setup({
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = settings,
+			cmd = { "clangd", "--clang-tidy" },
+		})
+		goto continue
+	end
+
 	lspconfig[server].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
 		settings = settings,
 	})
+	::continue::
 end
 
 local nullls = require("null-ls")
