@@ -4,7 +4,7 @@ call plug#begin(stdpath('data') . '/plugins')
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'Olical/aniseed'
+Plug 'rktjmp/hotpot.nvim'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'rcarriga/nvim-notify'
