@@ -122,6 +122,7 @@ local highlights = {
 	LightBulbVirtualText = { fg = nord.nord13, opts = "bold" },
 	-- cokeline
 	TabLineFill = { bg = nord.nord0 },
+	TabLine = { bg = nord.nord0 },
 	-- nvim-notify
 	NotifyDEBUGBorder = { fg = nord.nord3 },
 	NotifyDEBUGIcon = { fg = nord.nord3 },
