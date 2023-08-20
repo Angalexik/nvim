@@ -436,7 +436,7 @@ local function file_button(fn, sc, short_fn)
 	local file_button_el = button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <CR>")
 	local fn_start = short_fn:match(".*/")
 	if fn_start ~= nil then
-		table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt - 2 })
+		table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt })
 	end
 	file_button_el.opts.hl = fb_hl
 	return file_button_el
