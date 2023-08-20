@@ -54,14 +54,8 @@ local servers = {
 	"rust_analyzer",
 	"eslint",
 	"tailwindcss",
+	"kls",
 }
-
-require("neodev").setup({})
-
-require("mason").setup({})
-require("mason-lspconfig").setup({
-	automatic_installation = true,
-})
 
 local config_overrides = {
 	pylsp = {
@@ -76,6 +70,21 @@ local config_overrides = {
 		},
 	},
 }
+
+local configs = require("lspconfig.configs")
+
+if not configs.kls then
+	configs.kls = {
+		default_config = {
+			cmd = { "/home/alex/Code/JS/kos-language-server/server/bin/kos", "--stdio" },
+			filetypes = { "kerboscript" },
+			root_dir = function(fname)
+				return lspconfig.util.find_git_ancestor(fname)
+			end,
+			settings = {},
+		},
+	}
+end
 
 for _, server in ipairs(servers) do
 	local settings = {}
@@ -100,46 +109,3 @@ for _, server in ipairs(servers) do
 	})
 	::continue::
 end
-
-local nullls = require("null-ls")
-
-nullls.setup({
-	sources = {
-		nullls.builtins.formatting.prettierd.with({
-			extra_filetypes = { "svelte" },
-		}),
-		nullls.builtins.formatting.stylua,
-		nullls.builtins.diagnostics.eslint_d.with({
-			extra_filetypes = { "svelte" },
-		}),
-	},
-})
-
-require("mason-null-ls").setup({
-	ensure_installed = nil,
-	automatic_installation = true,
-	automatic_setup = true,
-})
-
-local lint = require("lint")
-
-lint.linters_by_ft = {
-	svelte = { "stylelint" },
-	css = { "stylelint" },
-	scss = { "stylelint" },
-	sass = { "stylelint" },
-	sh = { "shellcheck" },
-	bash = { "shellcheck" },
-}
-
-require("nvim-lightbulb").setup({
-	sign = {
-		enabled = false,
-	},
-	virtual_text = {
-		enabled = true,
-		text = " ",
-	},
-})
-
-vim.api.nvim_command('autocmd CursorHold,CursorHoldI * lua require("nvim-lightbulb").update_lightbulb()')

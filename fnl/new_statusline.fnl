@@ -200,7 +200,8 @@
        "hl" {"fg" "bg1"}
        "right_sep" " "})
 
-(right {"provider" #(if (not= vim.g.asyncrun_status "")
+(right {"provider" #(if (and (not= vim.g.asyncrun_status nil)
+                             (not= vim.g.asyncrun_status ""))
                       " AsyncRun"
                       "")
         "truncate_hide" true
