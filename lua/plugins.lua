@@ -173,7 +173,6 @@ require("lazy").setup({
 		dependencies = {
 			"folke/neodev.nvim",
 			"hrsh7th/cmp-nvim-lsp",
-			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
@@ -191,16 +190,24 @@ require("lazy").setup({
 	"hrsh7th/cmp-path",
 	{
 		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
 		config = true,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+		},
 		opts = {
 			automatic_installation = true,
 		},
 	},
 	{
 		"jay-babu/mason-null-ls.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"jose-elias-alvarez/null-ls.nvim",
+		},
 		opts = {
 			ensure_installed = nil,
 			automatic_installation = true,
@@ -235,14 +242,14 @@ require("lazy").setup({
 			"williamboman/mason.nvim",
 		},
 		opts = function()
-			local nullls = require("null-ls")
+			local null_ls = require("null-ls")
 			return {
 				sources = {
-					nullls.builtins.formatting.prettierd.with({
+					null_ls.builtins.formatting.prettierd.with({
 						extra_filetypes = { "svelte" },
 					}),
-					nullls.builtins.formatting.stylua,
-					nullls.builtins.diagnostics.eslint_d.with({
+					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.diagnostics.eslint_d.with({
 						extra_filetypes = { "svelte" },
 					}),
 				},
@@ -348,6 +355,10 @@ require("lazy").setup({
 	"junegunn/goyo.vim",
 	{
 		"noib3/nvim-cokeline",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
 		opts = function()
 			return require("buffline")
 		end,
