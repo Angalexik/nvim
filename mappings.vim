@@ -40,3 +40,6 @@ nnoremap  <C-s>   <Plug>(cokeline-pick-focus)
 
 " Open oil.nvim
 nnoremap - <Cmd>lua require("oil").open()<cr>
+
+" Open floating lazygit (mnemonic git lazy)
+nnoremap gl <Cmd>Lazygit<CR>

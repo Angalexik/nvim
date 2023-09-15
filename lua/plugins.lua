@@ -50,6 +50,38 @@ require("lazy").setup({
 	},
 	-- QOL
 	{
+		"akinsho/toggleterm.nvim",
+		opts = {
+			open_mapping = [[<C-'>]],
+			shade_terminals = false,
+		},
+		config = function(_, opts)
+			require("toggleterm").setup(opts)
+
+			local Terminal = require("toggleterm.terminal").Terminal
+			local lazygit = Terminal:new({
+				cmd = "lazygit",
+				dir = "git_dir",
+				hidden = true,
+				direction = "float",
+				float_opts = {
+					boarder = "curved",
+				},
+				close_on_exit = true,
+				on_open = function(term)
+					vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<ESC>", "<ESC>", {})
+					vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<C-[>", "<C-[>", {})
+				end,
+			})
+
+			local function lazygit_toggle()
+				lazygit:toggle()
+			end
+
+			vim.api.nvim_create_user_command("Lazygit", lazygit_toggle, {})
+		end,
+	},
+	{
 		"lilydjwg/fcitx.vim",
 		event = "InsertEnter",
 		config = function()
@@ -147,7 +179,25 @@ require("lazy").setup({
 			end)
 		end,
 	},
-	"nvim-telescope/telescope.nvim",
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "debugloop/telescope-undo.nvim" },
+		config = function()
+			require("telescope").setup({
+				extensions = {
+					undo = {
+						side_by_side = true,
+						layout_strategy = "vertical",
+						layout_config = {
+							preview_height = 0.8,
+						},
+					},
+				},
+			})
+
+			require("telescope").load_extension("undo")
+		end,
+	},
 	"psliwka/vim-smoothie",
 	{
 		"mg979/vim-visual-multi",

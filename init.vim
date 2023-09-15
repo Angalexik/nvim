@@ -27,3 +27,18 @@ autocmd FileType json setlocal filetype=jsonc
 " Custom comments for vim-commetary
 autocmd FileType jsonc setlocal commentstring=//\ %s
 autocmd FileType kerboscript setlocal commentstring=//\ %s
+
+lua << EOF
+-- Automatically close terminal unless exit code isn't 0
+vim.api.nvim_create_autocmd("TermClose", {
+  group = term_augroup,
+  callback = function()
+    if vim.v.event.status == 0 then
+      vim.api.nvim_buf_delete(0, {})
+      vim.notify_once("Previous terminal job was successful!")
+    else
+      vim.notify_once("Error code detected in the current terminal job!")
+    end
+  end
+})
+EOF
