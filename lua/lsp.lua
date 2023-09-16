@@ -55,6 +55,7 @@ local servers = {
 	"eslint",
 	"tailwindcss",
 	"kls",
+	"yamlls"
 }
 
 local config_overrides = {
