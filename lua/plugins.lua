@@ -386,7 +386,7 @@ require("lazy").setup({
 		},
 	},
 	{
-		dir = "~/Code/Lua/feline.nvim",
+		"freddiehaddad/feline.nvim",
 		dependencies = "jcdickinson/wpm.nvim",
 		config = function()
 			require("new_statusline")
