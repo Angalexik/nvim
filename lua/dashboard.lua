@@ -362,9 +362,8 @@ end
 
 --- @param sc string
 --- @param txt string
---- @param keybind string optional
---- @param keybind_opts table optional
-local function button(sc, txt, keybind, keybind_opts)
+--- @param keybind? string
+local function button(sc, txt, keybind)
 	local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
 
 	local opts = {
@@ -377,8 +376,7 @@ local function button(sc, txt, keybind, keybind_opts)
 		shrink_margin = false,
 	}
 	if keybind then
-		keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
-		opts.keymap = { "n", sc_, keybind, { noremap = false, silent = true, nowait = true } }
+		opts.keymap = { "n", sc_, keybind, { noremap = false, silent = true, nowait = false } }
 	end
 
 	local function on_press()
@@ -451,8 +449,8 @@ local mru_opts = {
 }
 
 --- @param start number
---- @param cwd string optional
---- @param items_number number optional number of items to generate, default = 10
+--- @param cwd? string
+--- @param items_number? number number of items to generate, default = 10
 local function mru(start, cwd, items_number, opts)
 	opts = opts or mru_opts
 	items_number = if_nil(items_number, 10)
