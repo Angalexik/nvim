@@ -303,6 +303,14 @@ require("lazy").setup({
 			}
 		end,
 	},
+	{
+		"github/copilot.vim",
+		init = function()
+			vim.g.copilot_no_tab_map = true
+			-- Doesn't work with vim.keymap for some reason
+			vim.cmd([[imap <silent><script><expr> <Plug>(accept-copilot) copilot#Accept()]])
+		end,
+	},
 	-- Snippets
 	"fivethree-team/vscode-svelte-snippets",
 	-- Various FileType support
