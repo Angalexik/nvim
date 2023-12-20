@@ -216,6 +216,13 @@ require("lazy").setup({
 		lazy = false,
 		priority = 2000,
 	},
+	{
+		"andymass/vim-matchup",
+		config = function()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+		end,
+	},
+	"wincent/ferret",
 	-- Completion/LSP
 	{
 		"neovim/nvim-lspconfig",
@@ -315,6 +322,12 @@ require("lazy").setup({
 				end,
 			})
 		end,
+	},
+	{
+		"linux-cultist/venv-selector.nvim",
+		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+		opts = {},
+		event = "VeryLazy",
 	},
 	{
 		"github/copilot.vim",
@@ -447,6 +460,13 @@ require("lazy").setup({
 			},
 			scope = {
 				highlight = { "Label" },
+				show_end = false,
+				include = {
+					node_type = {
+						python = { "for_statement", "if_statement", "while_statement" },
+						css = { "media_statement", "rule_set" },
+					},
+				},
 			},
 		},
 	},
