@@ -338,13 +338,13 @@ require("lazy").setup({
 			vim.g.OmniSharp_typeLookupInPreview = 1
 		end,
 	},
+	"JoosepAlviste/nvim-ts-context-commentstring",
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"JoosepAlviste/nvim-ts-context-commentstring",
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
@@ -354,10 +354,10 @@ require("lazy").setup({
 					enable = true,
 					disable = { "c_sharp" },
 				},
-				context_commentstring = { -- JoosepAlviste/nvim-ts-context-commentstring
+				autotag = { -- windwp/nvim-ts-autotag
 					enable = true,
 				},
-				autotag = { -- windwp/nvim-ts-autotag
+				matchup = {
 					enable = true,
 				},
 				textobjects = {
