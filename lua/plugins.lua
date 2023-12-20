@@ -221,9 +221,10 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"folke/neodev.nvim",
+			{ "folke/neodev.nvim", config = true },
 			"hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason-lspconfig.nvim",
+			"mason.nvim",
 		},
 		config = function()
 			require("lsp")
@@ -256,10 +257,6 @@ require("lazy").setup({
 	"hrsh7th/vim-vsnip",
 	"hrsh7th/vim-vsnip-integ",
 	"rafamadriz/friendly-snippets",
-	{
-		"folke/neodev.nvim",
-		config = true,
-	},
 	"hrsh7th/cmp-nvim-lsp-signature-help",
 	{
 		"kosayoda/nvim-lightbulb",
