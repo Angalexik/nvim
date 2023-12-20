@@ -97,7 +97,9 @@ for _, server in ipairs(servers) do
 	if server == "clangd" then
 		lspconfig[server].setup({
 			on_attach = on_attach,
-			capabilities = capabilities,
+			capabilities = vim.tbl_deep_extend("keep", {
+				offsetEncoding = "utf-16",
+			}, capabilities),
 			settings = settings,
 			cmd = { "clangd", "--clang-tidy" },
 		})
