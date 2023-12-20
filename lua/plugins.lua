@@ -252,18 +252,6 @@ require("lazy").setup({
 			automatic_installation = true,
 		},
 	},
-	{
-		"jay-babu/mason-null-ls.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"jose-elias-alvarez/null-ls.nvim",
-		},
-		opts = {
-			ensure_installed = nil,
-			automatic_installation = true,
-			automatic_setup = true,
-		},
-	},
 	"hrsh7th/cmp-vsnip",
 	"hrsh7th/vim-vsnip",
 	"hrsh7th/vim-vsnip-integ",
@@ -287,20 +275,48 @@ require("lazy").setup({
 		},
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
+		"stevearc/conform.nvim",
+		cmd = { "ConformInfo" },
+		keys = {
+			---@diagnostic disable-next-line: missing-fields
+			{
+				"<leader>f",
+				function()
+					require("conform").format({ async = true, lsp_fallback = true })
+				end,
+				mode = "n",
+			},
 		},
-		opts = function()
-			local null_ls = require("null-ls")
-			return {
-				sources = {
-					null_ls.builtins.formatting.prettierd.with({
-						extra_filetypes = { "svelte" },
-					}),
-					null_ls.builtins.formatting.stylua,
-				},
+		opts = {
+			formatters_by_ft = {
+				python = { "black" },
+				lua = { "stylua" },
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
+				css = { "prettierd" },
+				html = { "prettierd" },
+				json = { "prettierd" },
+				jsonc = { "prettierd" },
+				markdown = { "prettierd" },
+				-- svelte = { "prettierd" },
+			},
+		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		config = function()
+			require("lint").linters_by_ft = {
+				typescript = { "eslint" },
+				javascript = { "eslint" },
+				svelte = { "eslint" },
 			}
+
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+				pattern = "*",
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
 		end,
 	},
 	{
