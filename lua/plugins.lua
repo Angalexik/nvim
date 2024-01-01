@@ -198,7 +198,7 @@ require("lazy").setup({
 			require("telescope").load_extension("undo")
 		end,
 	},
-	"psliwka/vim-smoothie",
+	{ "psliwka/vim-smoothie", enabled = not vim.g.neovide },
 	{
 		"mg979/vim-visual-multi",
 		branch = "master",
