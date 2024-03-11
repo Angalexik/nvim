@@ -245,7 +245,7 @@
                       "fg" "bg"}}})
 
 ;; Position
-(right {"provider" #(let [percentage (cursor.line_percentage)]
+(right {"provider" #(let [percentage (cursor.line_percentage nil {:padding true})]
                       (.. " " (cursorpos) " " percentage "/" (vfn.line "$")))
         "short_provider" #(.. " " (cursorpos))
         "hl" {"bg" "bg1"
