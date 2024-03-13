@@ -88,7 +88,13 @@ require("lazy").setup({
 			vim.g.fcitx5_remote = "/usr/bin/fcitx5-remote"
 		end,
 	},
-	{ "eraserhd/parinfer-rust", build = "cargo build --release" },
+	{
+		"eraserhd/parinfer-rust",
+		build = "cargo build --release",
+		enabled = function()
+			return vim.fn.executable("cargo") == 1
+		end,
+	},
 	"tpope/vim-surround",
 	"tpope/vim-commentary",
 	"tpope/vim-fugitive",
