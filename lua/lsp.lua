@@ -47,7 +47,7 @@ local servers = {
 	"bashls",
 	"jsonls",
 	"html",
-	"tsserver",
+	"ts_ls",
 	"clangd",
 	"vimls",
 	"cssls",
