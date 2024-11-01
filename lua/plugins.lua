@@ -234,7 +234,6 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "folke/neodev.nvim", config = true },
 			"hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason-lspconfig.nvim",
 			"mason.nvim",
@@ -331,6 +330,7 @@ require("lazy").setup({
 	},
 	{
 		"linux-cultist/venv-selector.nvim",
+		branch = "regexp",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		opts = {},
 		event = "VeryLazy",
@@ -342,6 +342,19 @@ require("lazy").setup({
 			-- Doesn't work with vim.keymap for some reason
 			vim.cmd([[imap <silent><script><expr> <Plug>(accept-copilot) copilot#Accept()]])
 		end,
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{
+		"Bilal2453/luvit-meta",
+		lazy = true,
 	},
 	-- Snippets
 	"fivethree-team/vscode-svelte-snippets",
@@ -413,6 +426,7 @@ require("lazy").setup({
 	"clktmr/vim-gdscript3",
 	"rubixninja314/vim-mcfunction",
 	"rafcamlet/nvim-luapad",
+	"isobit/vim-caddyfile",
 	-- Visual changes
 	{
 		"lewis6991/gitsigns.nvim",
