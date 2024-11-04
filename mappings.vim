@@ -43,3 +43,13 @@ nnoremap - <Cmd>lua require("oil").open()<cr>
 
 " Open floating lazygit (mnemonic git lazy)
 nnoremap gl <Cmd>Lazygit<CR>
+
+" Telescope
+" Mnemonics: <leader>s for telescope and <key> as the telescope version of
+" what it does normally
+nnoremap <leader>s/ <Cmd>Telescope live_grep<CR>
+nnoremap <leader>s# <Cmd>Telescope grep_string<CR>
+nnoremap <leader>s* <Cmd>Telescope grep_string<CR>
+nnoremap <leader>s- <Cmd>Telescope find_files<CR>
+" Mnemonic: r for recent files
+nnoremap <leader>sr <Cmd>Telescope oldfiles<CR>
