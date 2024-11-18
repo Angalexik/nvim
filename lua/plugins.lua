@@ -244,6 +244,8 @@ require("lazy").setup({
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		commit = "b356f2c",
+		pin = true,
 		config = function()
 			require("completion")
 		end,
@@ -356,8 +358,6 @@ require("lazy").setup({
 		"Bilal2453/luvit-meta",
 		lazy = true,
 	},
-	-- Snippets
-	"fivethree-team/vscode-svelte-snippets",
 	-- Various FileType support
 	"mattn/emmet-vim",
 	"liuchengxu/vista.vim",
