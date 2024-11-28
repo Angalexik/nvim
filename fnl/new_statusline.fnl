@@ -200,6 +200,18 @@
        "hl" {"fg" "bg1"}
        "right_sep" " "})
 
+(right {"provider" #(let [register (vfn.reg_recording)]
+                      (if (not= register "")
+                        (.. " Recording @" register)
+                        ""))
+        "hl" {"bg" "bg1"}
+        "left_sep" {"str" "left_rounded"
+                    "hl" {"fg" "nord11"}}
+        "right_sep" "right_rounded"
+        "icon" {"str" "綠"
+                "hl" {"bg" "nord11"
+                      "fg" "bg"}}})
+
 (right {"provider" #(if (and (not= vim.g.asyncrun_status nil)
                              (not= vim.g.asyncrun_status ""))
                       " AsyncRun"
