@@ -141,14 +141,16 @@
                      "hl" {"bg" (vimode-colour)}}})
 
 ;; File name
-(let [component {"provider" file-name
-                 "short_provider" short-file-name
-                 "hl" {"bg" "bg1"}
-                 "right_sep" ["right_rounded" " "]
-                 "left_sep" {"str" " "
-                             "hl" {"bg" "bg1"}}}]
-  (left component)
-  (left-in component))
+(let [component #{"provider" file-name
+                  "short_provider" short-file-name
+                  "hl" {"bg" "bg1"}
+                  "right_sep" ["right_rounded" " "]
+                  "left_sep" (if $1
+                               {"str" " "
+                                "hl" {"bg" "bg1"}}
+                               {"str" "left_rounded"})}]
+  (left (component true))
+  (left-in (component false)))
 
 ;; Git block
 (left {"provider" "left_rounded" ;; TODO: a nicer way to do this
