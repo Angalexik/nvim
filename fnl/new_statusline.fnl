@@ -249,6 +249,8 @@
 (right {"provider" #(.. " " ((. (require "wpm") "wpm")) " WPM")
         "hl" {"bg" "bg1"
               "fg" "nord9"}
+        "truncate_hide" true
+        "priority" -1
         "left_sep" [" " {"str" "left_rounded"
                          "hl" {"fg" "nord9"}}]
         "right_sep" "right_rounded"
@@ -273,14 +275,14 @@
 (let [rsep {"provider" "left_rounded" ;; HACK: separator is a separate component instead of being a separator
             "truncate_hide" true
             "truncate_group" "lsp"
-            "priority" 1
+            "priority" 2
             "enabled" show-diag
             "hl" {"fg" "bg1"}
             "left_sep" " "}
       errors {"provider" #(tostring (diagnostics-count error-severity))
               "truncate_hide" true
               "truncate_group" "lsp"
-              "priority" 1
+              "priority" 2
               "enabled" #(> (diagnostics-count error-severity) 0)
               "hl" {"bg" "bg1"
                     "fg" "nord11"}
@@ -291,7 +293,7 @@
       warnings {"provider" #(tostring (diagnostics-count warn-severity))
                 "truncate_hide" true
                 "truncate_group" "lsp"
-                "priority" 1
+                "priority" 2
                 "enabled" #(> (diagnostics-count warn-severity) 0)
                 "hl" {"bg" "bg1"
                       "fg" "nord13"}
@@ -302,7 +304,7 @@
       informations {"provider" #(tostring (diagnostics-count info-severity))
                     "truncate_hide" true
                     "truncate_group" "lsp"
-                    "priority" 1
+                    "priority" 2
                     "enabled" #(> (diagnostics-count info-severity) 0)
                     "hl" {"bg" "bg1"
                           "fg" "nord8"}
@@ -313,7 +315,7 @@
       hints {"provider" #(tostring (diagnostics-count hint-severity))
              "truncate_hide" true
              "truncate_group" "lsp"
-             "priority" 1
+             "priority" 2
              "enabled" #(> (diagnostics-count hint-severity) 0)
              "hl" {"bg" "bg1"
                    "fg" "nord10"}
@@ -321,7 +323,7 @@
       lsep {"provider" "right_rounded" ;; HACK: separator is a separate component instead of being a separator
             "truncate_hide" true
             "truncate_group" "lsp"
-            "priority" 1
+            "priority" 2
             "hl" {"fg" "bg1"}
             "enabled" show-diag}]
   (right rsep)
