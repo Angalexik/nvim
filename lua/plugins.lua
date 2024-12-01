@@ -229,6 +229,16 @@ require("lazy").setup({
 		end,
 	},
 	"wincent/ferret",
+	{
+		"jedrzejboczar/exrc.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		opts = {
+			on_dir_changed = {
+				enabled = true,
+				use_ui_select = false,
+			},
+		},
+	},
 	-- Completion/LSP
 	{
 		"neovim/nvim-lspconfig",

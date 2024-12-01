@@ -11,6 +11,7 @@
   "dressing.nvim": { "branch": "master", "commit": "1b7921eecc65af1baf8ac1dc06f0794934cbcfb2" },
   "editorconfig-vim": { "branch": "master", "commit": "ba2ce027c5b0e523e658d24657ce3ae3306c9fe0" },
   "emmet-vim": { "branch": "master", "commit": "6c511a8d7d2863066f32e25543e2bb99d505172c" },
+  "exrc.nvim": { "branch": "master", "commit": "4346164895f432f361e453d837b612e6c7cbe3e6" },
   "fcitx.vim": { "branch": "fcitx5", "commit": "28d5bcc86d01a75911cf9c165d16840b7f0d4f98" },
   "feline.nvim": { "branch": "main", "commit": "c97c17dc56ca3cf2b9b9192c3447fc59347e8c0d" },
   "ferret": { "branch": "main", "commit": "0190acf27440d9f5acd67582bdb1a2b55f31c51a" },
