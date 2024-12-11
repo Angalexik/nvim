@@ -52,11 +52,11 @@ local servers = {
 	"vimls",
 	"cssls",
 	"lua_ls",
-	"pylsp",
+	"basedpyright",
 	"rust_analyzer",
 	"tailwindcss",
 	"kls",
-	"yamlls"
+	"yamlls",
 }
 
 local config_overrides = {

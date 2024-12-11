@@ -28,6 +28,9 @@ autocmd FileType json setlocal filetype=jsonc
 autocmd FileType jsonc setlocal commentstring=//\ %s
 autocmd FileType kerboscript setlocal commentstring=//\ %s
 
+" TODO: Put this somewhere else
+:let $LC_MESSAGES = "en-us"
+
 lua << EOF
 -- Automatically close terminal unless exit code isn't 0
 vim.api.nvim_create_autocmd("TermClose", {
