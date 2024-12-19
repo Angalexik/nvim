@@ -444,10 +444,17 @@ require("lazy").setup({
 	-- Visual changes
 	{
 		"lewis6991/gitsigns.nvim",
-		opts = {
-			yadm = {
-				enable = true,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"purarue/gitsigns-yadm.nvim",
+				opts = { shell_timeout_ms = 1000 },
 			},
+		},
+		opts = {
+			_on_attach_pre = function(_, callback)
+				require("gitsigns-yadm").yadm_signs(callback)
+			end,
 		},
 	},
 	{
