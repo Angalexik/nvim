@@ -103,7 +103,7 @@ require("lazy").setup({
 	"tpope/vim-sensible",
 	{
 		"stevearc/oil.nvim",
-		config = true,
+		opts = {},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 	"editorconfig/editorconfig-vim",
@@ -135,7 +135,7 @@ require("lazy").setup({
 	},
 	{
 		"ggandor/flit.nvim",
-		config = true,
+		opts = {},
 	},
 	{
 		"windwp/nvim-autopairs",
@@ -218,7 +218,7 @@ require("lazy").setup({
 	"moll/vim-bbye",
 	{
 		"willothy/flatten.nvim",
-		config = true,
+		opts = {},
 		lazy = false,
 		priority = 2000,
 	},
@@ -266,7 +266,7 @@ require("lazy").setup({
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
-		config = true,
+		opts = {},
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -565,6 +565,6 @@ require("lazy").setup({
 	},
 	{
 		"jcdickinson/wpm.nvim",
-		config = true,
+		opts = {},
 	},
 })
