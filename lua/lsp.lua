@@ -57,6 +57,7 @@ local servers = {
 	"tailwindcss",
 	"kls",
 	"yamlls",
+	require("ionide"),
 }
 
 local config_overrides = {
@@ -88,6 +89,26 @@ if not configs.kls then
 	}
 end
 
+local function setup(server, settings)
+	local server_table = nil
+	if type(server) == "string" then
+		server_table = lspconfig[server]
+	elseif type(server) == "table" then
+		server_table = server
+	elseif type(server) == "function" then
+		setup(server())
+		return
+	else
+		error("Server must be a string, table or function")
+	end
+
+	server_table.setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+		settings = settings,
+	})
+end
+
 for _, server in ipairs(servers) do
 	local settings = {}
 	if config_overrides[server] ~= nil then
@@ -106,10 +127,7 @@ for _, server in ipairs(servers) do
 		goto continue
 	end
 
-	lspconfig[server].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-		settings = settings,
-	})
+	setup(server, settings)
+
 	::continue::
 end
