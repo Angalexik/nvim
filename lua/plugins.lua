@@ -437,7 +437,10 @@ require("lazy").setup({
 	"rubixninja314/vim-mcfunction",
 	"rafcamlet/nvim-luapad",
 	"isobit/vim-caddyfile",
-	"ionide/ionide-vim",
+	{
+		"ionide/ionide-vim",
+		lazy = true,
+	},
 	-- Visual changes
 	{
 		"lewis6991/gitsigns.nvim",
