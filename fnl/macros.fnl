@@ -23,4 +23,16 @@
         `(tset vim.opt ,name false)
         `(tset vim.opt ,name true))))
 
-{: set!}
+(fn map! [args lhs rhs]
+  (fn extract-modes [symbol]
+    (icollect [c (string.gmatch (tostring symbol) ".")]
+      c))
+  (fn parse-opts [args]
+    (collect [_ opt (ipairs args)]
+      (if (= (type opt) "string")
+          (values opt true))))
+  (let [modes (extract-modes (. args 1))
+        opts (parse-opts args)]
+    `(vim.keymap.set ,modes ,lhs ,rhs ,opts)))
+
+{: set! : map!}

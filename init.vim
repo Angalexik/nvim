@@ -4,14 +4,14 @@
 " | | | \ V /| | | | | | |
 " |_| |_|\_/ |_|_| |_| |_|
 
-" Key maps
-runtime mappings.vim
-
 " User commands
 runtime commands.vim
 
 " Plugins
 lua require("plugins")
+
+" Key maps
+lua require("mappings")
 
 " Options
 lua require("options")
