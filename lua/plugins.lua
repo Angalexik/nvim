@@ -106,7 +106,6 @@ require("lazy").setup({
 		opts = {},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	"editorconfig/editorconfig-vim",
 	{
 		"ahmedkhalf/project.nvim",
 		main = "project_nvim",
