@@ -53,4 +53,7 @@ vim.api.nvim_create_autocmd('CursorMoved', {
     end
   end
 })
+
+-- sus
+require("editorconfig").properties.max_line_length = function (bufnr, val) end
 EOF
