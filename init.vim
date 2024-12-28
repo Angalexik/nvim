@@ -4,9 +4,6 @@
 " | | | \ V /| | | | | | |
 " |_| |_|\_/ |_|_| |_| |_|
 
-" Options
-runtime options.vim
-
 " Key maps
 runtime mappings.vim
 
@@ -15,6 +12,9 @@ runtime commands.vim
 
 " Plugins
 lua require("plugins")
+
+" Options
+lua require("options")
 
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
