@@ -318,6 +318,7 @@ require("lazy").setup({
 				json = { "prettierd" },
 				jsonc = { "prettierd" },
 				markdown = { "prettierd" },
+				xml = { "xmllint" }
 				-- svelte = { "prettierd" },
 			},
 		},
