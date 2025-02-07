@@ -297,16 +297,6 @@ require("lazy").setup({
 	{
 		"stevearc/conform.nvim",
 		cmd = { "ConformInfo" },
-		keys = {
-			---@diagnostic disable-next-line: missing-fields
-			{
-				"<leader>f",
-				function()
-					require("conform").format({ async = true, lsp_fallback = true })
-				end,
-				mode = "n",
-			},
-		},
 		opts = {
 			formatters_by_ft = {
 				python = { "black" },

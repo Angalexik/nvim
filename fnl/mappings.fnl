@@ -29,7 +29,10 @@
 (map! [n] "<c-s>" "<plug>(cokeline-pick-focus)")
 
 ; open oil.nvim
-(map! [n] "-" (. (require :oil) :open))
+(map! [n] "-" #((. (require :oil) :open)))
+; formatting
+(map! [n] "<leader>f"
+      #((. (require :conform) :format) {:async true :lsp_fallback true}))
 
 ; open floating lazygit (mnemonic Git Lazy)
 (map! [n] "gl" "<cmd>Lazygit<cr>")
