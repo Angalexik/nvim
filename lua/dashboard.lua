@@ -309,6 +309,17 @@ local quotes = {
 		"",
 		"- Atwood's Law",
 	},
+	{
+		"Any sufficiently complicated C or Fortran program contains an ad hoc, informally-specified, bug-ridden, slow implementation of half of Common Lisp.",
+	},
+	{
+		"Everybody has a testing environment. Some people are lucky enough enough to have a totally separate environment to run production in.",
+	},
+	{
+		"The three great virtues of a programmer are: Laziness, Impatience and Hubris.",
+		"",
+		"- Larry Wall",
+	},
 }
 
 local function merge(t1, t2)
@@ -512,6 +523,7 @@ local section = {
 		type = "group",
 		val = {
 			button("e", "New file", "<cmd>ene <CR>"),
+			button("r", "Recent files", "<cmd>Telescope oldfiles <CR>"),
 		},
 	},
 	-- note about MRU: currently this is a function,
