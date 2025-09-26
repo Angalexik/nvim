@@ -190,6 +190,11 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim", "debugloop/telescope-undo.nvim" },
 		config = function()
 			require("telescope").setup({
+				defaults = require("telescope.themes").get_ivy({
+					layout_config = {
+						height = 0.95,
+					},
+				}),
 				extensions = {
 					undo = {
 						side_by_side = true,
