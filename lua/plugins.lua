@@ -362,7 +362,14 @@ require("lazy").setup({
 	},
 	-- Various FileType support
 	"mattn/emmet-vim",
-	"liuchengxu/vista.vim",
+	{
+		"stevearc/aerial.nvim",
+		opts = {},
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
 	"Freedzone/kerbovim",
 	"maxbane/vim-asm_ca65",
 	{

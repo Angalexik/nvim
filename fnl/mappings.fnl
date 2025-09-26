@@ -46,3 +46,7 @@
 (map! [n] "<leader>s-" "<cmd>Telescope find_files<cr>")
 ; Mnemonic: r for recent files)
 (map! [n] "<leader>sr" "<cmd>Telescope oldfiles<cr>")
+
+; Aerial.nvim
+; Mnemonic: n for navigation
+(map! [n] "<leader>n" "<cmd>AerialOpen float<cr>")
