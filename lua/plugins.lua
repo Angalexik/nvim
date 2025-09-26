@@ -403,7 +403,7 @@ require("lazy").setup({
 				ensure_installed = "all",
 				highlight = {
 					enable = true,
-					disable = { "c_sharp" },
+					disable = { "c_sharp", "dockerfile" },
 				},
 				matchup = {
 					enable = true,
