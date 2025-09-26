@@ -84,6 +84,7 @@ require("lazy").setup({
 	{
 		"lilydjwg/fcitx.vim",
 		event = "InsertEnter",
+		enabled = false,
 		config = function()
 			vim.g.fcitx5_remote = "/usr/bin/fcitx5-remote"
 		end,
