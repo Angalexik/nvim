@@ -440,6 +440,14 @@ require("lazy").setup({
 		"ionide/ionide-vim",
 		lazy = true,
 	},
+	"tpope/vim-dadbod",
+	{
+		"kristijanhusak/vim-dadbod-ui",
+		init = function()
+			vim.g.db_ui_use_nerd_fonts = 1
+			vim.g.db_ui_env_variable_url = "DATABASE_URL"
+		end,
+	},
 	-- Visual changes
 	{
 		"lewis6991/gitsigns.nvim",
