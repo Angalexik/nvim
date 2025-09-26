@@ -340,6 +340,7 @@ require("lazy").setup({
 	},
 	{
 		"github/copilot.vim",
+		enabled = false,
 		init = function()
 			vim.g.copilot_no_tab_map = true
 			-- Doesn't work with vim.keymap for some reason
