@@ -85,8 +85,8 @@ _G.tab_complete = function()
 		return t("<Plug>(cmp-next)")
 	elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
 		return t("<Plug>(vsnip-expand-or-jump)")
-	elseif not vim.fn["copilot#GetDisplayedSuggestion"]().text ~= "" then
-		return t("<Plug>(accept-copilot)")
+	-- elseif not vim.fn["copilot#GetDisplayedSuggestion"]().text ~= "" then
+	-- 	return t("<Plug>(accept-copilot)")
 	elseif check_back_space() then
 		return t("<Tab>")
 	end
