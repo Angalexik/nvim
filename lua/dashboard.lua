@@ -320,6 +320,9 @@ local quotes = {
 		"",
 		"- Larry Wall",
 	},
+	{
+		"Hofstadter's law: It always takes longer than you expect, even when you take into account Hofstadter's law",
+	},
 }
 
 local function merge(t1, t2)
