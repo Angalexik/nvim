@@ -366,7 +366,7 @@ require("lazy").setup({
 	},
 	{
 		"linux-cultist/venv-selector.nvim",
-		branch = "regexp",
+		branch = "main",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		opts = {},
 		event = "VeryLazy",
@@ -508,7 +508,7 @@ require("lazy").setup({
 		},
 	},
 	{
-		"freddiehaddad/feline.nvim",
+		"Angalexik/feline.nvim",
 		dependencies = "jcdickinson/wpm.nvim",
 		config = function()
 			require("new_statusline")
