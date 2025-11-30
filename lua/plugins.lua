@@ -108,10 +108,9 @@ require("lazy").setup({
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 	{
-		"ahmedkhalf/project.nvim",
-		main = "project_nvim",
-		opts = {
-			patterns = {
+		"airblade/vim-rooter",
+		config = function()
+			vim.g.rooter_patterns = {
 				".git",
 				".git/",
 				"_darcs/",
@@ -124,8 +123,9 @@ require("lazy").setup({
 				"*.sln",
 				"*.csproj",
 				"Makefile",
-			},
-		},
+			}
+			vim.g.rooter_silent_chdir = 1
+		end,
 	},
 	{
 		"ggandor/leap.nvim",
