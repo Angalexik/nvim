@@ -50,3 +50,10 @@
 ; Aerial.nvim
 ; Mnemonic: n for navigation
 (map! [n] "<leader>n" "<cmd>AerialOpen float<cr>")
+
+; Leap.nvim
+(map! [nxo] "s"  "<plug>(leap-forward)")
+(map! [nxo] "S"  "<plug>(leap-backward)")
+(map! [n]   "gs" "<plug>(leap-from-window)")
+(map! [xo]  "x"  "<plug>(leap-forward-till)")
+(map! [xo]  "X"  "<plug>(leap-backward-till)")
