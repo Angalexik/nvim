@@ -1,9 +1,7 @@
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics,
-	{ virtual_text = { prefix = "●", source = "always" }, float = { source = "always" } }
-)
-
-local lspconfig = require("lspconfig")
+vim.diagnostic.config({
+	float = { source = true },
+	virtual_text = { prefix = "●", source = true },
+})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -11,13 +9,6 @@ local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
-
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
-
-	-- Enable completion triggered by <c-x><c-o>
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Mappings.
 	local opts = { noremap = true, silent = true }
@@ -41,6 +32,11 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+vim.lsp.config("*", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
 local servers = {
 	"omnisharp",
 	"svelte",
@@ -57,77 +53,35 @@ local servers = {
 	"tailwindcss",
 	"kls",
 	"yamlls",
-	require("ionide"),
+	"gopls",
+	"fsautocomplete",
+	"gdscript",
 }
 
-local config_overrides = {
-	pylsp = {
-		pylsp = {
-			plugins = {
-				pycodestyle = {
-					-- Stop yelling when using black formatter
-					ignore = { "E203", "W503" },
-					maxLineLength = 88,
-				},
-			},
-		},
-	},
-}
+vim.lsp.config("kls", {
+	cmd = { "/home/alex/Code/JS/kos-language-server/server/bin/kos", "--stdio" },
+	filetypes = { "kerboscript" },
+	root_dir = function(startpath)
+		return vim.fs.dirname(vim.fs.find(".git", { path = startpath, upward = true })[1])
+	end,
+	settings = {},
+})
 
-local configs = require("lspconfig.configs")
+vim.lsp.config("clangd", {
+	capabilities = vim.tbl_deep_extend("keep", {
+		offsetEncoding = "utf-16",
+	}, capabilities),
+	cmd = { "clangd", "--clang-tidy" },
+})
 
-if not configs.kls then
-	configs.kls = {
-		default_config = {
-			cmd = { "/home/alex/Code/JS/kos-language-server/server/bin/kos", "--stdio" },
-			filetypes = { "kerboscript" },
-			root_dir = function(fname)
-				return lspconfig.util.find_git_ancestor(fname)
-			end,
-			settings = {},
-		},
-	}
-end
-
-local function setup(server, settings)
-	local server_table = nil
-	if type(server) == "string" then
-		server_table = lspconfig[server]
-	elseif type(server) == "table" then
-		server_table = server
-	elseif type(server) == "function" then
-		setup(server())
-		return
-	else
-		error("Server must be a string, table or function")
-	end
-
-	server_table.setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-		settings = settings,
-	})
-end
+vim.lsp.config("gdscript", {
+	flags = { debounce_text_changes = 150 },
+	on_attach = function(client, bufnr)
+		vim.cmd('echo serverstart("/tmp/godot.pipe")')
+		on_attach(client, bufnr)
+	end,
+})
 
 for _, server in ipairs(servers) do
-	local settings = {}
-	if config_overrides[server] ~= nil then
-		settings = config_overrides[server]
-	end
-
-	if server == "clangd" then
-		lspconfig[server].setup({
-			on_attach = on_attach,
-			capabilities = vim.tbl_deep_extend("keep", {
-				offsetEncoding = "utf-16",
-			}, capabilities),
-			settings = settings,
-			cmd = { "clangd", "--clang-tidy" },
-		})
-		goto continue
-	end
-
-	setup(server, settings)
-
-	::continue::
+	vim.lsp.enable(server)
 end

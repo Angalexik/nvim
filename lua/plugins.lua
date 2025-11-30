@@ -280,6 +280,8 @@ require("lazy").setup({
 			"hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason-lspconfig.nvim",
 			"mason.nvim",
+			"OmniSharp/omnisharp-vim",
+			"ionide/ionide-vim",
 		},
 		config = function()
 			require("lsp")
@@ -287,8 +289,6 @@ require("lazy").setup({
 	},
 	{
 		"hrsh7th/nvim-cmp",
-		commit = "b356f2c",
-		pin = true,
 		config = function()
 			require("completion")
 		end,
