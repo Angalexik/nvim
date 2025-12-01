@@ -123,6 +123,8 @@ require("lazy").setup({
 				"*.sln",
 				"*.csproj",
 				"Makefile",
+				"dune-project",
+				"*.opam",
 			}
 			vim.g.rooter_silent_chdir = 1
 		end,
@@ -341,6 +343,7 @@ require("lazy").setup({
 				jsonc = { "prettierd" },
 				markdown = { "prettierd" },
 				xml = { "xmllint" },
+				ocaml = { "ocamlformat" },
 				-- svelte = { "prettierd" },
 			},
 		},

@@ -19,6 +19,7 @@ M.servers = {
 	"gopls",
 	"fsautocomplete",
 	-- "gdscript",
+	"ocamllsp",
 }
 
 function M.setup()
