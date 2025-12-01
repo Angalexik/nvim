@@ -283,9 +283,7 @@ require("lazy").setup({
 			"OmniSharp/omnisharp-vim",
 			"ionide/ionide-vim",
 		},
-		config = function()
-			require("lsp")
-		end,
+		config = require("lsp").setup,
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -307,7 +305,7 @@ require("lazy").setup({
 			"williamboman/mason.nvim",
 		},
 		opts = {
-			automatic_installation = true,
+			ensure_installed = require("lsp").servers,
 		},
 	},
 	"hrsh7th/cmp-vsnip",
