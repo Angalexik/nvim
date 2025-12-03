@@ -52,8 +52,10 @@
 (map! [n] "<leader>n" "<cmd>AerialOpen float<cr>")
 
 ; Leap.nvim
-(map! [nxo] "s"  "<plug>(leap-forward)")
-(map! [nxo] "S"  "<plug>(leap-backward)")
+(map! [n] "s"  "<plug>(leap-forward)")
+(map! [n] "S"  "<plug>(leap-backward)")
+(map! [xo] "z"  "<plug>(leap-forward)")
+(map! [xo] "Z"  "<plug>(leap-backward)")
 (map! [n]   "gs" "<plug>(leap-from-window)")
 (map! [xo]  "x"  "<plug>(leap-forward-till)")
 (map! [xo]  "X"  "<plug>(leap-backward-till)")

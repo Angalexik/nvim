@@ -133,7 +133,7 @@ require("lazy").setup({
 		"ggandor/leap.nvim",
 		config = function()
 			require("leap.user").set_repeat_keys(";", ",", {
-				relative_directions = false,
+				relative_directions = true,
 			})
 
 			-- Return an argument table for `leap()`, tailored for f/t-motions.
