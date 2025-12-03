@@ -28,37 +28,9 @@ function M.setup()
 		virtual_text = { prefix = "●", source = true },
 	})
 
-	-- Use an on_attach function to only map the following keys
-	-- after the language server attaches to the current buffer
-	local on_attach = function(client, bufnr)
-		local function buf_set_keymap(...)
-			vim.api.nvim_buf_set_keymap(bufnr, ...)
-		end
-
-		-- Mappings.
-		local opts = { noremap = true, silent = true }
-
-		if client.server_capabilities.codeLensProvider then
-			vim.api.nvim_command("autocmd InsertLeave,BufEnter,TextChanged <buffer> lua vim.lsp.codelens.refresh()")
-		end
-
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-		buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-		buf_set_keymap("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-		buf_set_keymap("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-		buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-		-- vim.api.nvim_command("autocmd CursorHold * silent lua vim.lsp.buf.hover({focuasble=false})")
-		buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-		buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-		-- buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-		buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	end
-
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 	vim.lsp.config("*", {
-		on_attach = on_attach,
 		capabilities = capabilities,
 	})
 
@@ -80,9 +52,8 @@ function M.setup()
 
 	vim.lsp.config("gdscript", {
 		flags = { debounce_text_changes = 150 },
-		on_attach = function(client, bufnr)
+		on_attach = function(_, _)
 			vim.cmd('echo serverstart("/tmp/godot.pipe")')
-			on_attach(client, bufnr)
 		end,
 	})
 

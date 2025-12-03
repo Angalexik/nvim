@@ -59,3 +59,18 @@
 (map! [n]   "gs" "<plug>(leap-from-window)")
 (map! [xo]  "x"  "<plug>(leap-forward-till)")
 (map! [xo]  "X"  "<plug>(leap-backward-till)")
+
+; Lsp
+(vim.api.nvim_create_autocmd
+  :LspAttach
+  {:callback
+   #(do
+     (vim.cmd "autocmd InsertLeave,BufEnter,TextChanged <buffer> lua vim.lsp.codelens.refresh({ bufnr = 0 })")
+     (map! [n :buffer] "gD" vim.lsp.buf.declaration)
+     (map! [n :buffer] "gd" vim.lsp.buf.definition)
+     (map! [n :buffer] "gy" vim.lsp.buf.type_definition)
+     (map! [n :buffer] "gr" "<cmd>Telescope lsp_references<cr>")
+     (map! [n :buffer] "K" vim.lsp.buf.hover)
+     (map! [n :buffer] "gi" vim.lsp.buf.implementation)
+     (map! [n :buffer] "<leader>rn" vim.lsp.buf.rename)
+     (map! [n :buffer] "<leader>ca" vim.lsp.buf.code_action))})
