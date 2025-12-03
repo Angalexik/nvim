@@ -1,6 +1,6 @@
 local M = {}
 
-M.servers = {
+M.auto_installed_servers = {
 	"omnisharp",
 	"svelte",
 	"bashls",
@@ -14,13 +14,17 @@ M.servers = {
 	"basedpyright",
 	"rust_analyzer",
 	"tailwindcss",
-	-- "kls",
 	"yamlls",
 	"gopls",
 	"fsautocomplete",
-	-- "gdscript",
 	"ocamllsp",
 }
+
+local servers = {
+	"kls",
+	"gdscript",
+}
+vim.list_extend(servers, M.auto_installed_servers)
 
 function M.setup()
 	vim.diagnostic.config({
@@ -57,9 +61,7 @@ function M.setup()
 		end,
 	})
 
-	for _, server in ipairs(M.servers) do
-		vim.lsp.enable(server)
-	end
+	vim.lsp.enable(servers)
 end
 
 return M

@@ -307,7 +307,7 @@ require("lazy").setup({
 			"williamboman/mason.nvim",
 		},
 		opts = {
-			ensure_installed = require("lsp").servers,
+			ensure_installed = require("lsp").auto_installed_servers,
 		},
 	},
 	"hrsh7th/cmp-vsnip",
