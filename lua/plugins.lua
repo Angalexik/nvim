@@ -130,7 +130,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"ggandor/leap.nvim",
+		url = "https://codeberg.org/andyg/leap.nvim.git",
 		config = function()
 			require("leap.user").set_repeat_keys(";", ",", {
 				relative_directions = true,
