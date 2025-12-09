@@ -13,7 +13,7 @@
   "emmet-vim": { "branch": "master", "commit": "e98397144982d1e75b20d94d55a82de3ec8f648d" },
   "exrc.nvim": { "branch": "master", "commit": "4346164895f432f361e453d837b612e6c7cbe3e6" },
   "fcitx.vim": { "branch": "fcitx5", "commit": "28d5bcc86d01a75911cf9c165d16840b7f0d4f98" },
-  "feline.nvim": { "branch": "main", "commit": "566415c74b281876a97d2a8e2ca2e5d56794726a" },
+  "feline.nvim": { "branch": "main", "commit": "9e71b9189789edd5dc8d20c86b4d43ca110c88b7" },
   "ferret": { "branch": "main", "commit": "80a1c6f2f6e18952fa6eb85000446650216987fd" },
   "flatten.nvim": { "branch": "main", "commit": "72527798e75b5e34757491947c2cb853ce21dc0e" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },

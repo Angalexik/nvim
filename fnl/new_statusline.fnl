@@ -70,6 +70,15 @@
 (fn showgit []
   (and (not= vim.b.gitsigns_status nil) (> (length vim.b.gitsigns_status) 0)))
 
+(fn insert-separators [list sep]
+  (let [out []]
+    (each [i elem (ipairs list)]
+      (if (= i 1)
+          (table.insert out elem)
+          (do (table.insert out sep)
+              (table.insert out elem))))
+    out))
+
 (fn git-padding [additions]
   (var num 0)
   (let [signs vim.b.gitsigns_status_dict]
@@ -153,54 +162,29 @@
   (left-in (component false)))
 
 ;; Git block
-(left {"provider" "left_rounded" ;; TODO: a nicer way to do this
+(left {"provider" #(let [signs vim.b.gitsigns_status_dict
+                         added signs.added
+                         changed signs.changed
+                         removed signs.removed
+                         columns []]
+                     (when (> added 0)
+                       (table.insert columns
+                                     {:str (.. "+" added)
+                                      :hl {"fg" "nord14"}}))
+                     (when (> changed 0)
+                       (table.insert columns
+                                     {:str (.. "~" changed)
+                                      :hl {"fg" "nord13"}}))
+                     (when (> removed 0)
+                       (table.insert columns
+                                     {:str (.. "-" removed)
+                                      :hl {"fg" "nord11"}}))
+                     (insert-separators columns " "))
        "enabled" showgit
        "truncate_hide" true
-       "truncate_group" "git"
-       "hl" {"fg" "bg1"}})
-
-;; Git additions
-(left {"provider" "git_diff_added"
-       "truncate_hide" true
-       "truncate_group" "git"
-       "enabled" #(and (showgit)
-                       (> vim.b.gitsigns_status_dict.added 0))
-       "hl" {"fg" "nord14"
-             "bg" "bg1"}
-       "icon" "+"
-       "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
-                      (tset sep "str" (git-padding true))
-                      sep)})
-
-;; Git changes
-(left {"provider" "git_diff_changed"
-       "truncate_hide" true
-       "truncate_group" "git"
-       "enabled" #(and (showgit)
-                       (> vim.b.gitsigns_status_dict.changed 0))
-       "hl" {"fg" "nord13"
-             "bg" "bg1"}
-       "icon" "~"
-       "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
-                      (tset sep "str" (git-padding false))
-                      sep)})
-
-;; Git deletions
-(left {"provider" "git_diff_removed"
-       "truncate_hide" true
-       "truncate_group" "git"
-       "enabled" #(and (showgit)
-                       (> vim.b.gitsigns_status_dict.removed 0))
-       "hl" {"fg" "nord11"
-             "bg" "bg1"}
-       "icon" "-"})
-
-(left {"provider" "right_rounded" ;; TODO: a nicer way to do this
-       "truncate_hide" true
-       "truncate_group" "git"
-       "enabled" showgit
-       "hl" {"fg" "bg1"}
-       "right_sep" " "})
+       "hl" {"bg" "bg1"}
+       "left_sep" "left_rounded"
+       "right_sep" "right_rounded"})
 
 (right {"provider" #(let [register (vfn.reg_recording)]
                       (if (not= register "")
@@ -274,77 +258,37 @@
                       "fg" "bg"}}})
 
 ;; Diagnostics block
-(let [rsep {"provider" "left_rounded" ;; HACK: separator is a separate component instead of being a separator
-            "truncate_hide" true
-            "truncate_group" "lsp"
-            "priority" 2
-            "enabled" show-diag
-            "hl" {"fg" "bg1"}
-            "left_sep" " "}
-      errors {"provider" #(tostring (diagnostics-count error-severity))
-              "truncate_hide" true
-              "truncate_group" "lsp"
-              "priority" 2
-              "enabled" #(> (diagnostics-count error-severity) 0)
-              "hl" {"bg" "bg1"
-                    "fg" "nord11"}
-              "icon" "E:"
-              "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
-                             (tset sep "str" (diagnostic-padding error-severity))
-                             sep)}
-      warnings {"provider" #(tostring (diagnostics-count warn-severity))
-                "truncate_hide" true
-                "truncate_group" "lsp"
-                "priority" 2
-                "enabled" #(> (diagnostics-count warn-severity) 0)
-                "hl" {"bg" "bg1"
-                      "fg" "nord13"}
-                "icon" "W:"
-                "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
-                               (tset sep "str" (diagnostic-padding warn-severity))
-                               sep)}
-      informations {"provider" #(tostring (diagnostics-count info-severity))
-                    "truncate_hide" true
-                    "truncate_group" "lsp"
-                    "priority" 2
-                    "enabled" #(> (diagnostics-count info-severity) 0)
-                    "hl" {"bg" "bg1"
-                          "fg" "nord8"}
-                    "icon" "I:"
-                    "right_sep" #(let [sep {"hl" {"bg" "bg1"}}]
-                                   (tset sep "str" (diagnostic-padding info-severity))
-                                   sep)}
-      hints {"provider" #(tostring (diagnostics-count hint-severity))
-             "truncate_hide" true
-             "truncate_group" "lsp"
-             "priority" 2
-             "enabled" #(> (diagnostics-count hint-severity) 0)
-             "hl" {"bg" "bg1"
-                   "fg" "nord10"}
-             "icon" "H:"}
-      lsep {"provider" "right_rounded" ;; HACK: separator is a separate component instead of being a separator
-            "truncate_hide" true
-            "truncate_group" "lsp"
-            "priority" 2
-            "hl" {"fg" "bg1"}
-            "enabled" show-diag}]
-  (right rsep)
-  (right-in rsep)
-
-  (right errors)
-  (right-in errors)
-
-  (right warnings)
-  (right-in warnings)
-
-  (right informations)
-  (right-in informations)
-
-  (right hints)
-  (right-in hints)
-
-  (right lsep)
-  (right-in lsep))
+(let [component
+      {"provider" #(let [errors (diagnostics-count error-severity)
+                         warnings (diagnostics-count warn-severity)
+                         informations (diagnostics-count info-severity)
+                         hints (diagnostics-count hint-severity)
+                         columns []]
+                     (when (> errors 0)
+                       (table.insert columns
+                                     {:str (.. "E:" errors)
+                                      :hl {"fg" "nord11"}}))
+                     (when (> warnings 0)
+                       (table.insert columns
+                                     {:str (.. "W:" warnings)
+                                      :hl {"fg" "nord13"}}))
+                     (when (> informations 0)
+                       (table.insert columns
+                                     {:str (.. "I:" informations)
+                                      :hl {"fg" "nord8"}}))
+                     (when (> hints 0)
+                       (table.insert columns
+                                     {:str (.. "H:" hints)
+                                      :hl {"fg" "nord10"}}))
+                     (insert-separators columns " "))
+       "enabled" show-diag
+       "truncate_hide" true
+       "priority" 2
+       "hl" {"bg" "bg1"}
+       "left_sep" [" " "left_rounded"]
+       "right_sep" "right_rounded"}]
+  (right component)
+  (right-in component))
 
 (let [theme {"fg" "#d8dee9"
              "bg" "#2e3440"
