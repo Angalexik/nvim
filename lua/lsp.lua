@@ -61,6 +61,16 @@ function M.setup()
 		end,
 	})
 
+	-- WORKAROUND: nvim 0.12 hangs when fsautocomplete gets loaded, remove when the bug gets fixed
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			if client and client.server_capabilities then
+				client.server_capabilities.semanticTokensProvider = nil
+			end
+		end,
+	})
+
 	vim.lsp.enable(servers)
 end
 
