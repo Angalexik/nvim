@@ -16,7 +16,6 @@ M.auto_installed_servers = {
 	"tailwindcss",
 	"yamlls",
 	"gopls",
-	"fsautocomplete",
 	"ocamllsp",
 }
 
