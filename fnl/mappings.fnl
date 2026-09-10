@@ -1,4 +1,4 @@
-(import-macros {: map!} :macros)
+(import-macros {: map! : ts-textobject!} :macros)
 
 ; change leader to space
 (set vim.g.mapleader " ")
@@ -59,6 +59,14 @@
 (map! [n]   "gs" "<plug>(leap-from-window)")
 (map! [xo]  "x"  "<plug>(leap-forward-till)")
 (map! [xo]  "X"  "<plug>(leap-backward-till)")
+
+; Treesitter textobjects
+(ts-textobject! "af" "@call.outer")
+(ts-textobject! "if" "@call.inner")
+(ts-textobject! "aF" "@function.outer")
+(ts-textobject! "iF" "@function.inner")
+(ts-textobject! "ac" "@class.outer")
+(ts-textobject! "ic" "@class.inner")
 
 ; Lsp
 (vim.api.nvim_create_autocmd

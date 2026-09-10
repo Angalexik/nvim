@@ -428,41 +428,32 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		event = { "BufReadPost", "BufNewFile" },
+		branch = "main",
+		build = { ":MasonInstall tree-sitter-cli", ":TSUpdate" },
+		lazy = false,
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
 			"windwp/nvim-ts-autotag",
+			"mason.nvim",
 		},
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = "all",
-				ignore_install = { "ipkg" },
-				highlight = {
-					enable = true,
-					disable = { "c_sharp", "dockerfile" },
-				},
-				matchup = {
-					enable = true,
-				},
-				textobjects = {
-					select = {
-						enable = true,
-						-- Automatically jump forward to textobj, similar to targets.vim
-						lookahead = true,
-						keymaps = {
-							-- You can use the capture groups defined in textobjects.scm
-							["af"] = "@call.outer",
-							["if"] = "@call.inner",
-							["aF"] = "@function.outer",
-							["iF"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
-						},
-					},
-				},
-			})
+			local treesitter = require("nvim-treesitter")
+			treesitter.setup({})
+
+			treesitter.install("all")
 		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		init = function()
+			vim.g.no_plugin_maps = true
+		end,
+		opts = {
+			select = {
+				-- Automatically jump forward to textobj, similar to targets.vim
+				lookahead = true,
+			},
+		},
 	},
 	{
 		"nvim-treesitter/playground",

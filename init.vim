@@ -28,6 +28,9 @@ autocmd FileType json setlocal filetype=jsonc
 autocmd FileType jsonc setlocal commentstring=//\ %s
 autocmd FileType kerboscript setlocal commentstring=//\ %s
 
+" Enable treesitter highlighting
+autocmd FileType * lua pcall(vim.treesitter.start)
+
 " TODO: Put this somewhere else
 :let $LC_MESSAGES = "en-us"
 

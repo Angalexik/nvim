@@ -35,4 +35,8 @@
         opts (parse-opts args)]
     `(vim.keymap.set ,modes ,lhs ,rhs ,opts)))
 
-{: set! : map!}
+(fn ts-textobject! [keybind capture ?group]
+  `(map! [xo] ,keybind
+         #((. (require :nvim-treesitter-textobjects.select) :select_textobject) ,capture ,(or ?group :textobjects))))
+
+{: set! : map! : ts-textobject!}

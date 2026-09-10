@@ -23,7 +23,7 @@
 (set! listchars {"trail" "·" "nbsp" "␣" "tab" "  "}) ; show trailing whitespace as `·` and NBSP as `␣`
 ; treesitter folding
 (set! foldmethod :expr)
-(set! foldexpr "nvim_treesitter#foldexpr()")
+(set! foldexpr "v:lua.vim.treesitter.foldexpr()")
 (set! foldlevel 99) ; don't automatically close folds
 (set! foldtext asdf)
 (set! foldtext #(let [line (vim.fn.getline vim.v.foldstart)
