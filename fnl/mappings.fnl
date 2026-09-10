@@ -65,7 +65,6 @@
   :LspAttach
   {:callback
    #(do
-     (vim.cmd "autocmd InsertLeave,BufEnter,TextChanged <buffer> lua vim.lsp.codelens.refresh({ bufnr = 0 })")
      (map! [n :buffer] "gD" vim.lsp.buf.declaration)
      (map! [n :buffer] "gd" vim.lsp.buf.definition)
      (map! [n :buffer] "gy" vim.lsp.buf.type_definition)
