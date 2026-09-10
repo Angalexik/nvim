@@ -17,6 +17,7 @@ M.auto_installed_servers = {
 	"yamlls",
 	"gopls",
 	"ocamllsp",
+	"denols"
 }
 
 local servers = {

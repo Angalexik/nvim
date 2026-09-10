@@ -125,6 +125,7 @@ require("lazy").setup({
 				"Makefile",
 				"dune-project",
 				"*.opam",
+				"deno.json",
 			}
 			vim.g.rooter_silent_chdir = 1
 		end,
