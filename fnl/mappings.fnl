@@ -12,8 +12,8 @@
 (map! [t] "<c-[>" "<c-\\><c-n>")
 
 ; go to diagnostic
-(map! [n] "]q" vim.diagnostic.goto_next)
-(map! [n] "[q" vim.diagnostic.goto_prev)
+(map! [n :remap] "]q" "]d")
+(map! [n :remap] "[q" "[d")
 
 ; go to hunk
 (map! [n] "]g" "<cmd>Gitsigns next_hunk<cr>")
