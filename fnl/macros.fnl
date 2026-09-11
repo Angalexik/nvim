@@ -1,3 +1,5 @@
+;; fennel-ls: macro-file
+
 (fn set! [name ?value]
   (let [name-string (tostring name)
         starts-with-no (= (name-string:sub 1 2) "no")
