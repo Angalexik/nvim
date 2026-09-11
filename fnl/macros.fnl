@@ -41,4 +41,21 @@
   `(map! [xo] ,keybind
          #((. (require :nvim-treesitter-textobjects.select) :select_textobject) ,capture ,(or ?group :textobjects))))
 
-{: set! : map! : ts-textobject!}
+(fn augroup! [[name ?clear] & body]
+  (let [clear (and (sym? ?clear)
+                   (= (tostring ?clear) "&clear"))]
+    `(let [group# (vim.api.nvim_create_augroup ,name {:clear ,clear})]
+       ,(unpack (icollect [_ expr (ipairs body)]
+                  (case expr
+                    (where [au event pattern action] (and (sym? au) 
+                                                          (= (tostring au) "au!")))
+                    `(let [action# ,action
+                           opts# {:pattern ,pattern
+                                  :group group#}]
+                       (if (= (type action#) "string")
+                           (tset opts# :command action#)
+                           (tset opts# :callback #(do (action# $1) false)))
+                       (vim.api.nvim_create_autocmd ,event opts#))
+                    otherwise otherwise))))))
+
+{: set! : map! : ts-textobject! : augroup!}
