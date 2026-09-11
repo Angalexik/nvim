@@ -214,6 +214,12 @@ require("lazy").setup({
 					return false
 				end
 			end)
+
+			pairs.get_rule("`"):with_pair(function()
+				if vim.bo.filetype == "fennel" then
+					return false
+				end
+			end)
 		end,
 	},
 	{
