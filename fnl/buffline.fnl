@@ -3,11 +3,11 @@
 (local nord3-bright "#616e88")
 (local nord4 "#d8dee9")
 (local nord9 "#81a1c1")
-(local nord11 "#bf616a")
 (local nord12 "#d08770")
+(local nord13 "#ebcb8b")
 (local nord15 "#b48ead")
 
-(local mappings (require :cokeline/mappings))
+(local mappings (require :cokeline.mappings))
 
 (fn picking []
   (or (mappings.is_picking_close) (mappings.is_picking_focus)))
@@ -37,9 +37,8 @@
                           (.. $.pick_letter " ")
                           $.devicon.icon)
                :fg #(if (and (picking) (not $.is_focused))
-                        nord11)
-               :style #(if (picking)
-                           "bold")}
+                        nord13)
+               :bold #(picking)}
               {:text #$.unique_prefix
                :fg nord3-bright}
               {:text #(.. $.filename " ")}
@@ -82,4 +81,5 @@
                        nord15
                        $.is_focused
                        nord9
-                       nord0)}}
+                       nord0)}
+ :pick {:letters "jklphnmyuiosfdagzvcxbwertyqJKLPHNMYUIOSFDAGZVCXBWERTYQ"}}
